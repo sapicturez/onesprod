@@ -47,7 +47,7 @@
   <!-- ── Hero: 3 cities ── -->
   <section id="cities" class="cities" aria-label="Our bases">
 
-    <a class="city" href="https://onesprod.com/pl/" aria-label="Enter ONES Warsaw">
+    <div class="city">
       <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
         <source src="https://onesprod.com/wp-content/uploads/2021/07/merc_intro_fhd_1a-1.mp4" type="video/mp4">
       </video>
@@ -55,9 +55,9 @@
       <div class="city__caption">
         <h2 class="city__name">Warsaw</h2>
       </div>
-    </a>
+    </div>
 
-    <a class="city" href="https://onesprod.com/bk/" aria-label="Enter ONES Bangkok">
+    <div class="city">
       <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
         <source src="https://onesprod.com/wp-content/uploads/2026/04/merc_intro_fhd_1a1_1-1.mp4" type="video/mp4">
       </video>
@@ -65,9 +65,9 @@
       <div class="city__caption">
         <h2 class="city__name">Bangkok</h2>
       </div>
-    </a>
+    </div>
 
-    <a class="city" href="about.html" aria-label="Enter ONES Barcelona">
+    <div class="city">
       <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
         <source src="https://onesprod.com/wp-content/uploads/2026/04/bcn_intr.mp4" type="video/mp4">
       </video>
@@ -75,6 +75,11 @@
       <div class="city__caption">
         <h2 class="city__name">Barcelona</h2>
       </div>
+    </div>
+
+    <a class="scroll-cue" href="#about" aria-label="Scroll down to explore">
+      <span class="scroll-cue__label">Scroll</span>
+      <span class="scroll-cue__line"><span class="scroll-cue__dot"></span></span>
     </a>
 
   </section>
@@ -146,6 +151,7 @@
         <a class="reel__poster" href="#reel-3" aria-label="Play OYSHO — Club Resort">
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/oysho-club-resort-thumbnail.jpg')"></div>
+            <video class="reel__preview" src="./images/oysho-club-resort-thumbnail.mp4" muted loop playsinline preload="none"></video>
             <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
             <div class="reel__credits">
               <p class="reel__proj">OYSHO — Club Resort</p>
@@ -159,7 +165,7 @@
         <a class="reel__poster" href="#reel-4" aria-label="Play PEKAO Bank — Engagement">
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/pekao-bank-thumbnail.jpg')"></div>
-            <video class="reel__preview" src="./images/pekao-odwaga%20bg.mp4" muted loop playsinline preload="none"></video>
+            <video class="reel__preview" src="./images/pekao-bank-thumbnail.mp4" muted loop playsinline preload="none"></video>
             <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
             <div class="reel__credits">
               <p class="reel__proj">PEKAO Bank — Engagement</p>
@@ -356,31 +362,6 @@
 </footer>
 
 
-<script>
-(function(){
-  function stopAll(){
-    document.querySelectorAll('.lightbox iframe').forEach(function(f){ f.src=''; });
-  }
-  function startReel(id){
-    var lb=document.getElementById(id);
-    if(!lb) return;
-    var f=lb.querySelector('iframe');
-    if(f && f.dataset.src) f.src=f.dataset.src;
-  }
-  window.addEventListener('hashchange',function(){
-    stopAll();
-    var m=location.hash.match(/^#(reel-\d+)$/);
-    if(m) startReel(m[1]);
-  });
-
-  // Hover video previews
-  document.querySelectorAll('.reel__item').forEach(function(item){
-    var v=item.querySelector('.reel__preview');
-    if(!v) return;
-    item.addEventListener('mouseenter',function(){ v.play(); });
-    item.addEventListener('mouseleave',function(){ v.pause(); v.currentTime=0; });
-  });
-})();
-</script>
+<script src="script.js"></script>
 </body>
 </html>
