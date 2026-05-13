@@ -32,17 +32,32 @@ h2{font-weight:600!important}
 .cities{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:100vh;width:100%;margin:0;padding:0;position:relative}
 
 /* Scroll-down cue — minimal neon streak */
-.scroll-cue{position:absolute;bottom:clamp(20px,3.5vh,40px);left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:14px;color:rgba(255,255,255,.9);text-decoration:none;transition:transform .4s ease,opacity .4s ease}
+.scroll-cue{position:absolute;bottom:clamp(20px,3.5vh,40px);left:50%;transform:translateX(-50%);z-index:5;display:flex;flex-direction:column;align-items:center;gap:14px;color:rgba(255,255,255,.9);text-decoration:none;transition:transform .4s ease,opacity .4s ease;cursor:pointer!important}
 .scroll-cue:hover{transform:translate(-50%,4px);opacity:1}
 .scroll-cue__label{font-size:10px;letter-spacing:.46em;text-transform:uppercase;font-weight:500;opacity:.8;text-shadow:0 1px 14px rgba(0,0,0,.45)}
 .scroll-cue__line{position:relative;display:block;width:1px;height:56px;background:rgba(255,255,255,.18);overflow:hidden}
 .scroll-cue__dot{position:absolute;top:-22px;left:0;width:1px;height:22px;background:linear-gradient(180deg,transparent,#fff);box-shadow:0 0 7px rgba(255,255,255,.7),0 0 14px rgba(255,255,255,.35);animation:scroll-trace 2.4s cubic-bezier(.45,0,.55,1) infinite}
 @keyframes scroll-trace{0%{top:-22px;opacity:0}12%{opacity:1}88%{opacity:1}100%{top:56px;opacity:0}}
-.city{position:relative;display:block;overflow:hidden;background:#0a0a0a;isolation:isolate}
+.city{position:relative;display:block;overflow:hidden;background:#0a0a0a;isolation:isolate;user-select:none;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}
 .city__video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;transform:scale(1.02);transition:transform 1.6s cubic-bezier(.2,.7,.2,1)}
 .city__overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.38) 0%,rgba(0,0,0,.08) 35%,rgba(0,0,0,.55) 100%);transition:background .4s}
-.city__caption{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.55)}
+.city__caption{position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;color:#fff;text-shadow:0 2px 30px rgba(0,0,0,.55);user-select:none;-webkit-user-select:none}
 .city__name{font-size:clamp(17px,2.6vw,36px);font-weight:400;letter-spacing:.06em;text-transform:uppercase;line-height:1;margin:0;color:rgba(255,255,255,.92);text-shadow:0 1px 18px rgba(0,0,0,.55)}
+
+/* Disable any text selection + force arrow cursor inside the hero cities section */
+.cities,.cities *{
+  -webkit-user-select:none!important;
+  -moz-user-select:none!important;
+  -ms-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+  cursor:default!important;
+}
+
+/* Stylish viewfinder cursor on clickable video reel posters (index + reels page) */
+.reel__poster,.reel__poster *{
+  cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'%3E%3Ccircle cx='14' cy='14' r='10' fill='none' stroke='black' stroke-width='2.5' opacity='0.4'/%3E%3Ccircle cx='14' cy='14' r='10' fill='none' stroke='white' stroke-width='1.2'/%3E%3Ccircle cx='14' cy='14' r='1.2' fill='white'/%3E%3C/svg%3E") 14 14,pointer!important;
+}
 .city + .city{border-left:1px solid rgba(255,255,255,.06)}
 .city:hover .city__video{transform:scale(1.08)}
 .city:hover .city__overlay{background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.45))}
@@ -87,19 +102,27 @@ h2{font-weight:600!important}
 .prod-card h3{font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;margin:0 0 20px;color:#f4f4f2}
 .prod-card p{margin:0;font-size:14px;opacity:.55;line-height:1.75}
 
-/* ── Parallax road ───────────────────────────────────── */
+/* ── Parallax road (JS-driven so it works on iOS / Android too) ── */
 .roads{
   width:100%;
   height:330px;
+  position:relative;
+  overflow:hidden;
+  filter:brightness(.95);
+}
+.roads__bg{
+  position:absolute;
+  top:-30%;
+  bottom:-30%;
+  left:0;
+  right:0;
   background-image:url('./images/roads.jpg');
-  background-attachment:fixed;
   background-size:cover;
   background-position:center;
   background-repeat:no-repeat;
-  position:relative;
-  filter:brightness(.95);
+  will-change:transform;
 }
-.roads::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 4px);pointer-events:none}
+.roads::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 4px);pointer-events:none;z-index:1}
 
 /* ── Contact ─────────────────────────────────────────── */
 .contact{padding:clamp(80px,12vh,160px) 0;background:#0a0a0a;border-top:1px solid rgba(255,255,255,.07)}
@@ -326,9 +349,6 @@ h2{font-weight:600!important}
   .contact__grid{grid-template-columns:1fr;gap:0}
   .contact__grid li{padding:clamp(28px,4vh,40px) 0 0}
   .reels-grid--lg{grid-template-columns:1fr}
-
-  /* Parallax fallback */
-  .roads{background-attachment:scroll}
 }
 
 /* ── Mobile (≤600px) ─────────────────────────────────── */
@@ -358,5 +378,5 @@ h2{font-weight:600!important}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .city__video{display:none}
   .city{background:#111}
-  .roads{background-attachment:scroll}
+  .roads__bg{transform:none!important}
 }

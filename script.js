@@ -117,6 +117,46 @@
   }
 
   // ──────────────────────────────────────────────────────────────
+  // Module: Roads parallax — JS-driven so it works on iOS/Android too
+  // (CSS background-attachment:fixed is unsupported on iOS Safari).
+  // Pages that use it: index.html
+  // ──────────────────────────────────────────────────────────────
+  function initRoadsParallax() {
+    var roads = document.querySelector('.roads');
+    if (!roads) return;
+    var bg = roads.querySelector('.roads__bg');
+    if (!bg) return;
+
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var rect = roads.getBoundingClientRect();
+      var vh = window.innerHeight;
+      // Skip when fully off-screen
+      if (rect.bottom < 0 || rect.top > vh) return;
+      // Progress: 0 when section enters at viewport bottom, 1 when leaves at top
+      var progress = (vh - rect.top) / (vh + rect.height);
+      if (progress < 0) progress = 0;
+      else if (progress > 1) progress = 1;
+      // Translate range: ±50 px (well within the 30% overhang on .roads__bg)
+      var translate = (progress - 0.5) * 100;
+      bg.style.transform = 'translate3d(0,' + translate + 'px,0)';
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+  }
+
+  // ──────────────────────────────────────────────────────────────
   // Module: Photoshoots slideshow — keyboard + click-and-drag swipe
   // Pages that use it: photoshoots.html
   // ──────────────────────────────────────────────────────────────
@@ -196,6 +236,7 @@
     initLightbox();
     initHoverPreviews();
     initBounceLoop();
+    initRoadsParallax();
     initSlideshow();
   }
 
