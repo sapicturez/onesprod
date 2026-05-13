@@ -112,8 +112,8 @@ h2{font-weight:600!important}
 }
 .roads__bg{
   position:absolute;
-  top:-30%;
-  bottom:-30%;
+  top:-130%;
+  bottom:-130%;
   left:0;
   right:0;
   background-image:url('./images/roads.jpg');
@@ -122,7 +122,7 @@ h2{font-weight:600!important}
   background-repeat:no-repeat;
   will-change:transform;
 }
-.roads::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.18) 0px,rgba(0,0,0,.18) 1px,transparent 1px,transparent 4px);pointer-events:none;z-index:1}
+.roads::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(0deg,rgba(0,0,0,.22) 0px,rgba(0,0,0,.22) 1px,transparent 1px,transparent 2px);pointer-events:none;z-index:1}
 
 /* ── Contact ─────────────────────────────────────────── */
 .contact{padding:clamp(80px,12vh,160px) 0;background:#0a0a0a;border-top:1px solid rgba(255,255,255,.07)}
@@ -131,8 +131,9 @@ h2{font-weight:600!important}
 .contact__grid li{border-top:1px solid rgba(255,255,255,.14);padding:clamp(36px,4vh,52px) 0 0}
 .contact h3{font-size:clamp(22px,2.2vw,30px);font-weight:300;letter-spacing:-.01em;text-transform:none;margin:0 0 16px}
 .contact p{margin:0 0 22px;font-size:14px;opacity:.55;line-height:1.65}
-.contact a{font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.65;transition:opacity .25s;display:inline-block}
-.contact a:hover{opacity:1}
+.contact__grid li a{display:block;color:inherit;text-decoration:none}
+.contact__arrow{display:inline-block;font-size:16px;opacity:.6;transition:opacity .25s ease,transform .25s ease;line-height:1}
+.contact__grid li a:hover .contact__arrow{opacity:1;transform:translateX(4px)}
 
 /* ── Clients CTA (2.png) ─────────────────────────────── */
 .clients-cta{margin-top:clamp(80px,12vh,140px)}
@@ -268,16 +269,33 @@ h2{font-weight:600!important}
 .photo-item figcaption strong{font-weight:400;font-size:16px;letter-spacing:.02em}
 .photo-item figcaption span{font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.7;margin-top:4px}
 
-/* ── Team — minimal portraits ────────────────────────── */
+/* ── Team — DESKTOP 3-col original ───────────────────── */
 .team{padding:clamp(80px,12vh,140px) 0;background:#000;border-top:1px solid rgba(255,255,255,.07)}
 .team__list{margin:clamp(56px,8vh,80px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(36px,5vw,72px);background:transparent;border:none}
-.team__list li{padding:0;background:transparent}
-.team__photo{aspect-ratio:4/5;width:100%;background-size:cover;background-position:center top;margin-bottom:28px;filter:grayscale(.6);transition:filter .6s ease}
-.team__list li:hover .team__photo{filter:grayscale(0)}
+.team__list li{padding:0;background:transparent;display:block}
+.team__photo{aspect-ratio:4/5;width:100%;background-size:cover;background-position:center top;margin:0 0 28px;filter:grayscale(.6) brightness(.7);transition:filter .6s ease}
+.team__list li:hover .team__photo{filter:grayscale(0) brightness(1)}
+.team__info{display:block;min-width:0}
 .team__list h3{font-size:clamp(20px,1.8vw,24px);font-weight:400;letter-spacing:-.01em;margin:0 0 6px}
 .team__role{font-size:11px;letter-spacing:.28em;text-transform:uppercase;opacity:.55;margin:0 0 22px;font-weight:500}
-.team__list p{margin:0 0 6px;font-size:14px;opacity:.7}
-.team__list a:hover{opacity:1;color:#fff}
+.team__contact{margin:0 0 6px;font-size:14px;opacity:.7;line-height:1.5}
+.team__contact a{transition:opacity .25s ease,color .25s ease}
+.team__contact a:hover{opacity:1;color:#fff}
+
+/* ── Team — iPhone-app style on tablet & mobile (≤960px) ─ */
+@media (max-width:960px){
+  .team__list{grid-template-columns:1fr;display:flex;flex-direction:column;gap:0;margin:clamp(40px,7vw,56px) 0 0}
+  .team__list li{display:grid;grid-template-columns:clamp(96px,22vw,116px) 1fr;align-items:center;gap:clamp(18px,4vw,28px);padding:clamp(20px,3.2vh,28px) 0;border-top:1px solid rgba(255,255,255,.07)}
+  .team__list li:first-child{border-top:none;padding-top:clamp(4px,1.5vh,10px)}
+  .team__list li:last-child{padding-bottom:clamp(8px,2vh,14px)}
+  .team__photo{aspect-ratio:4/5;width:100%;margin:0;border-radius:6px;filter:grayscale(.5) brightness(.7)}
+  .team__list li:hover .team__photo,.team__list li:active .team__photo{filter:grayscale(0) brightness(1)}
+  .team__info{display:flex;flex-direction:column;min-width:0}
+  .team__list h3{font-size:18px;font-weight:500;letter-spacing:-.005em;margin:0 0 6px;line-height:1.15}
+  .team__role{font-size:10px;letter-spacing:.3em;opacity:.5;margin:0 0 14px;font-weight:500}
+  .team__contact{margin:0 0 4px;font-size:13.5px;opacity:.72;line-height:1.4}
+  .team__contact:last-child{margin-bottom:0}
+}
 
 /* ── Clients — white-on-black logo wall ─────────────── */
 .logos-wall{padding:clamp(80px,12vh,140px) 0;background:#000;border-top:1px solid rgba(255,255,255,.07)}
@@ -336,8 +354,13 @@ h2{font-weight:600!important}
 
   /* Grids */
   .reel,.reels-grid{grid-template-columns:repeat(2,1fr)}
-  .services{grid-template-columns:repeat(2,1fr);gap:40px 0}
-  .services li{padding:0}
+  /* Services — iOS-style cards with subtle bg + index numbers */
+  .services{counter-reset:svc;grid-template-columns:1fr;gap:10px;margin:clamp(40px,8vw,60px) 0 0}
+  .services li{counter-increment:svc;padding:22px 22px 24px;background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);border-radius:14px;position:relative}
+  .services li:first-child{padding-left:22px}
+  .services li::before{content:counter(svc,decimal-leading-zero);position:absolute;top:22px;right:22px;font-size:9.5px;letter-spacing:.32em;color:rgba(255,255,255,.35);font-weight:500}
+  .services h3{font-size:11px;letter-spacing:.28em;text-transform:uppercase;font-weight:600;margin:0 0 8px;padding-bottom:0;border-bottom:none;max-width:calc(100% - 40px)}
+  .services p{margin:0;font-size:14.5px;opacity:.7;line-height:1.55}
   .prod-grid{grid-template-columns:repeat(2,1fr)}
   .prod-card:nth-child(3n){border-right:1px solid rgba(255,255,255,.1)}
   .prod-card:nth-child(2n){border-right:none}
@@ -346,9 +369,20 @@ h2{font-weight:600!important}
   .photo-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:240px}
   .team__list{grid-template-columns:1fr}
   .clients__list{grid-template-columns:repeat(3,1fr)}
-  .contact__grid{grid-template-columns:1fr;gap:0}
-  .contact__grid li{padding:clamp(28px,4vh,40px) 0 0}
+  /* Contact bases — iOS Settings-style cell list, whole row tappable */
+  .contact__grid{display:flex;flex-direction:column;gap:0;margin:clamp(36px,7vh,56px) 0 0;background:rgba(255,255,255,.028);border:1px solid rgba(255,255,255,.07);border-radius:14px;overflow:hidden}
+  .contact__grid li{border-top:1px solid rgba(255,255,255,.07);padding:0}
+  .contact__grid li:first-child{border-top:none}
+  .contact__grid li a{display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:18px;padding:18px 22px;color:inherit;text-decoration:none}
+  .contact__grid h3{margin:0 0 4px;font-size:18px;font-weight:500;letter-spacing:-.005em;grid-row:1;grid-column:1}
+  .contact__grid p{margin:0;grid-row:2;grid-column:1;font-size:13px;opacity:.55;line-height:1.45}
+  .contact__grid .contact__arrow{grid-row:1/span 2;grid-column:2;align-self:center;font-size:18px;opacity:.4;transition:opacity .25s ease,transform .25s ease}
+  .contact__grid li a:hover .contact__arrow,.contact__grid li a:active .contact__arrow{opacity:1;transform:translateX(3px)}
+  .contact__grid li a:active{background:rgba(255,255,255,.04)}
   .reels-grid--lg{grid-template-columns:1fr}
+
+  /* Roads parallax — 50% shorter on tablet & mobile */
+  .roads{height:165px}
 }
 
 /* ── Mobile (≤600px) ─────────────────────────────────── */
@@ -358,7 +392,6 @@ h2{font-weight:600!important}
   .city__name{font-size:clamp(16px,4.5vw,25px)}
   .reel,.reels-grid{grid-template-columns:1fr}
   .reel__item figcaption{opacity:1}
-  .services{grid-template-columns:1fr;gap:36px 0}
   .prod-grid{grid-template-columns:1fr}
   .prod-card{border-right:none}
   .prod-card:nth-child(n+4){border-bottom:1px solid rgba(255,255,255,.1)}

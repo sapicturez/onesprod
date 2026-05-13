@@ -139,8 +139,12 @@
       var progress = (vh - rect.top) / (vh + rect.height);
       if (progress < 0) progress = 0;
       else if (progress > 1) progress = 1;
-      // Translate range: ±50 px (well within the 30% overhang on .roads__bg)
-      var translate = (progress - 0.5) * 100;
+      // Asymmetric range — full bottom of the photo, top reveal trimmed:
+      //   progress 0 → translate = -130% h  (FULL bottom)
+      //   progress 1 → translate = +73%  h  (top, with the upper ~44% hidden)
+      var down = rect.height * 1.3;    // full bottom reveal
+      var up   = rect.height * 0.73;   // trimmed top reveal
+      var translate = -down + progress * (down + up);
       bg.style.transform = 'translate3d(0,' + translate + 'px,0)';
     }
 
