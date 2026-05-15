@@ -117,6 +117,85 @@
   }
 
   // ──────────────────────────────────────────────────────────────
+  // Module: Hover image preview — follows the cursor
+  // Any element with data-img="..." anywhere on the page gets a
+  // floating preview that lerp-follows the pointer. One shared
+  // floating panel for every section. Touch devices skip via CSS
+  // (@media hover:none → display:none).
+  // ──────────────────────────────────────────────────────────────
+  function initServicesHoverPreview() {
+    var items = document.querySelectorAll('[data-img]');
+    if (!items.length) return;
+
+    // Build the floating preview once and append to <body>
+    var preview = document.createElement('div');
+    preview.className = 'hover-preview';
+    preview.setAttribute('aria-hidden', 'true');
+
+    // Pre-create an <img> for each unique source so transitions look smooth
+    var imgs = {};
+    items.forEach(function (item) {
+      var src = item.dataset.img;
+      if (!imgs[src]) {
+        var img = document.createElement('img');
+        img.src = src;
+        img.alt = '';
+        preview.appendChild(img);
+        imgs[src] = img;
+      }
+    });
+    document.body.appendChild(preview);
+
+    var targetX = 0, targetY = 0;
+    var smoothX = 0, smoothY = 0;
+    var raf = null;
+    var primed = false;
+
+    function lerp(start, end, factor) {
+      return start + (end - start) * factor;
+    }
+
+    function tick() {
+      smoothX = lerp(smoothX, targetX, 0.15);
+      smoothY = lerp(smoothY, targetY, 0.15);
+      preview.style.transform =
+        'translate3d(' + (smoothX + 20) + 'px,' + (smoothY - 100) + 'px,0)';
+      if (Math.abs(targetX - smoothX) > 0.2 || Math.abs(targetY - smoothY) > 0.2) {
+        raf = requestAnimationFrame(tick);
+      } else {
+        raf = null;
+      }
+    }
+
+    function onMouseMove(e) {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      if (!raf) raf = requestAnimationFrame(tick);
+    }
+
+    items.forEach(function (item) {
+      item.addEventListener('mouseenter', function (e) {
+        // First hover: snap to cursor instead of flying in from (0,0)
+        if (!primed) {
+          targetX = smoothX = e.clientX;
+          targetY = smoothY = e.clientY;
+          primed = true;
+        }
+        // Show only this item's image, hide the rest
+        var src = item.dataset.img;
+        Object.keys(imgs).forEach(function (k) {
+          imgs[k].classList.toggle('is-active', k === src);
+        });
+        preview.classList.add('is-visible');
+      });
+      item.addEventListener('mouseleave', function () {
+        preview.classList.remove('is-visible');
+      });
+      item.addEventListener('mousemove', onMouseMove);
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────────
   // Module: Roads parallax — JS-driven so it works on iOS/Android too
   // (CSS background-attachment:fixed is unsupported on iOS Safari).
   // Pages that use it: index.html
@@ -242,6 +321,7 @@
     initBounceLoop();
     initRoadsParallax();
     initSlideshow();
+    initServicesHoverPreview();
   }
 
   if (document.readyState === 'loading') {
