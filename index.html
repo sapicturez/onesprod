@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ONES — International Film Production Service | Warsaw · Bangkok · Barcelona</title>
-<meta name="description" content="ONES is an international full service production company established in 2012. Bases in Warsaw, Bangkok and Barcelona. TV commercials, TV shows, documentary films and music videos.">
-<meta name="keywords" content="film production service, tv commercials, fixer, Warsaw, Bangkok, Barcelona, line producer, full service production">
+<title>ONES — International Film Production Service | Barcelona · Warsaw · Bangkok</title>
+<meta name="description" content="ONES is an international full service production company established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films and music videos.">
+<meta name="keywords" content="film production service, tv commercials, fixer, Barcelona, Warsaw, Bangkok, line producer, full service production">
 <meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:title" content="ONES — International Film Production Service">
-<meta property="og:description" content="Full service production with bases in Warsaw, Bangkok and Barcelona.">
+<meta property="og:description" content="Full service production with bases in Barcelona, Warsaw and Bangkok.">
 <meta property="og:url" content="https://onesprod.com/">
 <meta property="og:site_name" content="ONES">
 <link rel="canonical" href="https://onesprod.com/">
@@ -19,7 +19,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=24">
+<link rel="stylesheet" href="style.css?v=32">
 </head>
 <body>
 
@@ -33,19 +33,30 @@
   </label>
   <nav class="site-nav" aria-label="Primary">
     <label for="nav-toggle" class="nav-close" aria-label="Close navigation">✕</label>
-    <a href="reels.html">Reels</a>
-    <a href="tv-shows.html">TV Shows</a>
+    <a href="#about">About</a>
+    <a href="reels.html">Commercial reel</a>
+    <a href="tv-shows.html">TV Formats</a>
     <a href="photoshoots.html">Photoshoots</a>
-    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
   </nav>
 </header>
 
 <main id="main">
 
-  <h1 class="sr-only">ONES — International Film Production Service in Warsaw, Bangkok and Barcelona</h1>
+  <h1 class="sr-only">ONES — International Film Production Service in Barcelona, Warsaw and Bangkok</h1>
 
   <!-- ── Hero: 3 cities ── -->
   <section id="cities" class="cities" aria-label="Our bases">
+
+    <div class="city">
+      <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
+        <source src="https://onesprod.com/wp-content/uploads/2026/04/bcn_intr.mp4" type="video/mp4">
+      </video>
+      <div class="city__overlay"></div>
+      <div class="city__caption">
+        <h2 class="city__name">Barcelona</h2>
+      </div>
+    </div>
 
     <div class="city">
       <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
@@ -67,16 +78,6 @@
       </div>
     </div>
 
-    <div class="city">
-      <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-        <source src="https://onesprod.com/wp-content/uploads/2026/04/bcn_intr.mp4" type="video/mp4">
-      </video>
-      <div class="city__overlay"></div>
-      <div class="city__caption">
-        <h2 class="city__name">Barcelona</h2>
-      </div>
-    </div>
-
     <a class="scroll-cue" href="#about" aria-label="Scroll down to explore">
       <span class="scroll-cue__label">Scroll</span>
       <span class="scroll-cue__line"><span class="scroll-cue__dot"></span></span>
@@ -87,9 +88,9 @@
   <!-- ── About ── -->
   <section id="about" class="about" aria-labelledby="about-h">
     <div class="wrap">
-      <p class="eyebrow">Established 2012</p>
-      <h2 id="about-h" class="display">International full&nbsp;service production company.</h2>
-      <p class="lede">From Warsaw to Bangkok to Barcelona — ONES delivers TV commercials, films, fashion and music videos for clients and agencies across the world. Local crews, local knowledge, one standard.</p>
+      <p class="eyebrow">One company. Multiple territories. Seamless execution.</p>
+      <h2 id="about-h" class="display">Ones is an international production company operating as a production hub.</h2>
+      <p class="lede">ONES delivers integrated production solutions across commercials, television, documentaries, music videos and branded content.</p>
       <ul class="services" role="list">
         <li data-img="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800&auto=format&fit=crop">
           <h3>TV Commercials</h3>
@@ -108,6 +109,57 @@
           <p>Local fixing, permits, casting, crew and equipment in three regions.</p>
         </li>
       </ul>
+    </div>
+  </section>
+
+  <!-- ── Interactive production-hub infographic ── -->
+  <section id="hub" class="hub" aria-label="Production hub">
+    <div class="hub__map">
+      <!-- Dot grid background covers the whole infographic -->
+      <div class="hub__bg-dots" aria-hidden="true"></div>
+      <div class="hub__glow hub__glow--a" aria-hidden="true"></div>
+      <div class="hub__glow hub__glow--b" aria-hidden="true"></div>
+
+      <!-- Eyebrow + integrated text blocks -->
+      <p class="hub__eyebrow">Production hub</p>
+      <p class="hub__text hub__text--a">Within our team, we bring together resources, expertise and production capabilities to ensure consistent quality, efficient execution and creative flexibility across regions.</p>
+      <p class="hub__text hub__text--b">Our structure goes beyond a traditional production model — we operate as a centralized production hub, integrating teams, resources and partners into one unified system.</p>
+
+      <!-- Pin area: lines + 3 pins (geographic-proportional positions) -->
+      <div class="hub__pin-area">
+        <svg class="hub__lines" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M 100 205 Q 175 155 250 125"/>
+          <path d="M 250 125 Q 550 210 850 390"/>
+          <path d="M 100 205 Q 475 350 850 390"/>
+        </svg>
+
+        <button class="hub__pin" type="button" data-city="barcelona" aria-expanded="false">
+          <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
+          <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-label">Barcelona</span>
+          <span class="hub__pin-tooltip" role="tooltip">
+            <strong>Spain</strong><br>Production service across Iberia &amp; Southern Europe.
+          </span>
+        </button>
+
+        <button class="hub__pin" type="button" data-city="warsaw" aria-expanded="false">
+          <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
+          <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-label">Warsaw</span>
+          <span class="hub__pin-tooltip" role="tooltip">
+            <strong>Poland</strong><br>Production service across Central &amp; Eastern Europe.
+          </span>
+        </button>
+
+        <button class="hub__pin" type="button" data-city="bangkok" aria-expanded="false">
+          <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
+          <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-label">Bangkok</span>
+          <span class="hub__pin-tooltip" role="tooltip">
+            <strong>Thailand</strong><br>Production service across South-East Asia.
+          </span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -280,7 +332,7 @@
     <div class="wrap">
       <p class="eyebrow">Production Service</p>
       <h2 id="prod-h" class="display display--xl">We produce wherever the story takes us.</h2>
-      <p class="lede">ONES operates from Warsaw, Bangkok and Barcelona — delivering full service production and line producing across Europe and South East Asia. From complex location shoots to large-scale studio builds, we bring international standards to every project, in every region.</p>
+      <p class="lede">ONES operates from Barcelona, Warsaw and Bangkok — delivering full service production and line producing across Europe and South East Asia. From complex location shoots to large-scale studio builds, we bring international standards to every project, in every region.</p>
       <div class="prod-grid">
         <article class="prod-card" data-img="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop">
           <h3>Location Scouting</h3>
@@ -324,23 +376,23 @@
 
       <ul class="contact__grid" role="list">
         <li>
-          <a href="about.html" data-img="https://images.unsplash.com/photo-1607427293702-036933bbf746?q=80&w=800&auto=format&fit=crop">
+          <a href="contact.html" data-img="https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=800&auto=format&fit=crop">
+            <h3>Barcelona</h3>
+            <p>ONES Spain<br>Production service in Spain &amp;&nbsp;Iberia.</p>
+            <span class="contact__arrow" aria-hidden="true">→</span>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" data-img="https://images.unsplash.com/photo-1607427293702-036933bbf746?q=80&w=800&auto=format&fit=crop">
             <h3>Warsaw</h3>
             <p>ONES Poland<br>Production service across Europe.</p>
             <span class="contact__arrow" aria-hidden="true">→</span>
           </a>
         </li>
         <li>
-          <a href="about.html" data-img="https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=800&auto=format&fit=crop">
+          <a href="contact.html" data-img="https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=800&auto=format&fit=crop">
             <h3>Bangkok</h3>
             <p>ONES Bangkok<br>Production service in Thailand &amp;&nbsp;SEA.</p>
-            <span class="contact__arrow" aria-hidden="true">→</span>
-          </a>
-        </li>
-        <li>
-          <a href="about.html" data-img="https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=800&auto=format&fit=crop">
-            <h3>Barcelona</h3>
-            <p>ONES Spain<br>Production service in Spain &amp;&nbsp;Iberia.</p>
             <span class="contact__arrow" aria-hidden="true">→</span>
           </a>
         </li>
@@ -351,7 +403,7 @@
           <p>We have worked with Mercedes-Benz, Skoda, Volkswagen, SAB Miller, T-Mobile, Asahi, Reckitt&nbsp;Benckiser, O2, Nivea, Samsung, Canal+, TVN, Stink Films, Dynamo Films, Opus Film and OTO Film — among many other local and international clients.</p>
         </blockquote>
         <div class="cta-pair">
-          <a class="btn btn--wide" href="about.html">Meet the team →</a>
+          <a class="btn btn--wide" href="contact.html">Meet the team →</a>
           <a class="btn btn--wide" href="mailto:office@onesprod.com">office@onesprod.com</a>
         </div>
       </div>
@@ -364,7 +416,7 @@
 <footer class="site-footer" role="contentinfo">
   <div class="wrap site-footer__row">
     <span>© <time>2026</time> ONES — International Production Company</span>
-    <span>Warsaw · Bangkok · Barcelona</span>
+    <span>Barcelona · Warsaw · Bangkok</span>
     <span><a href="mailto:office@onesprod.com">office@onesprod.com</a></span>
   </div>
 </footer>

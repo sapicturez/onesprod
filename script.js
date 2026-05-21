@@ -117,6 +117,59 @@
   }
 
   // ──────────────────────────────────────────────────────────────
+  // Module: Interactive production hub map
+  // ─── click a city pin to pin its tooltip (latches open)
+  // ─── click outside / press ESC to close
+  // ─── mouse-follow parallax shifts the dot grid for depth
+  // ──────────────────────────────────────────────────────────────
+  function initHubMap() {
+    var map = document.querySelector('.hub__map');
+    if (!map) return;
+    var pins = map.querySelectorAll('.hub__pin');
+    if (!pins.length) return;
+    var grid = map.querySelector('.hub__grid');
+    var active = null;
+
+    function setActive(pin) {
+      pins.forEach(function (p) {
+        p.classList.toggle('is-active', p === pin);
+        p.setAttribute('aria-expanded', p === pin ? 'true' : 'false');
+      });
+      active = pin;
+    }
+    function clearActive() {
+      pins.forEach(function (p) {
+        p.classList.remove('is-active');
+        p.setAttribute('aria-expanded', 'false');
+      });
+      active = null;
+    }
+
+    pins.forEach(function (pin) {
+      pin.addEventListener('click', function (e) {
+        e.stopPropagation();
+        if (active === pin) clearActive();
+        else setActive(pin);
+      });
+    });
+
+    // Click anywhere else → close
+    document.addEventListener('click', function (e) {
+      if (active && !map.contains(e.target)) clearActive();
+    });
+    // ESC → close
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && active) {
+        var prev = active;
+        clearActive();
+        prev.focus();
+      }
+    });
+
+    // Parallax removed — pins and background stay perfectly still
+  }
+
+  // ──────────────────────────────────────────────────────────────
   // Module: Hover image preview — follows the cursor
   // Any element with data-img="..." anywhere on the page gets a
   // floating preview that lerp-follows the pointer. One shared
@@ -322,6 +375,7 @@
     initRoadsParallax();
     initSlideshow();
     initServicesHoverPreview();
+    initHubMap();
   }
 
   if (document.readyState === 'loading') {

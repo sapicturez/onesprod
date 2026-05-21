@@ -84,6 +84,79 @@ h2{font-weight:600!important}
 .hover-preview img.is-active{opacity:1;transform:scale(1);filter:none}
 @media (hover:none){.hover-preview{display:none!important}}
 
+/* ── Production hub — integrated infographic ─────────── */
+.hub{position:relative;padding:clamp(80px,12vh,160px) 0;background:#000;border-top:1px solid rgba(255,255,255,.07);overflow:hidden}
+
+.hub__map{position:relative;width:100%;max-width:1200px;margin:0 auto;min-height:clamp(560px,55vw,720px);padding:clamp(60px,8vh,90px) clamp(40px,6vw,80px);box-sizing:border-box}
+
+/* Eyebrow + integrated text blocks */
+.hub__eyebrow{position:absolute;top:clamp(40px,5vh,60px);left:clamp(40px,6vw,80px);margin:0;font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-weight:500;opacity:.6;z-index:2}
+.hub__text{position:absolute;margin:0;font-size:14px;line-height:1.55;color:rgba(255,255,255,.7);z-index:2;max-width:300px}
+.hub__text--a{top:18%;right:clamp(40px,6vw,80px)}
+.hub__text--b{bottom:clamp(40px,5vh,60px);left:clamp(40px,6vw,80px)}
+
+/* Pin area covers the full map on desktop */
+.hub__pin-area{position:absolute;inset:0;z-index:1}
+
+/* Ambient mood glows */
+.hub__glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none;opacity:.55}
+.hub__glow--a{top:8%;right:6%;width:46%;height:80%;background:radial-gradient(circle,rgba(236,72,153,.32),transparent 60%)}
+.hub__glow--b{bottom:6%;left:8%;width:38%;height:60%;background:radial-gradient(circle,rgba(139,92,246,.22),transparent 60%)}
+
+/* Dot grid — the entire map canvas */
+.hub__bg-dots{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,.16) 1.1px,transparent 1.6px);background-size:16px 16px;-webkit-mask-image:radial-gradient(ellipse 80% 75% at center,#000 25%,transparent 90%);mask-image:radial-gradient(ellipse 80% 75% at center,#000 25%,transparent 90%)}
+
+/* Connection lines between cities */
+.hub__lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;opacity:.55}
+.hub__lines path{fill:none;stroke:rgba(255,255,255,.45);stroke-width:1;stroke-dasharray:3 6;animation:hub-line-flow 22s linear infinite}
+.hub__lines path:nth-child(2){animation-duration:26s}
+.hub__lines path:nth-child(3){animation-duration:30s;opacity:.45}
+@keyframes hub-line-flow{to{stroke-dashoffset:-180}}
+
+/* City pin button */
+.hub__pin{position:absolute;top:var(--top);left:var(--left);transform:translate(-50%,-50%);background:transparent;border:0;padding:0;cursor:pointer;color:inherit;font:inherit;z-index:3;display:flex;flex-direction:column;align-items:center;-webkit-tap-highlight-color:transparent}
+/* Real-world geographic proportions
+   (Barcelona ↔ Warsaw ≈ 1900 km · Warsaw ↔ Bangkok ≈ 8000 km · Bar ↔ Bkk ≈ 9700 km)
+   so Warsaw is close to Barcelona, Bangkok is far away */
+.hub__pin[data-city="barcelona"]{--top:41%;--left:10%;--c:96,165,250}
+.hub__pin[data-city="warsaw"]{--top:25%;--left:25%;--c:168,139,250}
+.hub__pin[data-city="bangkok"]{--top:78%;--left:85%;--c:244,114,182}
+
+.hub__pin-dot{display:block;width:10px;height:10px;border-radius:50%;background:rgb(var(--c));box-shadow:0 0 10px rgba(var(--c),.7),0 0 20px rgba(var(--c),.35);position:relative;z-index:2;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.hub__pin:hover .hub__pin-dot,.hub__pin.is-active .hub__pin-dot{transform:scale(1.25)}
+
+/* Two concentric pulse rings (40% slower than before) */
+.hub__pin-rings{position:absolute;top:50%;left:50%;transform:translate(-50%,calc(-50% - 7px));width:46px;height:46px;pointer-events:none}
+.hub__pin-rings span{position:absolute;inset:0;border-radius:50%;border:1.5px solid rgba(var(--c),.55);opacity:0;transform:scale(.3);animation:hub-ring 3.6s ease-out infinite}
+.hub__pin-rings span:nth-child(2){animation-delay:1.8s}
+@keyframes hub-ring{0%{transform:scale(.3);opacity:.85}100%{transform:scale(2.3);opacity:0}}
+
+/* Label pill */
+.hub__pin-label{margin-top:14px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:#fff;background:rgba(var(--c),.16);border:1px solid rgba(var(--c),.45);padding:6px 13px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;white-space:nowrap}
+.hub__pin:hover .hub__pin-label,.hub__pin:focus-visible .hub__pin-label,.hub__pin.is-active .hub__pin-label{background:rgba(var(--c),.38);border-color:rgba(var(--c),.8);transform:translateY(-2px)}
+.hub__pin:focus-visible{outline:none}
+.hub__pin:focus-visible .hub__pin-dot{box-shadow:0 0 16px rgba(var(--c),.9),0 0 0 4px rgba(var(--c),.3),0 0 24px rgba(var(--c),.35)}
+
+/* Tooltip card revealed on hover / click */
+.hub__pin-tooltip{position:absolute;bottom:calc(100% + 18px);left:50%;transform:translate(-50%,4px);width:max-content;max-width:240px;padding:12px 16px;background:rgba(15,15,15,.88);backdrop-filter:saturate(160%) blur(20px);-webkit-backdrop-filter:saturate(160%) blur(20px);border:1px solid rgba(255,255,255,.09);border-radius:10px;font-size:12px;line-height:1.5;color:#fff;opacity:0;pointer-events:none;transition:opacity .35s ease,transform .35s cubic-bezier(.2,.8,.2,1);text-align:left;font-weight:400;letter-spacing:0;text-transform:none}
+.hub__pin-tooltip strong{display:inline-block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.55;margin-bottom:4px;font-weight:600}
+.hub__pin:hover .hub__pin-tooltip,.hub__pin:focus-visible .hub__pin-tooltip,.hub__pin.is-active .hub__pin-tooltip{opacity:1;transform:translate(-50%,0)}
+
+/* Mobile / tablet — stack the infographic vertically inside the same dotted background */
+@media (max-width:760px){
+  .hub__map{display:flex;flex-direction:column;gap:18px;min-height:auto;padding:clamp(34px,6vw,44px) clamp(22px,5vw,30px)}
+  .hub__eyebrow{position:static;margin:0}
+  .hub__text{position:static;max-width:none}
+  .hub__pin-area{position:relative;inset:auto;width:100%;aspect-ratio:2/1;margin:6px 0}
+
+  /* Pins ≈1.6× larger for tap-friendly + visibility */
+  .hub__pin-dot{width:18px;height:18px;box-shadow:0 0 16px rgba(var(--c),.75),0 0 28px rgba(var(--c),.4)}
+  .hub__pin-rings{width:90px;height:90px;transform:translate(-50%,calc(-50% - 11px))}
+  .hub__pin-rings span{border-width:1.8px}
+  .hub__pin-label{font-size:10px;letter-spacing:.28em;padding:7px 14px;margin-top:14px}
+  .hub__pin-tooltip{max-width:200px;font-size:11.5px;padding:10px 14px;bottom:calc(100% + 22px)}
+}
+
 /* ── Work / reel ─────────────────────────────────────── */
 .work{padding:clamp(80px,12vh,160px) 0 0;background:#000;border-top:1px solid rgba(255,255,255,.07)}
 .reel{margin:56px 0 0;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.06)}
