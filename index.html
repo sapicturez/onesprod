@@ -19,9 +19,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=32">
+<link rel="stylesheet" href="style.css?v=71">
 </head>
 <body>
+
+<!-- SVG threshold filter for the gooey city-name morph effect -->
+<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
+  <defs>
+    <filter id="city-threshold">
+      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
+    </filter>
+  </defs>
+</svg>
 
 <header class="site-header" role="banner">
   <a href="index.html" class="brand" aria-label="ONES — Home">
@@ -54,7 +63,12 @@
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">Barcelona</h2>
+        <h2 class="city__name">
+          <span class="city__morph">
+            <span class="city__morph-text city__morph-text--a">Barcelona</span>
+            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Spain</span>
+          </span>
+        </h2>
       </div>
     </div>
 
@@ -64,7 +78,12 @@
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">Warsaw</h2>
+        <h2 class="city__name">
+          <span class="city__morph">
+            <span class="city__morph-text city__morph-text--a">Warsaw</span>
+            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Poland</span>
+          </span>
+        </h2>
       </div>
     </div>
 
@@ -74,7 +93,12 @@
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">Bangkok</h2>
+        <h2 class="city__name">
+          <span class="city__morph">
+            <span class="city__morph-text city__morph-text--a">Bangkok</span>
+            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Thailand</span>
+          </span>
+        </h2>
       </div>
     </div>
 
@@ -85,47 +109,22 @@
 
   </section>
 
-  <!-- ── About ── -->
-  <section id="about" class="about" aria-labelledby="about-h">
-    <div class="wrap">
+  <!-- ── About + Production Hub (integrated single section) ── -->
+  <section id="about" class="about about--hub" aria-labelledby="about-h">
+    <div class="wrap about__intro">
       <p class="eyebrow">One company. Multiple territories. Seamless execution.</p>
       <h2 id="about-h" class="display">Ones is an international production company operating as a production hub.</h2>
       <p class="lede">ONES delivers integrated production solutions across commercials, television, documentaries, music videos and branded content.</p>
-      <ul class="services" role="list">
-        <li data-img="https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=800&auto=format&fit=crop">
-          <h3>TV Commercials</h3>
-          <p>Full service production for international agencies and brands.</p>
-        </li>
-        <li data-img="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop">
-          <h3>Fashion &amp; Editorial</h3>
-          <p>From location scouting to final delivery for global fashion houses.</p>
-        </li>
-        <li data-img="https://images.unsplash.com/photo-1501386761578-eac5c94b800a?q=80&w=800&auto=format&fit=crop">
-          <h3>Music Videos</h3>
-          <p>Concept-driven production with award-winning directors and DPs.</p>
-        </li>
-        <li data-img="https://images.unsplash.com/photo-1521791136064-7986c2920216?q=80&w=800&auto=format&fit=crop">
-          <h3>Service Production</h3>
-          <p>Local fixing, permits, casting, crew and equipment in three regions.</p>
-        </li>
-      </ul>
     </div>
-  </section>
 
-  <!-- ── Interactive production-hub infographic ── -->
-  <section id="hub" class="hub" aria-label="Production hub">
-    <div class="hub__map">
-      <!-- Dot grid background covers the whole infographic -->
+    <div class="hub__map" aria-label="Production hub">
       <div class="hub__bg-dots" aria-hidden="true"></div>
       <div class="hub__glow hub__glow--a" aria-hidden="true"></div>
       <div class="hub__glow hub__glow--b" aria-hidden="true"></div>
 
-      <!-- Eyebrow + integrated text blocks -->
-      <p class="hub__eyebrow">Production hub</p>
       <p class="hub__text hub__text--a">Within our team, we bring together resources, expertise and production capabilities to ensure consistent quality, efficient execution and creative flexibility across regions.</p>
       <p class="hub__text hub__text--b">Our structure goes beyond a traditional production model — we operate as a centralized production hub, integrating teams, resources and partners into one unified system.</p>
 
-      <!-- Pin area: lines + 3 pins (geographic-proportional positions) -->
       <div class="hub__pin-area">
         <svg class="hub__lines" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
           <path d="M 100 205 Q 175 155 250 125"/>
@@ -176,10 +175,12 @@
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/oysho-club-thumbnail.jpg')"></div>
             <video class="reel__preview" src="./images/oysho-club.mp4" muted loop playsinline preload="none"></video>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">OYSHO — Club Boat</p>
-              <p class="reel__meta"><b>Prod</b> Intricate Studio <i>·</i> <b>Dir</b> Fabio de Frel <i>·</i> <b>DOP</b> Peter Bishop</p>
+              <p class="reel__meta"><b>Prod</b> Intricate Studio</p>
+              <p class="reel__meta"><b>Dir</b> Fabio de Frel</p>
+              <p class="reel__meta"><b>DOP</b> Peter Bishop</p>
             </div>
           </div>
         </a>
@@ -190,10 +191,13 @@
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/oryal-thumbnail.jpg')"></div>
             <video class="reel__preview" src="./images/oryal-thumbnail.mp4" muted loop playsinline preload="none"></video>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">ORYAL Aqua</p>
-              <p class="reel__meta"><b>Agency</b> Creatives Nowakowski Przerwa <i>·</i> <b>Prod</b> Selfish3pro <i>·</i> <b>Dir</b> Piotr Kumik <i>·</i> <b>DOP</b> Jakub Giza</p>
+              <p class="reel__meta"><b>Agency</b> Creatives Nowakowski Przerwa</p>
+              <p class="reel__meta"><b>Prod</b> Selfish3pro</p>
+              <p class="reel__meta"><b>Dir</b> Piotr Kumik</p>
+              <p class="reel__meta"><b>DOP</b> Jakub Giza</p>
             </div>
           </div>
         </a>
@@ -204,10 +208,12 @@
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/oysho-club-resort-thumbnail.jpg')"></div>
             <video class="reel__preview" src="./images/oysho-club-resort-thumbnail.mp4" muted loop playsinline preload="none"></video>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">OYSHO — Club Resort</p>
-              <p class="reel__meta"><b>Prod</b> Intricate Studio <i>·</i> <b>Dir</b> Fabio de Frel <i>·</i> <b>DOP</b> Peter Bishop</p>
+              <p class="reel__meta"><b>Prod</b> Intricate Studio</p>
+              <p class="reel__meta"><b>Dir</b> Fabio de Frel</p>
+              <p class="reel__meta"><b>DOP</b> Peter Bishop</p>
             </div>
           </div>
         </a>
@@ -218,10 +224,12 @@
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/pekao-bank-thumbnail.jpg')"></div>
             <video class="reel__preview" src="./images/pekao-bank-thumbnail.mp4" muted loop playsinline preload="none"></video>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">PEKAO Bank — Engagement</p>
-              <p class="reel__meta"><b>Agency</b> Leo Burnett <i>·</i> <b>Dir</b> Maciej Kowalczuk <i>·</i> <b>DOP</b> Nikodem Marek</p>
+              <p class="reel__meta"><b>Agency</b> Leo Burnett</p>
+              <p class="reel__meta"><b>Dir</b> Maciej Kowalczuk</p>
+              <p class="reel__meta"><b>DOP</b> Nikodem Marek</p>
             </div>
           </div>
         </a>
@@ -231,10 +239,12 @@
         <a class="reel__poster" href="#reel-5" aria-label="Play Scoot Airlines — Gifts">
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/scoot-thumbnail.jpg')"></div>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">Scoot Airlines — Gifts</p>
-              <p class="reel__meta"><b>Agency</b> VMLYR Singapore <i>·</i> <b>Dir</b> Docter Twins <i>·</i> <b>DOP</b> Lukasz Gutt</p>
+              <p class="reel__meta"><b>Agency</b> VMLYR Singapore</p>
+              <p class="reel__meta"><b>Dir</b> Docter Twins</p>
+              <p class="reel__meta"><b>DOP</b> Lukasz Gutt</p>
             </div>
           </div>
         </a>
@@ -244,10 +254,12 @@
         <a class="reel__poster" href="#reel-6" aria-label="Play WARKA — Gold for the Fans">
           <div class="reel__frame">
             <div class="reel__bg" style="background-image:url('./images/warka-thumbnail.jpg')"></div>
-            <span class="reel__play-btn" aria-hidden="true"><svg viewBox="0 0 16 20" fill="currentColor"><polygon points="0,0 16,10 0,20"/></svg></span>
+            
             <div class="reel__credits">
               <p class="reel__proj">WARKA — Gold for the Fans</p>
-              <p class="reel__meta"><b>Prod</b> Opusfilm <i>·</i> <b>Dir</b> Antek Nykowski <i>·</i> <b>DOP</b> Kamil Płocki</p>
+              <p class="reel__meta"><b>Prod</b> Opusfilm</p>
+              <p class="reel__meta"><b>Dir</b> Antek Nykowski</p>
+              <p class="reel__meta"><b>DOP</b> Kamil Płocki</p>
             </div>
           </div>
         </a>
@@ -327,37 +339,85 @@
 
   </section>
 
-  <!-- ── Production Service (3.png layout) ── -->
+  <!-- ── Production Service (replaces former 6-card prod-grid) ── -->
   <section id="production" class="prod-section" aria-labelledby="prod-h">
     <div class="wrap">
       <p class="eyebrow">Production Service</p>
       <h2 id="prod-h" class="display display--xl">We produce wherever the story takes us.</h2>
-      <p class="lede">ONES operates from Barcelona, Warsaw and Bangkok — delivering full service production and line producing across Europe and South East Asia. From complex location shoots to large-scale studio builds, we bring international standards to every project, in every region.</p>
-      <div class="prod-grid">
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=800&auto=format&fit=crop">
-          <h3>Location Scouting</h3>
-          <p>From metropolitan grids to volcanic shores — our location managers open access to landscapes few crews have ever filmed.</p>
+      <p class="lede">Within ONES, production is not divided between regions or partners. All projects are managed through a single workflow, ensuring clarity, efficiency and consistent quality.</p>
+      <div class="acc" role="list">
+
+        <article class="acc__item" role="listitem">
+          <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-p1" id="acc-h1">
+            <span class="acc__num">01</span>
+            <span class="acc__label">
+              <span class="acc__title">How We Work</span>
+              <span class="acc__sub">One team. One approach.</span>
+            </span>
+            <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+          </button>
+          <div class="acc__panel" id="acc-p1" role="region" aria-labelledby="acc-h1">
+            <div class="acc__inner">
+              <p>ONES combines centralized planning with locally driven execution, creating a production approach that is both consistent and adaptable.</p>
+              <p>Our team responds flexibly to creative needs while maintaining clarity, efficiency and full control throughout the process.</p>
+            </div>
+          </div>
         </article>
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1554080353-a576cf803bda?q=80&w=800&auto=format&fit=crop">
-          <h3>Casting</h3>
-          <p>Local and international talent. Street, model, lifestyle and character casting handled in-house across three regions.</p>
+
+        <article class="acc__item" role="listitem">
+          <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-p2" id="acc-h2">
+            <span class="acc__num">02</span>
+            <span class="acc__label">
+              <span class="acc__title">Geographic Reach</span>
+              <span class="acc__sub">Offices in Europe and South&nbsp;East&nbsp;Asia.</span>
+            </span>
+            <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+          </button>
+          <div class="acc__panel" id="acc-p2" role="region" aria-labelledby="acc-h2">
+            <div class="acc__inner">
+              <ul class="acc__cities">
+                <li><b>Spain</b><span>Barcelona</span></li>
+                <li><b>Poland</b><span>Warsaw</span></li>
+                <li><b>Thailand</b><span>Bangkok</span></li>
+              </ul>
+              <p>Our structure enables seamless production across regions, combining centralized coordination with strong local expertise.</p>
+            </div>
+          </div>
         </article>
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop">
-          <h3>Budgeting &amp; Planning</h3>
-          <p>Transparent budgets, clear schedules and creative production planning that protect the idea on every shoot day.</p>
+
+        <article class="acc__item" role="listitem">
+          <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-p3" id="acc-h3">
+            <span class="acc__num">03</span>
+            <span class="acc__label">
+              <span class="acc__title">Client-oriented &amp; Flexible</span>
+              <span class="acc__sub">A flexible production capability.</span>
+            </span>
+            <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+          </button>
+          <div class="acc__panel" id="acc-p3" role="region" aria-labelledby="acc-h3">
+            <div class="acc__inner">
+              <p>Operating across multiple regions allows us to optimize production costs and eliminate unnecessary structural layers, including &ldquo;double mark-up&rdquo; models.</p>
+              <p>Production adapts to each creative brief, while the overall system remains consistent.</p>
+            </div>
+          </div>
         </article>
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1454942901704-3c44c11b2ad1?q=80&w=800&auto=format&fit=crop">
-          <h3>Challenging Locations</h3>
-          <p>Permits, logistics, safety and remote-shoot expertise — from Tatra peaks to tropical coasts and Iberian deserts.</p>
+
+        <article class="acc__item" role="listitem">
+          <button class="acc__head" type="button" aria-expanded="false" aria-controls="acc-p4" id="acc-h4">
+            <span class="acc__num">04</span>
+            <span class="acc__label">
+              <span class="acc__title">Full Service Production</span>
+              <span class="acc__sub">We produce wherever the story takes us.</span>
+            </span>
+            <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+          </button>
+          <div class="acc__panel" id="acc-p4" role="region" aria-labelledby="acc-h4">
+            <div class="acc__inner">
+              <p>Full service production for international agencies, brands and production houses — local crews, local knowledge, one accountable team.</p>
+            </div>
+          </div>
         </article>
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1559523182-a284c3fb7cff?q=80&w=800&auto=format&fit=crop">
-          <h3>Set Construction</h3>
-          <p>Complex builds, art departments and SFX coordinated with senior crews who deliver at network broadcast standards.</p>
-        </article>
-        <article class="prod-card" data-img="https://images.unsplash.com/photo-1487260211189-670c54da558d?q=80&w=800&auto=format&fit=crop">
-          <h3>Line Producing</h3>
-          <p>Full line production across Poland, Thailand and Spain. One producer, one currency, one accountable team.</p>
-        </article>
+
       </div>
     </div>
   </section>
@@ -376,21 +436,21 @@
 
       <ul class="contact__grid" role="list">
         <li>
-          <a href="contact.html" data-img="https://images.unsplash.com/photo-1583422409516-2895a77efded?q=80&w=800&auto=format&fit=crop">
+          <a href="contact.html">
             <h3>Barcelona</h3>
             <p>ONES Spain<br>Production service in Spain &amp;&nbsp;Iberia.</p>
             <span class="contact__arrow" aria-hidden="true">→</span>
           </a>
         </li>
         <li>
-          <a href="contact.html" data-img="https://images.unsplash.com/photo-1607427293702-036933bbf746?q=80&w=800&auto=format&fit=crop">
+          <a href="contact.html">
             <h3>Warsaw</h3>
             <p>ONES Poland<br>Production service across Europe.</p>
             <span class="contact__arrow" aria-hidden="true">→</span>
           </a>
         </li>
         <li>
-          <a href="contact.html" data-img="https://images.unsplash.com/photo-1508009603885-50cf7c579365?q=80&w=800&auto=format&fit=crop">
+          <a href="contact.html">
             <h3>Bangkok</h3>
             <p>ONES Bangkok<br>Production service in Thailand &amp;&nbsp;SEA.</p>
             <span class="contact__arrow" aria-hidden="true">→</span>
@@ -422,6 +482,6 @@
 </footer>
 
 
-<script src="script.js"></script>
+<script src="script.js?v=11"></script>
 </body>
 </html>

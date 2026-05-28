@@ -117,6 +117,103 @@
   }
 
   // ──────────────────────────────────────────────────────────────
+  // Module: Gooey city-name morph (hero cities — Barcelona, Warsaw, Bangkok)
+  // ───────────────────────────────────────────────────────────────
+  // On hover, the city name morphs through Barcelona → Warsaw → Bangkok …
+  // looping. Uses SVG threshold filter + blur+opacity tween for the
+  // classic "metaball" gooey effect. Only animates while hovered.
+  // ──────────────────────────────────────────────────────────────
+  function initCityMorph() {
+    var morphTime = 1;
+    var cooldownTime = 0.25;
+
+    document.querySelectorAll('.city .city__morph').forEach(function (morphEl) {
+      var textA = morphEl.querySelector('.city__morph-text--a');
+      var textB = morphEl.querySelector('.city__morph-text--b');
+      if (!textA || !textB) return;
+
+      // Each tile cycles its own 2-text pair (city ↔ country)
+      var texts = [textA.textContent.trim(), textB.textContent.trim()];
+
+      var rafId = null, hovering = false;
+      var textIndex = texts.length - 1;
+      var time = 0, morph = 0, cooldown = cooldownTime;
+
+      function setMorph(fraction) {
+        textB.style.filter = 'blur(' + Math.min(8 / fraction - 8, 100) + 'px)';
+        textB.style.opacity = Math.pow(fraction, 0.4) * 100 + '%';
+        fraction = 1 - fraction;
+        textA.style.filter = 'blur(' + Math.min(8 / fraction - 8, 100) + 'px)';
+        textA.style.opacity = Math.pow(fraction, 0.4) * 100 + '%';
+      }
+      function doCooldown() {
+        morph = 0;
+        textB.style.filter = '';
+        textB.style.opacity = '100%';
+        textA.style.filter = '';
+        textA.style.opacity = '0%';
+      }
+      function doMorph() {
+        morph -= cooldown;
+        cooldown = 0;
+        var fraction = morph / morphTime;
+        if (fraction > 1) { cooldown = cooldownTime; fraction = 1; }
+        setMorph(fraction);
+      }
+      function animate() {
+        if (!hovering) { rafId = null; return; }
+        rafId = requestAnimationFrame(animate);
+        var newTime = performance.now();
+        var shouldIncrement = cooldown > 0;
+        var dt = (newTime - time) / 1000;
+        time = newTime;
+        cooldown -= dt;
+        if (cooldown <= 0) {
+          if (shouldIncrement) {
+            textIndex = (textIndex + 1) % texts.length;
+            textA.textContent = texts[textIndex % texts.length];
+            textB.textContent = texts[(textIndex + 1) % texts.length];
+          }
+          doMorph();
+        } else {
+          doCooldown();
+        }
+      }
+
+      var cityEl = morphEl.closest('.city');
+      if (!cityEl) return;
+      cityEl.addEventListener('mouseenter', function () {
+        hovering = true;
+        time = performance.now();
+        morph = 0;
+        cooldown = 0;          // 0, not cooldownTime — so the first frame
+                                // morphs FROM the visible city, instead of
+                                // doCooldown jumping straight to textB
+        textIndex = 0;          // we're "currently at" index 0 (city);
+                                // first cycle morphs to index 1 (country)
+        textA.textContent = texts[0];
+        textB.textContent = texts[1];
+        textA.style.filter = '';
+        textA.style.opacity = '1';
+        textB.style.filter = '';
+        textB.style.opacity = '0';
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      });
+      cityEl.addEventListener('mouseleave', function () {
+        hovering = false;
+        if (rafId) cancelAnimationFrame(rafId);
+        rafId = null;
+        textA.textContent = texts[0];
+        textB.textContent = texts[1];
+        textA.style.filter = '';
+        textA.style.opacity = '';
+        textB.style.filter = '';
+        textB.style.opacity = '';
+      });
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────────
   // Module: Interactive production hub map
   // ─── click a city pin to pin its tooltip (latches open)
   // ─── click outside / press ESC to close
@@ -368,6 +465,147 @@
   // Each module is element-gated so calling them all on every page
   // is harmless.
   // ──────────────────────────────────────────────────────────────
+  // ──────────────────────────────────────────────────────────────
+  // Module: Accordion — Apple-style roll out / roll in.
+  // Single-open behaviour. Animates `grid-template-rows: 0fr → 1fr`
+  // for a real height transition without measuring anything. The
+  // .is-open class drives the plus→close icon rotation and the
+  // panel reveal in CSS.
+  // ──────────────────────────────────────────────────────────────
+  function initAccordion() {
+    document.querySelectorAll('.acc').forEach(function (acc) {
+      var items = Array.prototype.slice.call(acc.querySelectorAll('.acc__item'));
+      items.forEach(function (item) {
+        var head = item.querySelector('.acc__head');
+        if (!head) return;
+        head.addEventListener('click', function () {
+          var willOpen = !item.classList.contains('is-open');
+          items.forEach(function (other) {
+            other.classList.remove('is-open');
+            var h = other.querySelector('.acc__head');
+            if (h) h.setAttribute('aria-expanded', 'false');
+          });
+          if (willOpen) {
+            item.classList.add('is-open');
+            head.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    });
+  }
+
+  // ──────────────────────────────────────────────────────────────
+  // Module: Smart header — hide on scroll-down, reveal on scroll-up.
+  // Uses rAF throttling to stay silky. A 100px threshold prevents
+  // flickering at the very top of the page.
+  // ──────────────────────────────────────────────────────────────
+  // ──────────────────────────────────────────────────────────────
+  // Module: Photoshoot thumbnail cursor label.
+  // One shared fixed div follows the mouse over .ps-thumbs links.
+  // Name is parsed from aria-label ("Slide N: NAME" → "NAME").
+  // Position is set via rAF, opacity via CSS transition.
+  // ──────────────────────────────────────────────────────────────
+  // ──────────────────────────────────────────────────────────────
+  // Module: Video aperture cursor.
+  // A 72px animated ring replaces the native cursor over every
+  // .reel__poster across all pages. Two expanding pulse rings +
+  // a breathing main ring + centre dot + play triangle.
+  // Lerp-follows the pointer for cinematic smoothness.
+  // ──────────────────────────────────────────────────────────────
+  function initVideoCursor() {
+    var targets = document.querySelectorAll('.reel__poster');
+    if (!targets.length) return;
+
+    // Build element
+    var el = document.createElement('div');
+    el.id = 'vid-cursor';
+    el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<div class="vc__ring2"></div><div class="vc__dot"></div><div class="vc__play"></div>';
+    document.body.appendChild(el);
+
+    var rafId = null, hovering = false;
+    var R = 48; // half of 96px — used to centre element on cursor
+
+    function tick(e) {
+      el.style.transform = 'translate3d(' + (e.clientX - R) + 'px,' + (e.clientY - R) + 'px,0)';
+      rafId = null;
+    }
+
+    document.addEventListener('mousemove', function (e) {
+      if (!hovering) return;
+      if (rafId) return;
+      rafId = requestAnimationFrame(tick.bind(null, e));
+    }, { passive: true });
+
+    targets.forEach(function (target) {
+      target.addEventListener('mouseenter', function (e) {
+        hovering = true;
+        el.style.transform = 'translate3d(' + (e.clientX - R) + 'px,' + (e.clientY - R) + 'px,0)';
+        el.classList.add('is-active');
+      });
+      target.addEventListener('mouseleave', function () {
+        hovering = false;
+        el.classList.remove('is-active');
+      });
+    });
+  }
+
+  function initPhotoCursor() {
+    var thumbs = document.querySelectorAll('.ps-thumbs a');
+    if (!thumbs.length) return;
+
+    var el = document.createElement('div');
+    el.className = 'ps-cursor';
+    el.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(el);
+
+    var cx = 0, cy = 0, rafId = null;
+
+    function tick() {
+      el.style.transform = 'translate(' + (cx + 18) + 'px,' + (cy - 18) + 'px)';
+      rafId = null;
+    }
+
+    thumbs.forEach(function (thumb) {
+      var name = (thumb.getAttribute('aria-label') || '')
+        .replace(/^Slide\s*\d+\s*:\s*/i, '').trim();
+
+      thumb.addEventListener('mouseenter', function () {
+        el.textContent = name;
+        el.classList.add('is-active');
+      });
+      thumb.addEventListener('mouseleave', function () {
+        el.classList.remove('is-active');
+      });
+      thumb.addEventListener('mousemove', function (e) {
+        cx = e.clientX;
+        cy = e.clientY;
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      });
+    });
+  }
+
+  function initSmartHeader() {
+    var header = document.querySelector('.site-header');
+    if (!header) return;
+    var lastY = window.scrollY;
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        var y = window.scrollY;
+        if (y > lastY && y > 100) {
+          header.classList.add('is-hidden');
+        } else {
+          header.classList.remove('is-hidden');
+        }
+        lastY = y;
+        ticking = false;
+      });
+    }, { passive: true });
+  }
+
   function init() {
     initLightbox();
     initHoverPreviews();
@@ -376,6 +614,11 @@
     initSlideshow();
     initServicesHoverPreview();
     initHubMap();
+    initCityMorph();
+    initAccordion();
+    initSmartHeader();
+    initVideoCursor();
+    initPhotoCursor();
   }
 
   if (document.readyState === 'loading') {
