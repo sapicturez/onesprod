@@ -19,18 +19,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap">
-<link rel="stylesheet" href="style.css?v=71">
+<link rel="stylesheet" href="style.css?v=88">
 </head>
 <body>
-
-<!-- SVG threshold filter for the gooey city-name morph effect -->
-<svg width="0" height="0" style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true">
-  <defs>
-    <filter id="city-threshold">
-      <feColorMatrix in="SourceGraphic" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 255 -140"/>
-    </filter>
-  </defs>
-</svg>
 
 <header class="site-header" role="banner">
   <a href="index.html" class="brand" aria-label="ONES — Home">
@@ -59,16 +50,11 @@
 
     <div class="city">
       <video class="city__video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-        <source src="https://onesprod.com/wp-content/uploads/2026/04/bcn_intr.mp4" type="video/mp4">
+        <source src="https://onesprod.com/wp-content/uploads/2026/06/bcn_intr2.mp4" type="video/mp4">
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">
-          <span class="city__morph">
-            <span class="city__morph-text city__morph-text--a">Barcelona</span>
-            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Spain</span>
-          </span>
-        </h2>
+        <h2 class="city__name">Barcelona</h2>
       </div>
     </div>
 
@@ -78,12 +64,7 @@
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">
-          <span class="city__morph">
-            <span class="city__morph-text city__morph-text--a">Warsaw</span>
-            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Poland</span>
-          </span>
-        </h2>
+        <h2 class="city__name">Warsaw</h2>
       </div>
     </div>
 
@@ -93,12 +74,7 @@
       </video>
       <div class="city__overlay"></div>
       <div class="city__caption">
-        <h2 class="city__name">
-          <span class="city__morph">
-            <span class="city__morph-text city__morph-text--a">Bangkok</span>
-            <span class="city__morph-text city__morph-text--b" aria-hidden="true">Thailand</span>
-          </span>
-        </h2>
+        <h2 class="city__name">Bangkok</h2>
       </div>
     </div>
 
@@ -113,29 +89,34 @@
   <section id="about" class="about about--hub" aria-labelledby="about-h">
     <div class="wrap about__intro">
       <p class="eyebrow">One company. Multiple territories. Seamless execution.</p>
-      <h2 id="about-h" class="display">Ones is an international production company operating as a production hub.</h2>
+      <h2 id="about-h" class="display">ONES is an international production company operating as a production hub.</h2>
       <p class="lede">ONES delivers integrated production solutions across commercials, television, documentaries, music videos and branded content.</p>
     </div>
 
-    <div class="hub__map" aria-label="Production hub">
-      <div class="hub__bg-dots" aria-hidden="true"></div>
-      <div class="hub__glow hub__glow--a" aria-hidden="true"></div>
-      <div class="hub__glow hub__glow--b" aria-hidden="true"></div>
+    <div id="production-hub" class="hub__map" aria-label="Production hub">
+      <div class="hub__masthead">
+        <p class="hub__kicker">Production without borders</p>
+        <h3 class="hub__statement">Three bases.<br><span>One moving system.</span></h3>
+      </div>
 
-      <p class="hub__text hub__text--a">Within our team, we bring together resources, expertise and production capabilities to ensure consistent quality, efficient execution and creative flexibility across regions.</p>
-      <p class="hub__text hub__text--b">Our structure goes beyond a traditional production model — we operate as a centralized production hub, integrating teams, resources and partners into one unified system.</p>
+      <p class="hub__text hub__text--a"><span>How we work / 01</span>Resources, expertise and production capability move together — keeping quality consistent and execution flexible across regions.</p>
+      <p class="hub__text hub__text--b"><span>Built as a hub / 02</span>One centralized team connects local knowledge, trusted partners and on-the-ground production into a single workflow.</p>
+
+      <p class="hub__watermark" aria-hidden="true">ONES<br>GLOBAL</p>
 
       <div class="hub__pin-area">
-        <svg class="hub__lines" viewBox="0 0 1000 500" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M 100 205 Q 175 155 250 125"/>
-          <path d="M 250 125 Q 550 210 850 390"/>
-          <path d="M 100 205 Q 475 350 850 390"/>
+        <svg class="hub__lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+          <path class="hub__route hub__route--main" d="M -30 470 C 180 90 480 120 1030 455"/>
+          <path class="hub__route hub__route--echo" d="M -20 525 C 240 245 560 210 1020 505"/>
+          <path class="hub__route hub__route--return" d="M 80 570 C 410 650 730 570 955 315"/>
         </svg>
 
         <button class="hub__pin" type="button" data-city="barcelona" aria-expanded="false">
           <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
           <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-index">01 — BCN</span>
           <span class="hub__pin-label">Barcelona</span>
+          <span class="hub__pin-region">Iberia / Southern Europe</span>
           <span class="hub__pin-tooltip" role="tooltip">
             <strong>Spain</strong><br>Production service across Iberia &amp; Southern Europe.
           </span>
@@ -144,7 +125,9 @@
         <button class="hub__pin" type="button" data-city="warsaw" aria-expanded="false">
           <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
           <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-index">02 — WAW</span>
           <span class="hub__pin-label">Warsaw</span>
+          <span class="hub__pin-region">Central / Eastern Europe</span>
           <span class="hub__pin-tooltip" role="tooltip">
             <strong>Poland</strong><br>Production service across Central &amp; Eastern Europe.
           </span>
@@ -153,7 +136,9 @@
         <button class="hub__pin" type="button" data-city="bangkok" aria-expanded="false">
           <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
           <span class="hub__pin-dot" aria-hidden="true"></span>
+          <span class="hub__pin-index">03 — BKK</span>
           <span class="hub__pin-label">Bangkok</span>
+          <span class="hub__pin-region">South-East Asia</span>
           <span class="hub__pin-tooltip" role="tooltip">
             <strong>Thailand</strong><br>Production service across South-East Asia.
           </span>
@@ -482,6 +467,6 @@
 </footer>
 
 
-<script src="script.js?v=11"></script>
+<script src="script.js?v=13"></script>
 </body>
 </html>

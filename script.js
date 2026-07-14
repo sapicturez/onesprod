@@ -368,12 +368,10 @@
       var progress = (vh - rect.top) / (vh + rect.height);
       if (progress < 0) progress = 0;
       else if (progress > 1) progress = 1;
-      // Asymmetric range — full bottom of the photo, top reveal trimmed:
-      //   progress 0 → translate = -130% h  (FULL bottom)
-      //   progress 1 → translate = +73%  h  (top, with the upper ~44% hidden)
-      var down = rect.height * 1.3;    // full bottom reveal
-      var up   = rect.height * 0.73;   // trimmed top reveal
-      var translate = -down + progress * (down + up);
+      // Keep travel inside the modest overscan area so the photograph
+      // remains close to its native scale instead of being enlarged.
+      var travel = rect.height * 0.32;
+      var translate = (progress - 0.5) * travel;
       bg.style.transform = 'translate3d(0,' + translate + 'px,0)';
     }
 
@@ -606,6 +604,39 @@
     }, { passive: true });
   }
 
+  // ──────────────────────────────────────────────────────────────
+  // Module: Editorial reveal rhythm
+  // Adds a restrained entrance to content blocks as they enter view.
+  // Content remains immediately visible when reduced motion is preferred
+  // or IntersectionObserver is unavailable.
+  // ──────────────────────────────────────────────────────────────
+  function initEditorialReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    var targets = document.querySelectorAll(
+      '.about__intro > *, .work > .wrap > *, .reel__item, ' +
+      '.prod-section > .wrap > *, .acc__item, .contact > .wrap > *, ' +
+      '.page-hero .wrap > *, .team__list > li, .cta-band .wrap > *'
+    );
+    if (!targets.length) return;
+
+    targets.forEach(function (el, index) {
+      el.classList.add('editorial-reveal');
+      el.style.setProperty('--reveal-delay', (index % 4) * 70 + 'ms');
+    });
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in-view');
+        observer.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+
+    targets.forEach(function (el) { observer.observe(el); });
+  }
+
   function init() {
     initLightbox();
     initHoverPreviews();
@@ -619,6 +650,7 @@
     initSmartHeader();
     initVideoCursor();
     initPhotoCursor();
+    initEditorialReveal();
   }
 
   if (document.readyState === 'loading') {
