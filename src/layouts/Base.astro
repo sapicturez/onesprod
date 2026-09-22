@@ -1,7 +1,7 @@
 ---
 import '../styles/base.css';
 import '../styles/site.css';
-import { NAV, u, site } from '../lib/site.js';
+import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
 const { title, description = 'ONES is an international full service production company established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = '/media/cities/warsaw.webp' } = Astro.props;
 const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -50,6 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <span>© <time>{new Date().getFullYear()}</time> ONES — International Production Company</span>
     <span>Barcelona · Warsaw · Bangkok</span>
     <span class="site-footer__links">
+      {FOOTER_NAV.map(([href, label]) => <a href={u(href)}>{label}</a>)}
       <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
       <a href={site.social.vimeo} target="_blank" rel="noopener">Vimeo</a>
       <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>

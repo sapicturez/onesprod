@@ -14,12 +14,11 @@ export const NAV = [
   ['/photoshoots/', 'Photoshoots'],
   ['/production-service/', 'Production Service'],
   ['/showcase/', 'Showcase'],
-  ['/roster/', 'Roster'],
-  ['/clients/', 'Clients'],
   ['/about/', 'About us'],
   ['/contact/', 'Contacts'],
 ];
 
+export const FOOTER_NAV = [['/roster/', 'Roster'], ['/clients/', 'Clients']];
 export const bySection = (key) => projects.filter((p) => p.sections.includes(key));
 export const reel = () => bySection('reel').sort((a, b) => a.order - b.order);
 export const tvShows = () => bySection('tv-shows').sort((a, b) => b.year - a.year);
