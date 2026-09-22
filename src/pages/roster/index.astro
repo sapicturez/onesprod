@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Filters from '../../components/Filters.astro';
+import { people, u } from '../../lib/site.js';
+const dirs = people.filter((p) => /Director/.test(p.role)).length;
+const phots = people.filter((p) => /Photographer/.test(p.role)).length;
+---
+<Base title="Roster" current="/roster/" description="ONES roster — directors and photographers we represent and produce for: Michał Sabliński, Maciej Bieliński, Katka Michalak, Bart Pogoda, Tomek Albin, Alex Dobrovodsky.">
+  <PageHero eyebrow="Roster" title="Directors &amp; photographers." lede="The people we produce for and with. Each page carries a reel and the work made together." />
+  <Filters filters={[['director', 'Directors', dirs], ['photographer', 'Photographers', phots]]} group="roster" />
+  <section style="padding-bottom:clamp(60px,10vh,100px)">
+    <div class="wrap">
+      <div class="roster">
+        {people.map((p) => (
+          <div class="tile" data-group="roster" data-tags={[/Director/.test(p.role) ? 'director' : '', /Photographer/.test(p.role) ? 'photographer' : ''].join(' ').trim()}>
+            <a class="person" href={u(`/roster/${p.slug}/`)}>
+              <img src={u(p.photo_local)} alt={p.name} loading="lazy" width="900" height="1125">
+              <div class="person__cap"><h2>{p.name}</h2><p>{p.role}</p></div>
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { showcase, u, vimeoEmbed, vimeoHash } from '../lib/site.js';
+const items = showcase();
+const strip = (h) => h.replace(/^\s*<h\d[^>]*>[\s\S]*?<\/h\d>/, '').trim();
+---
+<Base title="Showcase" current="/showcase/" description="ONES showcase — behind the scenes of selected productions: She's Mercedes, Skoda TOPR, Warka Radler, Iron Majdan, Lech, industry press.">
+  <PageHero eyebrow="Showcase" title="Behind the productions." lede="Case studies from selected shoots — what the brief asked for, what it took, and how it turned out." />
+  {items.map((p, i) => {
+    const gallery = (p.gallery_local || []).map((g) => u(g));
+    return (
+      <section class="article" id={p.slug} style="padding-top:0">
+        <div class="wrap">
+          <div class="section-head" style="border-top:1px solid rgba(255,255,255,.15);padding-top:28px">
+            <h2 class="display" style="font-size:clamp(28px,3.4vw,48px)">{p.title}</h2>
+            <span class="count">0{i + 1} / 0{items.length}</span>
+          </div>
+        </div>
+        <div class="wrap article__grid">
+          <div>
+            {p.vimeo && (
+              <a class="video-embed video-embed--btn" href={`https://vimeo.com/${p.vimeo}`} data-video-open={p.vimeo} data-vh={vimeoHash(p.vimeo) || undefined} data-title={p.title}>
+                <img src={u(p.thumb_local)} alt="" loading={i < 2 ? 'eager' : 'lazy'}><span class="reel__play" aria-hidden="true">▶</span>
+              </a>
+            )}
+            {p.text && <div class="article__body" set:html={strip(p.text_html)}></div>}
+          </div>
+          <aside>
+            {gallery.length > 0 && (
+              <div class="gallery" style="margin-top:0;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))">
+                {gallery.map((g, j) => <a href={g} data-gallery="[]" data-title={`${p.title} — ${j + 1}`}><img src={g.replace('.webp', '-sm.webp')} alt="" loading="lazy" decoding="async"></a>)}
+              </div>
+            )}
+            {p.vimeos.length > 1 && <p style="margin-top:20px">{p.vimeos.slice(1).map((v, j) => <a class="btn btn--ghost" href="#" data-video-open={v} data-vh={vimeoHash(v) || undefined} data-title={`${p.title} — ${j + 2}`} style="margin:0 8px 8px 0">▶ Part {j + 2}</a>)}</p>}
+          </aside>
+        </div>
+      </section>
+    );
+  })}
+</Base>

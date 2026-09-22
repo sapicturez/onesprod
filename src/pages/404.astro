@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { u } from '../lib/site.js';
+---
+<Base title="Page not found">
+  <PageHero eyebrow="404" title="That page has moved." lede="The site was rebuilt in 2026 and the old WordPress addresses are gone. Try the reel or the menu above." />
+  <section style="padding-bottom:100px"><div class="wrap"><a class="btn" href={u('/reel/')}>Watch the TVC reel →</a></div></section>
+</Base>

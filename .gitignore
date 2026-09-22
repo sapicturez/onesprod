@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+.env
+.wp-auth
+.gh-token
+thumbnails.psd
+tmp/
+_old-static/

@@ -1,0 +1,34 @@
+---
+/**
+ * One portfolio tile. Behaviour by `mode`:
+ *  - "video":   click opens the Vimeo lightbox (data-vimeo)
+ *  - "gallery": click opens an image lightbox (data-gallery = JSON list)
+ *  - "link":    plain link to `href`
+ */
+import { u, creditPairs, vimeoHash } from '../lib/site.js';
+const { item, mode = 'video', href = '', tags = [], group = 'reel', showCredits = true, eager = false } = Astro.props;
+const thumb = item.thumb_local ? u(item.thumb_local) : item.thumb;
+const thumbSm = item.thumb_local ? u(item.thumb_local.replace('.webp', '-sm.webp')) : item.thumb;
+const hover = item.hover_local ? u(item.hover_local) : '';
+const credits = creditPairs(item.credits);
+const gallery = (item.gallery_local || []).map((g) => u(g));
+const attrs = {};
+if (mode === 'video') { attrs['data-vimeo'] = item.vimeo; if (vimeoHash(item.vimeo)) attrs['data-vh'] = vimeoHash(item.vimeo); }
+if (mode === 'gallery') attrs['data-gallery'] = JSON.stringify(gallery);
+---
+<figure class="reel__item tile" data-tags={tags.join(' ')} data-group={group}>
+  <a class="reel__poster" href={mode === 'link' ? href : `#${item.slug}`} data-title={item.title} {...attrs} aria-label={`${mode === 'video' ? 'Play' : 'Open'} ${item.title}`}>
+    <div class="reel__frame">
+      <picture>
+        <source media="(max-width: 640px)" srcset={thumbSm}>
+        <img class="reel__img" src={thumb} alt="" width="960" height="540" loading={eager ? 'eager' : 'lazy'} decoding="async">
+      </picture>
+      {hover && <video class="reel__preview" src={hover} muted loop playsinline preload="none" aria-hidden="true"></video>}
+      <div class="reel__credits">
+        <p class="reel__proj">{item.title}</p>
+        {showCredits && credits.map(([k, v]) => <p class="reel__meta">{k && <b>{k}</b>} {v}</p>)}
+      </div>
+      {mode === 'video' && <span class="reel__play" aria-hidden="true">▶</span>}
+    </div>
+  </a>
+</figure>

@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, u } from '../lib/site.js';
+---
+<Base title="Contacts" current="/contact/" description="Contact ONES — international full service production company. Offices in Barcelona, Warsaw and Bangkok. office@onesprod.com">
+  <PageHero eyebrow="Contacts" title="Three offices. One&nbsp;standard." lede={`Write to <a href="mailto:${site.email}">${site.email}</a> or reach the office closest to your shoot.`} />
+  <section class="contact" aria-label="Offices" style="padding-top:0">
+    <div class="wrap">
+      <ul class="contact__grid" role="list">
+        {site.offices.map((o) => (
+          <li class="office">
+            <h3>{o.city}</h3>
+            <p><b>{o.company}</b><br>{o.lines.map((l) => <>{l}<br /></>)}</p>
+            {o.phone && <p>{o.contact && <>{o.contact}<br /></>}<a href={`tel:${o.phone.replace(/\s/g, '')}`}>{o.phone}</a></p>}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+  <section class="article" style="padding-top:0">
+    <div class="wrap article__grid">
+      <div>
+        <p class="eyebrow">Send a brief</p>
+        <h2 class="display" style="font-size:clamp(28px,3.4vw,44px)">Tell us about the project.</h2>
+        <form class="contact-form" method="post" action={u('/contact.php')} data-contact-form>
+          <label>Name<input type="text" name="name" required autocomplete="name"></label>
+          <label>Email<input type="email" name="email" required autocomplete="email"></label>
+          <label>Company<input type="text" name="company" autocomplete="organization"></label>
+          <label>Message<textarea name="message" rows="6" required></textarea></label>
+          <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <p><button class="btn" type="submit">Send →</button></p>
+          <p class="form-note">Or simply email <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+        </form>
+      </div>
+      <aside class="article__aside">
+        <ul class="credits">
+          <li><b>Email</b><span><a href={`mailto:${site.email}`}>{site.email}</a></span></li>
+          <li><b>Instagram</b><span><a href={site.social.instagram} target="_blank" rel="noopener">@ones_prod</a></span></li>
+          <li><b>Vimeo</b><span><a href={site.social.vimeo} target="_blank" rel="noopener">vimeo.com/wearetheones</a></span></li>
+          <li><b>Facebook</b><span><a href={site.social.facebook} target="_blank" rel="noopener">onesprod.filmservice</a></span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>

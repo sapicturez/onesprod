@@ -1,0 +1,23 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../lib/site.js';
+// The Films page currently carries one title (Wild City). New films: add a block below.
+const body = site.film_html.replace(/<h\d[^>]*>\s*WILD CITY\s*<\/h\d>/i, '').replace(/<h\d[^>]*>\s*ABOUT A FILM\s*<\/h\d>/i, '<h3>About the film</h3>');
+---
+<Base title="Films" current="/films/" description="Films by ONES — Wild City, a creative documentary by Krystian Matysek about animals living alongside people in the cities.">
+  <PageHero eyebrow="Films" title="Wild City." lede="A creative documentary film by multi-award-winning director and cinematographer Krystian Matysek." />
+  <section class="article">
+    <div class="wrap article__grid">
+      <div class="article__body" set:html={body}></div>
+      <aside class="article__aside">
+        <ul class="credits">
+          <li><b>Title</b><span>Wild City</span></li>
+          <li><b>Director</b><span>Krystian Matysek</span></li>
+          <li><b>Genre</b><span>Creative documentary</span></li>
+          <li><b>Production</b><span>ONES</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Base>

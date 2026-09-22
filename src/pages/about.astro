@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site, u } from '../lib/site.js';
+const teamPhoto = (t) => u(`/media/team/${t.name.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '')}.webp`);
+const body = site.about_html.replace('based in Bangkok and Warsaw', 'based in Barcelona, Warsaw and Bangkok').replace('in Poland and South East Asia', 'in Poland, South East Asia and Spain');
+---
+<Base title="About us" current="/about/" description="ONES is an international full service production company established in 2012, based in Barcelona, Warsaw and Bangkok.">
+  <PageHero eyebrow="Established 2012" title="International full service production company." large />
+  <section class="article" style="padding-top:0">
+    <div class="wrap article__grid">
+      <div class="article__body" set:html={body}></div>
+      <aside class="article__aside">
+        <ul class="credits">
+          <li><b>Founded</b><span>2012</span></li>
+          <li><b>Bases</b><span>Barcelona · Warsaw · Bangkok</span></li>
+          <li><b>We make</b><span>TV commercials, TV shows, documentary films, photoshoots, music videos</span></li>
+          <li><b>We offer</b><span>Full service production, line producing, fixing</span></li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+  <section class="team" aria-labelledby="team-h" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Team</p>
+      <h2 id="team-h" class="display">Meet our team.</h2>
+      <ul class="team__list" role="list">
+        {site.team.map((t) => (
+          <li>
+            <div class="team__photo" style={`background-image:url('${teamPhoto(t)}')`} aria-hidden="true"></div>
+            <div class="team__info">
+              <h3>{t.name}</h3>
+              <p class="team__role">{t.role} · {t.base}</p>
+              <p class="team__contact"><a href={`tel:${t.phone.replace(/\s/g, '')}`}>{t.phone}</a></p>
+              <p class="team__contact"><a href={`mailto:${t.email}`}>{t.email}</a></p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

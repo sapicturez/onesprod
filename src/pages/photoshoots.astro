@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Tile from '../components/Tile.astro';
+import { photoshoots } from '../lib/site.js';
+const items = photoshoots();
+---
+<Base title="Photoshoots" current="/photoshoots/" description="Photoshoot production service by ONES across Barcelona, Warsaw and Bangkok — fashion, automotive, lifestyle and brand campaigns.">
+  <PageHero eyebrow="Stills production" title="Photoshoots." lede="Full service photo production for automotive, lifestyle, fashion and brand campaigns. Locations, casting, permits and senior crews across three regions. Click a project to open the gallery." />
+  <section class="work work--list" aria-label="Photoshoots" style="padding-bottom:clamp(60px,10vh,100px)">
+    <div class="reel reel--tight">
+      {items.map((p, i) => <Tile item={p} mode={p.gallery_local.length ? 'gallery' : 'link'} href="#" group="photo" eager={i < 3} />)}
+    </div>
+  </section>
+  <section class="prod-section" aria-labelledby="ph-h" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">What we handle</p>
+      <h2 id="ph-h" class="display">Full service photo production.</h2>
+      <div class="acc" role="list">
+        {[['Location Scouting', 'Urban, coastal, mountain, desert and studio options in all three regions.'], ['Casting', 'Local and international talent; challenging briefs welcome.'], ['Permits & Logistics', 'Shooting permits, travel, transport and on-set logistics handled end to end.'], ['Crew & Equipment', 'Senior photographers, assistants, digital operators and rental partners.'], ['Studio & Sets', 'Daylight and blackout studios, set construction and art department.'], ['Post Production', 'Retouching and delivery coordinated with your team.']].map(([t, s], i) => (
+          <article class="acc__item" role="listitem">
+            <button class="acc__head" type="button" aria-expanded="false" aria-controls={`ph-p${i}`} id={`ph-h${i}`}>
+              <span class="acc__num">0{i + 1}</span>
+              <span class="acc__label"><span class="acc__title">{t}</span></span>
+              <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+            </button>
+            <div class="acc__panel" id={`ph-p${i}`} role="region" aria-labelledby={`ph-h${i}`}><div class="acc__inner"><p>{s}</p></div></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+import Tile from '../../components/Tile.astro';
+import { people, u, vimeoHash } from '../../lib/site.js';
+export function getStaticPaths() {
+  return people.map((p, i) => ({ params: { slug: p.slug }, props: { p, prev: people[i - 1] || people[people.length - 1], next: people[i + 1] || people[0] } }));
+}
+const { p, prev, next } = Astro.props;
+const gallery = (p.gallery_local || []).map((g) => u(g));
+const works = p.works.map((w) => ({ ...w, gallery_local: [] }));
+const desc = p.bio_html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 155);
+---
+<Base title={p.name} current="/roster/" description={desc} ogImage={p.photo_local}>
+  <section class="article">
+    <div class="wrap person-hero">
+      <img src={u(p.photo_local)} alt={p.name} width="900" height="1125">
+      <div>
+        <p class="eyebrow">{p.role}</p>
+        <h1 class="display" style="font-size:clamp(40px,5vw,72px)">{p.name}</h1>
+        <div class="article__body" set:html={p.bio_html}></div>
+        {p.reels.length > 0 && (
+          <p style="display:flex;flex-wrap:wrap;gap:8px">
+            {p.reels.map((v, i) => <a class="btn btn--ghost" href={`https://vimeo.com/${v}`} data-video-open={v} data-vh={vimeoHash(v) || undefined} data-title={`${p.name} — reel ${i + 1}`}>▶ {i === 0 ? 'Showreel' : `Reel ${i + 1}`}</a>)}
+          </p>
+        )}
+      </div>
+    </div>
+  </section>
+  {works.length > 0 && (
+    <section class="work work--list" aria-labelledby="w-h" style="padding-top:0">
+      <div class="wrap section-head"><h2 id="w-h" class="display">Work with ONES.</h2><span class="count">{works.length} projects</span></div>
+      <div class="reel reel--tight">
+        {works.map((w) => <Tile item={w} mode={w.vimeo ? 'video' : 'link'} href="#" group={`p-${p.slug}`} />)}
+      </div>
+    </section>
+  )}
+  {gallery.length > 0 && (
+    <section style="padding-bottom:clamp(60px,10vh,100px)">
+      <div class="wrap">
+        <div class="section-head"><h2 class="display">Selected photographs.</h2><span class="count">{gallery.length} images</span></div>
+        <div class="gallery">
+          {gallery.map((g, i) => <a href={g} data-gallery="[]" data-title={`${p.name} — ${i + 1}`}><img src={g.replace('.webp', '-sm.webp')} alt="" loading="lazy" decoding="async"></a>)}
+        </div>
+      </div>
+    </section>
+  )}
+  <div class="wrap pager" style="margin-bottom:80px">
+    <a href={u(`/roster/${prev.slug}/`)}><span>Previous</span>← {prev.name}</a>
+    <a href={u(`/roster/${next.slug}/`)} style="text-align:right"><span>Next</span>{next.name} →</a>
+  </div>
+</Base>

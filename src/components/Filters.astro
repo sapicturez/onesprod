@@ -1,0 +1,7 @@
+---
+const { filters, group = 'reel' } = Astro.props;
+---
+<div class="filters wrap" role="group" aria-label="Filter" data-filter-group={group}>
+  <button class="filter is-on" type="button" data-filter="all">All</button>
+  {filters.map(([key, label, n]) => <button class="filter" type="button" data-filter={key}>{label}<i>{n}</i></button>)}
+</div>

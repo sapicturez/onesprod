@@ -1,0 +1,131 @@
+---
+import Base from '../layouts/Base.astro';
+import Tile from '../components/Tile.astro';
+import { u, site, reel } from '../lib/site.js';
+const recent = reel().slice(0, 6);
+---
+<Base sub={false} current="/">
+  <h1 class="sr-only">ONES — International Film Production Service in Barcelona, Warsaw and Bangkok</h1>
+
+  <section id="cities" class="cities" aria-label="Our bases">
+    {site.cities.map((c) => (
+      <a class="city" href={u('/reel/')} aria-label={`${c.name} — open the TVC reel`}>
+        <video class="city__video" autoplay muted loop playsinline preload="metadata" poster={u(`/media/cities/${c.slug}.webp`)} aria-hidden="true">
+          <source src={u(`/media/cities/${c.slug}.mp4`)} type="video/mp4">
+        </video>
+        <div class="city__overlay"></div>
+        <div class="city__caption">
+          <h2 class="city__name">{c.name}</h2>
+          <span class="city__go">Watch the reel →</span>
+        </div>
+      </a>
+    ))}
+    <a class="scroll-cue" href="#about" aria-label="Scroll down to explore">
+      <span class="scroll-cue__label">Scroll</span>
+      <span class="scroll-cue__line"><span class="scroll-cue__dot"></span></span>
+    </a>
+  </section>
+
+  <section id="about" class="about about--hub" aria-labelledby="about-h">
+    <div class="wrap about__intro">
+      <p class="eyebrow">One company. Multiple territories. Seamless execution.</p>
+      <h2 id="about-h" class="display">ONES is an international production company operating as a production hub.</h2>
+      <p class="lede">ONES delivers integrated production solutions across commercials, television, documentaries, music videos and branded content.</p>
+    </div>
+    <div id="production-hub" class="hub__map" aria-label="Production hub">
+      <div class="hub__masthead">
+        <p class="hub__kicker">Production without borders</p>
+        <h3 class="hub__statement">Three bases.<br><span>One moving system.</span></h3>
+      </div>
+      <p class="hub__text hub__text--a"><span>How we work / 01</span>Resources, expertise and production capability move together — keeping quality consistent and execution flexible across regions.</p>
+      <p class="hub__text hub__text--b"><span>Built as a hub / 02</span>One centralized team connects local knowledge, trusted partners and on-the-ground production into a single workflow.</p>
+      <p class="hub__watermark" aria-hidden="true">ONES<br>GLOBAL</p>
+      <div class="hub__pin-area">
+        <svg class="hub__lines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true">
+          <path class="hub__route hub__route--main" d="M -30 470 C 180 90 480 120 1030 455"/>
+          <path class="hub__route hub__route--echo" d="M -20 525 C 240 245 560 210 1020 505"/>
+          <path class="hub__route hub__route--return" d="M 80 570 C 410 650 730 570 955 315"/>
+        </svg>
+        {[
+          ['barcelona', '01 — BCN', 'Barcelona', 'Iberia / Southern Europe', 'Spain', 'Production service across Iberia & Southern Europe.'],
+          ['warsaw', '02 — WAW', 'Warsaw', 'Central / Eastern Europe', 'Poland', 'Production service across Central & Eastern Europe.'],
+          ['bangkok', '03 — BKK', 'Bangkok', 'South-East Asia', 'Thailand', 'Production service across South-East Asia.'],
+        ].map(([slug, idx, name, region, country, tip]) => (
+          <button class="hub__pin" type="button" data-city={slug} aria-expanded="false">
+            <span class="hub__pin-rings" aria-hidden="true"><span></span><span></span></span>
+            <span class="hub__pin-dot" aria-hidden="true"></span>
+            <span class="hub__pin-index">{idx}</span>
+            <span class="hub__pin-label">{name}</span>
+            <span class="hub__pin-region">{region}</span>
+            <span class="hub__pin-tooltip" role="tooltip"><strong>{country}</strong><br>{tip}</span>
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="work" aria-labelledby="work-h">
+    <div class="wrap">
+      <p class="eyebrow">Selected work</p>
+      <h2 id="work-h" class="display">Recent productions.</h2>
+    </div>
+    <div class="reel">
+      {recent.map((p, i) => <Tile item={p} group="home" eager={i < 3} />)}
+    </div>
+    <div class="wrap reel__cta">
+      <a class="btn" href={u('/reel/')}>View the full TVC reel →</a>
+    </div>
+  </section>
+
+  <section id="production" class="prod-section" aria-labelledby="prod-h">
+    <div class="wrap">
+      <p class="eyebrow">Production Service</p>
+      <h2 id="prod-h" class="display display--xl">We produce wherever the story takes us.</h2>
+      <p class="lede">Within ONES, production is not divided between regions or partners. All projects are managed through a single workflow, ensuring clarity, efficiency and consistent quality.</p>
+      <div class="acc" role="list">
+        {[
+          ['How We Work', 'One team. One approach.', '<p>ONES combines centralized planning with locally driven execution, creating a production approach that is both consistent and adaptable.</p><p>Our team responds flexibly to creative needs while maintaining clarity, efficiency and full control throughout the process.</p>'],
+          ['Geographic Reach', 'Offices in Europe and South East Asia.', '<ul class="acc__cities"><li><b>Spain</b><span>Barcelona</span></li><li><b>Poland</b><span>Warsaw</span></li><li><b>Thailand</b><span>Bangkok</span></li></ul><p>Our structure enables seamless production across regions, combining centralized coordination with strong local expertise.</p>'],
+          ['Client-oriented & Flexible', 'A flexible production capability.', '<p>Operating across multiple regions allows us to optimize production costs and eliminate unnecessary structural layers, including “double mark-up” models.</p><p>Production adapts to each creative brief, while the overall system remains consistent.</p>'],
+          ['Full Service Production', 'We produce wherever the story takes us.', `<p>Full service production for international agencies, brands and production houses — local crews, local knowledge, one accountable team.</p><p><a class="btn btn--ghost" href="${u('/production-service/')}">Production service in Poland, Asia &amp; Spain →</a></p>`],
+        ].map(([t, s, body], i) => (
+          <article class="acc__item" role="listitem">
+            <button class="acc__head" type="button" aria-expanded="false" aria-controls={`acc-p${i + 1}`} id={`acc-h${i + 1}`}>
+              <span class="acc__num">0{i + 1}</span>
+              <span class="acc__label"><span class="acc__title" set:html={t}></span><span class="acc__sub" set:html={s}></span></span>
+              <span class="acc__plus" aria-hidden="true"><i></i><i></i></span>
+            </button>
+            <div class="acc__panel" id={`acc-p${i + 1}`} role="region" aria-labelledby={`acc-h${i + 1}`}>
+              <div class="acc__inner" set:html={body}></div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="roads" role="img" aria-label="Film production locations">
+    <div class="roads__bg" style={`background-image:url('${u('/media/roads.jpg')}')`}></div>
+  </div>
+
+  <section id="contact" class="contact" aria-labelledby="contact-h">
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2 id="contact-h" class="display">Three bases. One&nbsp;standard.</h2>
+      <ul class="contact__grid" role="list">
+        {site.offices.map((o) => (
+          <li><a href={u('/contact/')}><h3>{o.city}</h3><p>{o.company}<br>{o.lines[0]}</p><span class="contact__arrow" aria-hidden="true">→</span></a></li>
+        ))}
+      </ul>
+      <div class="clients-cta">
+        <blockquote class="clients-quote">
+          <p>We have worked with Mercedes-Benz, Skoda, Volkswagen, SAB Miller, T-Mobile, Asahi, Reckitt&nbsp;Benckiser, O2, Nivea, Samsung, Canal+, TVN, Stink Films, Dynamo Films, Opus Film and OTO Film — among many other local and international clients.</p>
+        </blockquote>
+        <div class="cta-pair">
+          <a class="btn btn--wide" href={u('/contact/')}>Meet the team →</a>
+          <a class="btn btn--wide" href={`mailto:${site.email}`}>{site.email}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

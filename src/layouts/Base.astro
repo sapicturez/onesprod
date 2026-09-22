@@ -1,0 +1,75 @@
+---
+import '../styles/base.css';
+import '../styles/site.css';
+import { NAV, u, site } from '../lib/site.js';
+const { title, description = 'ONES is an international full service production company established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = '/media/cities/warsaw.webp' } = Astro.props;
+const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{fullTitle}</title>
+<meta name="description" content={description}>
+<meta name="theme-color" content="#000000">
+<meta property="og:type" content="website">
+<meta property="og:title" content={fullTitle}>
+<meta property="og:description" content={description}>
+<meta property="og:url" content={canonical}>
+<meta property="og:site_name" content="ONES">
+<meta property="og:image" content={new URL(u(ogImage), Astro.site).href}>
+<link rel="canonical" href={canonical}>
+<link rel="icon" href={u('/favicon.png')} type="image/png">
+<link rel="preconnect" href="https://player.vimeo.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class={`site-header${sub ? ' site-header--solid' : ''}`} role="banner">
+  <a href={u('/')} class="brand" aria-label="ONES — Home">
+    <img src={u('/media/ones-main.png')} alt="ONES" width="180" height="60">
+  </a>
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+  <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation"><span></span><span></span><span></span></label>
+  <nav class="site-nav" aria-label="Primary">
+    <label for="nav-toggle" class="nav-close" aria-label="Close navigation">✕</label>
+    {NAV.map(([href, label]) => <a href={u(href)} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+  </nav>
+</header>
+
+<main id="main" class={sub ? 'sub' : undefined}>
+  <slot />
+</main>
+
+<footer class="site-footer" role="contentinfo">
+  <div class="wrap site-footer__row">
+    <span>© <time>{new Date().getFullYear()}</time> ONES — International Production Company</span>
+    <span>Barcelona · Warsaw · Bangkok</span>
+    <span class="site-footer__links">
+      <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+      <a href={site.social.vimeo} target="_blank" rel="noopener">Vimeo</a>
+      <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+    </span>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden aria-hidden="true" role="dialog" aria-label="Media viewer">
+  <div class="lb__bd" data-lb-close></div>
+  <button class="lb__close" type="button" data-lb-close aria-label="Close">✕ close</button>
+  <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Previous">←</button>
+  <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Next">→</button>
+  <div class="lb__stage">
+    <div class="lb__frame" id="lb-frame"></div>
+    <p class="lb__title" id="lb-title"></p>
+    <p class="lb__count" id="lb-count"></p>
+  </div>
+</div>
+
+<script src="../scripts/site.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { logos, u } from '../lib/site.js';
+---
+<Base title="Clients" current="/clients/" description="Brands, agencies, broadcasters and production houses ONES has worked for since 2012 — Mercedes-Benz, Škoda, Volkswagen, Samsung, Nivea, T-Mobile, Canal+, TVN, Stink, Opus Film and more.">
+  <PageHero eyebrow="Clients" title="We work for." lede="Brands, agencies, broadcasters and production houses that have trusted ONES since 2012." />
+  <section class="logos-wall" aria-label="Client logos" style="padding-top:0">
+    <div class="logos-grid">
+      {logos.map((l, i) => <div class="logo-cell"><img src={u(`/media/logos/${String(i + 1).padStart(2, '0')}.webp`)} alt={l.name} loading={i < 12 ? 'eager' : 'lazy'} width="480" height="270"></div>)}
+    </div>
+  </section>
+</Base>

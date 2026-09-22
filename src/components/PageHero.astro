@@ -1,0 +1,11 @@
+---
+const { eyebrow, title, lede, large = false } = Astro.props;
+---
+<section class={`page-hero${large ? ' page-hero--lg' : ''}`}>
+  <div class="wrap">
+    {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+    <h1 class="display" set:html={title}></h1>
+    {lede && <p class="lede" set:html={lede}></p>}
+    <slot />
+  </div>
+</section>
