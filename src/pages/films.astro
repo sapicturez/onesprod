@@ -1,15 +1,22 @@
 ---
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
-import { site } from '../lib/site.js';
+import { site, u } from '../lib/site.js';
 // The Films page currently carries one title (Wild City). New films: add a block below.
 const body = site.film_html.replace(/<h\d[^>]*>\s*WILD CITY\s*<\/h\d>/i, '').replace(/<h\d[^>]*>\s*ABOUT A FILM\s*<\/h\d>/i, '<h3>About the film</h3>');
+// Film stills as shown on the WordPress page (8 frames)
+const stills = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => u(`/media/gallery/wild-city/${String(n).padStart(2, '0')}.webp`));
 ---
 <Base title="Films" current="/films/" description="Films by ONES — Wild City, a creative documentary by Krystian Matysek about animals living alongside people in the cities.">
   <PageHero eyebrow="Films" title="Wild City." lede="A creative documentary film by multi-award-winning director and cinematographer Krystian Matysek." />
   <section class="article">
     <div class="wrap article__grid">
       <div class="article__body" set:html={body}></div>
+    </div>
+    <div class="wrap">
+      <div class="gallery gallery--film" aria-label="Wild City — film stills">
+        {stills.map((g, i) => <a href={g} data-gallery="[]" data-title={`Wild City — still ${i + 1}`}><img src={g.replace('.webp', '-sm.webp')} srcset={`${g.replace('.webp', '-sm.webp')} 480w, ${g} 1400w`} sizes="(max-width: 640px) 100vw, 50vw" alt={`Wild City — film still ${i + 1}`} width="1400" height="653" loading={i < 2 ? 'eager' : 'lazy'} decoding="async"></a>)}
+      </div>
     </div>
   </section>
 </Base>

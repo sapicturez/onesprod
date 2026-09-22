@@ -99,6 +99,34 @@
     item.addEventListener('mouseleave', function () { item.classList.remove('is-playing'); v.pause(); });
   });
 
+  /* ── Custom video cursor: round aperture with a play mark, follows the pointer over tiles (desktop only) ── */
+  (function initVideoCursor() {
+    if (!canHover) return;
+    var targets = $$('.reel__poster'); if (!targets.length) return;
+    var el = document.createElement('div');
+    el.id = 'vid-cursor'; el.setAttribute('aria-hidden', 'true');
+    el.innerHTML = '<div class="vc__ring2"></div><div class="vc__dot"></div><div class="vc__play"></div>';
+    document.body.appendChild(el);
+    var R = 48, raf = null, hovering = false, last = null;
+    function place(x, y) { el.style.transform = 'translate3d(' + (x - R) + 'px,' + (y - R) + 'px,0)'; }
+    document.addEventListener('mousemove', function (e) {
+      if (!hovering) return; last = e;
+      if (raf) return;
+      raf = requestAnimationFrame(function () { raf = null; if (last) place(last.clientX, last.clientY); if (hovering && lb.hidden) el.classList.add('is-active'); });
+    }, { passive: true });
+    targets.forEach(function (t) {
+      t.addEventListener('mouseenter', function (e) {
+        hovering = true; place(e.clientX, e.clientY);
+        el.classList.toggle('is-gallery', !t.hasAttribute('data-vimeo') && !t.hasAttribute('data-video-open'));
+        el.classList.add('is-active');
+      });
+      t.addEventListener('mouseleave', function () { hovering = false; el.classList.remove('is-active'); });
+    });
+    // hide when the lightbox opens or the window loses the pointer
+    document.addEventListener('mouseleave', function () { hovering = false; el.classList.remove('is-active'); });
+    document.addEventListener('click', function () { el.classList.remove('is-active'); }, true);
+  })();
+
   /* ── Header: hide on scroll down, show on scroll up (home only) ── */
   var header = $('.site-header'), lastY = window.scrollY;
   if (header && !header.classList.contains('site-header--solid')) {

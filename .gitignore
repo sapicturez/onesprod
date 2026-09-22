@@ -8,3 +8,4 @@ dist/
 thumbnails.psd
 tmp/
 _old-static/
+.vimeo-token
