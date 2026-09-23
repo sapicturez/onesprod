@@ -145,8 +145,6 @@
 .cities,.cities--gate{gap:0!important}
 .city + .city{border:0!important}
 /* Custom "play" cursor: only on video tiles; galleries and links keep the pointer, play mark hidden there */
-#vid-cursor.is-gallery .vc__play{display:none}
-#vid-cursor.is-gallery .vc__dot{width:10px;height:10px}
 
 /* Reel / TV Shows: no hero, tiles start right under the menu */
 .work.work--flush{padding-top:0;padding-bottom:0}
@@ -179,3 +177,22 @@
 .contact{padding-bottom:clamp(60px,10vh,100px)}
 .contact__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:20px}
 @media (max-width:760px){.contact__grid{grid-template-columns:1fr}}
+
+/* ── Creative cursor (overrides the old aperture cursor from base.css) ── */
+@media(hover:hover){
+  .reel__poster,.reel__poster *,[data-video-open],[data-video-open] *,.gallery a,.gallery a *,.roster a,.roster a *,.city,.city *,.team__photo{cursor:none!important}
+}
+#vid-cursor{width:88px;height:88px;opacity:0;transition:opacity .25s ease,scale .35s cubic-bezier(.2,.8,.2,1);scale:.6}
+#vid-cursor::before,#vid-cursor::after{display:none}
+#vid-cursor.is-active{opacity:1;scale:1}
+#vid-cursor .vc{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
+#vid-cursor .vc__ring{transform-origin:50% 50%;animation:vc-spin 9s linear infinite}
+#vid-cursor .vc__orbit{transform-origin:50% 50%;animation:vc-spin 7s linear infinite reverse}
+#vid-cursor .vc__label{font:600 9.5px/1 Inter,system-ui,sans-serif;letter-spacing:.32em;fill:#fff;text-transform:uppercase}
+#vid-cursor .vc__play,#vid-cursor .vc__plus{transform-origin:50% 50%;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
+#vid-cursor .vc__play{opacity:0;transform:scale(.6)}
+#vid-cursor .vc__plus{opacity:0;transform:rotate(-90deg) scale(.6)}
+#vid-cursor.is-video .vc__play{opacity:1;transform:scale(1)}
+#vid-cursor.is-photo .vc__plus{opacity:1;transform:rotate(0) scale(1)}
+#vid-cursor.is-photo .vc__ring{stroke-dasharray:6 6}
+@keyframes vc-spin{to{transform:rotate(360deg)}}

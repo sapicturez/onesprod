@@ -100,29 +100,43 @@
   });
 
   /* ── Custom video cursor: round aperture with a play mark, follows the pointer over tiles (desktop only) ── */
-  (function initVideoCursor() {
+  /* ── Creative cursor: gradient ring with orbiting label. Video = ▶ + "PLAY", photos = + + "VIEW" ── */
+  (function initCursor() {
     if (!canHover) return;
-    var targets = $$('.reel__poster'); if (!targets.length) return;
+    var SEL_VIDEO = '.reel__poster[data-vimeo], [data-video-open], .tile a[href*="/tv-shows/"], .city';
+    var SEL_PHOTO = '.reel__poster[data-gallery], .gallery a, .roster a, .team__photo';
+    var targets = $$(SEL_VIDEO + ', ' + SEL_PHOTO); if (!targets.length) return;
     var el = document.createElement('div');
     el.id = 'vid-cursor'; el.setAttribute('aria-hidden', 'true');
-    el.innerHTML = '<div class="vc__ring2"></div><div class="vc__dot"></div><div class="vc__play"></div>';
+    el.innerHTML =
+      '<svg class="vc" viewBox="0 0 100 100">' +
+        '<defs><linearGradient id="vcg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7FCFF5"/><stop offset=".4" stop-color="#AFB5DE"/><stop offset=".75" stop-color="#E18DAC"/><stop offset="1" stop-color="#F2A1A1"/></linearGradient>' +
+        '<path id="vcp" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0"/></defs>' +
+        '<circle class="vc__ring" cx="50" cy="50" r="47" fill="none" stroke="url(#vcg)" stroke-width="2"/>' +
+        '<g class="vc__orbit"><text class="vc__label"><textPath href="#vcp" startOffset="0"><tspan class="vc__t"></tspan></textPath></text></g>' +
+        '<polygon class="vc__play" points="42,36 66,50 42,64" fill="#fff"/>' +
+        '<g class="vc__plus" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><line x1="50" y1="40" x2="50" y2="60"/><line x1="40" y1="50" x2="60" y2="50"/></g>' +
+      '</svg>';
     document.body.appendChild(el);
-    var R = 48, raf = null, hovering = false, last = null;
-    function place(x, y) { el.style.transform = 'translate3d(' + (x - R) + 'px,' + (y - R) + 'px,0)'; }
-    document.addEventListener('mousemove', function (e) {
-      if (!hovering) return; last = e;
-      if (raf) return;
-      raf = requestAnimationFrame(function () { raf = null; if (last) place(last.clientX, last.clientY); if (hovering && lb.hidden) el.classList.add('is-active'); });
-    }, { passive: true });
+    var label = el.querySelector('.vc__t');
+    var R = 44, tx = 0, ty = 0, cx = 0, cy = 0, hovering = false, running = false;
+    function loop() {
+      cx += (tx - cx) * 0.22; cy += (ty - cy) * 0.22;
+      el.style.transform = 'translate3d(' + (cx - R) + 'px,' + (cy - R) + 'px,0)';
+      if (hovering || Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) requestAnimationFrame(loop); else running = false;
+    }
+    function start() { if (!running) { running = true; requestAnimationFrame(loop); } }
+    document.addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; if (hovering && lb.hidden) { el.classList.add('is-active'); start(); } }, { passive: true });
     targets.forEach(function (t) {
+      var isVideo = t.matches(SEL_VIDEO);
       t.addEventListener('mouseenter', function (e) {
-        hovering = true; place(e.clientX, e.clientY);
-        el.classList.toggle('is-gallery', !t.hasAttribute('data-vimeo') && !t.hasAttribute('data-video-open'));
-        el.classList.add('is-active');
+        hovering = true; tx = cx = e.clientX; ty = cy = e.clientY;
+        el.classList.toggle('is-video', isVideo); el.classList.toggle('is-photo', !isVideo);
+        label.textContent = isVideo ? 'PLAY · PLAY · PLAY · PLAY · ' : 'VIEW · VIEW · VIEW · VIEW · ';
+        if (lb.hidden) el.classList.add('is-active'); start();
       });
       t.addEventListener('mouseleave', function () { hovering = false; el.classList.remove('is-active'); });
     });
-    // hide when the lightbox opens or the window loses the pointer
     document.addEventListener('mouseleave', function () { hovering = false; el.classList.remove('is-active'); });
     document.addEventListener('click', function () { el.classList.remove('is-active'); }, true);
   })();
