@@ -39,7 +39,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/bank-pekao-s-a-summer.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/bank-pekao-s-a-summer.webm"
  },
  {
   "slug": "oysho-yacht",
@@ -80,7 +80,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/oysho-yacht.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/oysho-yacht.webm"
  },
  {
   "slug": "oryal-aqua",
@@ -121,7 +121,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/oryal-aqua.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/oryal-aqua.webm"
  },
  {
   "slug": "oysho-resort",
@@ -162,7 +162,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/oysho-resort.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/oysho-resort.webm"
  },
  {
   "slug": "pekao-bank-engagement",
@@ -203,7 +203,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/pekao-bank-engagement.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/pekao-bank-engagement.webm"
  },
  {
   "slug": "pekao-bank-beach",
@@ -244,7 +244,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/pekao-bank-beach.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/pekao-bank-beach.webm"
  },
  {
   "slug": "jakubiak-rozgryza-tajlandie",
@@ -345,7 +345,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/scoot-airlines-gifts.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/scoot-airlines-gifts.webm"
  },
  {
   "slug": "pekao-bank-spring",
@@ -386,7 +386,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/pekao-bank-spring.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/pekao-bank-spring.webm"
  },
  {
   "slug": "pekao-bank-winter",
@@ -427,7 +427,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/pekao-bank-winter.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/pekao-bank-winter.webm"
  },
  {
   "slug": "scoot-airlines-honeymoon",
@@ -469,7 +469,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/scoot-airlines-honeymoon.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/scoot-airlines-honeymoon.webm"
  },
  {
   "slug": "desperados-equity",
@@ -510,7 +510,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/desperados-equity.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/desperados-equity.webm"
  },
  {
   "slug": "pekao-bank-holiday-cards",
@@ -592,7 +592,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/eurojackpot.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/eurojackpot.webm"
  },
  {
   "slug": "toracino",
@@ -633,7 +633,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/toracino.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/toracino.webm"
  },
  {
   "slug": "desperados-00",
@@ -674,7 +674,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/desperados-00.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/desperados-00.webm"
  },
  {
   "slug": "pierwszy-film",
@@ -715,7 +715,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/pierwszy-film.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/pierwszy-film.webm"
  },
  {
   "slug": "warka-radler",
@@ -756,7 +756,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/warka-radler.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/warka-radler.webm"
  },
  {
   "slug": "t-mobile",
@@ -797,7 +797,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/t-mobile.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/t-mobile.webm"
  },
  {
   "slug": "lech-premium",
@@ -838,7 +838,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/lech-premium.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/lech-premium.webm"
  },
  {
   "slug": "skoda-4x4",
@@ -876,7 +876,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/skoda-4x4.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/skoda-4x4.webm"
  },
  {
   "slug": "nivea-baby",
@@ -914,7 +914,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/nivea-baby.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/nivea-baby.webm"
  },
  {
   "slug": "b-life",
@@ -954,7 +954,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/b-life.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/b-life.webm"
  },
  {
   "slug": "skoda-fabia",
@@ -992,7 +992,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/skoda-fabia.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/skoda-fabia.webm"
  },
  {
   "slug": "lech-free",
@@ -1032,7 +1032,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/lech-free.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/lech-free.webm"
  },
  {
   "slug": "house",
@@ -1073,7 +1073,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/house.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/house.webm"
  },
  {
   "slug": "skoda",
@@ -1111,7 +1111,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/skoda.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/skoda.webm"
  },
  {
   "slug": "volkswagen",
@@ -1149,7 +1149,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/volkswagen.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/volkswagen.webm"
  },
  {
   "slug": "nivea",
@@ -1187,7 +1187,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/nivea.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/nivea.webm"
  },
  {
   "slug": "avon",
@@ -1227,7 +1227,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/avon.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/avon.webm"
  },
  {
   "slug": "nivea-q10",
@@ -1265,7 +1265,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/nivea-q10.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/nivea-q10.webm"
  },
  {
   "slug": "fixly",
@@ -1303,7 +1303,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/fixly.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/fixly.webm"
  },
  {
   "slug": "zubrowka",
@@ -1341,7 +1341,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/zubrowka.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/zubrowka.webm"
  },
  {
   "slug": "nivea-2",
@@ -1379,7 +1379,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/nivea-2.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/nivea-2.webm"
  },
  {
   "slug": "thermano",
@@ -1417,7 +1417,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/thermano.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/thermano.webm"
  },
  {
   "slug": "o2",
@@ -1454,7 +1454,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/o2.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/o2.webm"
  },
  {
   "slug": "coma",
@@ -1492,7 +1492,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/coma.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/coma.webm"
  },
  {
   "slug": "lemon",
@@ -1530,7 +1530,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/lemon.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/lemon.webm"
  },
  {
   "slug": "warka-gold-for-the-fans",
@@ -1571,7 +1571,7 @@
   ],
   "gallery_local": [],
   "thumb_local": "/media/thumbs/warka-gold-for-the-fans.webp",
-  "hover_local": ""
+  "hover_local": "/media/hover/warka-gold-for-the-fans.webm"
  },
  {
   "slug": "down-the-road",
