@@ -23,6 +23,9 @@ const mediaBase = u('/media/cities/');
   html.is-gate main { height: 100%; }
   .cities--gate { height: 100%; grid-template-rows: 100%; }
   html.is-gate .site-footer { display: none; }
+  html.is-gate .site-header { mix-blend-mode: normal; }
+  html.is-gate .site-header::before { display: none; }
+  html.is-gate .brand img { filter: none; }
   .cities--gate .city__video { filter: none; }
   @media (max-width: 900px) { .cities--gate { display: grid !important; height: 100% !important; min-height: 0; grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); } .cities--gate .city { height: auto !important; min-height: 0 !important; } }
 </style>
