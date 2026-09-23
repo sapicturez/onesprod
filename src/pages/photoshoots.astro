@@ -8,7 +8,7 @@ const items = photoshoots();
 <Base title="Photoshoots" current="/photoshoots/" description="Photoshoot production service by ONES across Barcelona, Warsaw and Bangkok — fashion, automotive, lifestyle and brand campaigns.">
   <PageHero eyebrow="Stills production" title="Photoshoots." lede="Full service photo production for automotive, lifestyle, fashion and brand campaigns. Locations, casting, permits and senior crews across three regions. Click a project to open the gallery." />
   <section class="work work--list" aria-label="Photoshoots" style="padding-bottom:clamp(60px,10vh,100px)">
-    <div class="reel reel--tight">
+    <div class="reel reel--tight reel--photos">
       {items.map((p, i) => <Tile item={p} mode={p.gallery_local.length ? 'gallery' : 'link'} href="#" group="photo" eager={i < 3} />)}
     </div>
   </section>

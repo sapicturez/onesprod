@@ -33,12 +33,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   <a href={u('/')} class="brand" aria-label="ONES — Home">
     <img src={u('/media/ones-main.png')} alt="ONES" width="180" height="60">
   </a>
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
-  <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation"><span></span><span></span><span></span></label>
-  <nav class="site-nav" aria-label="Primary">
-    <label for="nav-toggle" class="nav-close" aria-label="Close navigation">✕</label>
-    {NAV.map(([href, label]) => <a href={u(href)} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
-  </nav>
+  {sub && (
+    <>
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true">
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation"><span></span><span></span><span></span></label>
+      <nav class="site-nav" aria-label="Primary">
+        <label for="nav-toggle" class="nav-close" aria-label="Close navigation">✕</label>
+        {NAV.map(([href, label]) => <a href={u(href)} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+      </nav>
+    </>
+  )}
 </header>
 
 <main id="main" class={sub ? 'sub' : undefined}>

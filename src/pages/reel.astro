@@ -1,17 +1,12 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageHero from '../components/PageHero.astro';
-import Filters from '../components/Filters.astro';
 import Tile from '../components/Tile.astro';
 import { reel } from '../lib/site.js';
 const items = reel();
-const count = (t) => items.filter((p) => p.tags.includes(t)).length;
-const filters = [['commercials', 'Commercials', count('commercials')], ['asia', 'Asia', count('asia')], ['music-videos', 'Music videos', count('music-videos')], ['digital', 'Digital', count('digital')]].filter((f) => f[2] > 0);
 ---
 <Base title="TVC Reel" current="/reel/" description="The complete ONES commercial reel — TV commercials and branded films produced across Barcelona, Warsaw, Bangkok and South East Asia.">
-  <PageHero eyebrow="TVC Reel" title="All commercials." lede={`${items.length} spots produced by ONES across Europe and South&nbsp;East&nbsp;Asia. Click any tile to play.`} />
-  <Filters filters={filters} group="reel" />
-  <section class="work work--list" aria-label="Commercial reel" style="padding-bottom:clamp(60px,10vh,100px)">
+  <h1 class="sr-only">TVC Reel</h1>
+  <section class="work work--list work--flush" aria-label="Commercial reel">
     <div class="reel reel--tight">
       {items.map((p, i) => <Tile item={p} group="reel" tags={p.tags} eager={i < 6} />)}
     </div>

@@ -127,12 +127,13 @@
     document.addEventListener('click', function () { el.classList.remove('is-active'); }, true);
   })();
 
-  /* ── Header: hide on scroll down, show on scroll up (home only) ── */
+  /* ── Header: hide on scroll down, show on scroll up ── */
   var header = $('.site-header'), lastY = window.scrollY;
-  if (header && !header.classList.contains('site-header--solid')) {
+  if (header) {
     window.addEventListener('scroll', function () {
       var y = window.scrollY;
-      header.classList.toggle('is-hidden', y > lastY && y > 120);
+      if (Math.abs(y - lastY) < 4) return;
+      header.classList.toggle('is-hidden', y > lastY && y > 80);
       lastY = y;
     }, { passive: true });
   }

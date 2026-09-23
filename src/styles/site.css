@@ -120,11 +120,13 @@
 @media (prefers-reduced-motion:reduce){.reel__img,.reel__preview,.gallery img,.person img{transition:none}}
 
 /* uniform 3-column grid for listing pages (home keeps the editorial staggered grid) */
-.reel.reel--tight{grid-template-columns:repeat(3,minmax(0,1fr));gap:0;background:#000;margin-top:28px}
+.reel.reel--tight{grid-template-columns:repeat(2,minmax(0,1fr));gap:0;background:#000;margin-top:28px}
 .reel.reel--tight .reel__item{grid-column:auto}
-@media (max-width:900px){.reel.reel--tight{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.reel.reel--tight{grid-template-columns:1fr}}
-.reel.reel--tight .reel__proj{font-size:clamp(15px,1.25vw,20px)}
+.reel.reel--tight .reel__proj{font-size:clamp(16px,1.6vw,26px)}
+.reel.reel--photos{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:900px){.reel.reel--photos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:560px){.reel.reel--photos{grid-template-columns:1fr}}
 .work>.wrap.section-head{display:flex}
 .work>.wrap.section-head .display{max-width:none}
 .work.work--list{padding-top:clamp(28px,4vh,48px)}
@@ -145,3 +147,8 @@
 /* Custom "play" cursor: only on video tiles; galleries and links keep the pointer, play mark hidden there */
 #vid-cursor.is-gallery .vc__play{display:none}
 #vid-cursor.is-gallery .vc__dot{width:10px;height:10px}
+
+/* Reel / TV Shows: no hero, tiles start right under the menu */
+.work.work--flush{padding-top:0;padding-bottom:0}
+.work.work--flush .reel.reel--tight{margin-top:0}
+.site-header--solid.is-hidden{opacity:1}
