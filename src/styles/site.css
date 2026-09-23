@@ -152,3 +152,30 @@
 .work.work--flush{padding-top:0;padding-bottom:0}
 .work.work--flush .reel.reel--tight{margin-top:0}
 .site-header--solid.is-hidden{opacity:1}
+
+/* ── Brand gradient (from the ONES logo) + menu underline ── */
+:root{--ones-gradient:linear-gradient(90deg,#7FCFF5 0%,#AFB5DE 38%,#E18DAC 72%,#F2A1A1 100%)}
+.site-nav a{position:relative;padding:8px 0 10px}
+.site-nav a::before{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;border-radius:2px;background:var(--ones-gradient);
+  transform:scaleX(0);transform-origin:left center;transition:transform .38s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.site-nav a:hover::before,.site-nav a:focus-visible::before,.site-nav a[aria-current=page]::before{transform:scaleX(1)}
+.site-nav a[aria-current=page]{opacity:1}
+.site-nav a[aria-current=page]::after{display:none}
+@media (max-width:900px){
+  .site-nav a::before{height:4px;bottom:6px;left:0;right:auto;width:64px}
+  .site-nav a[aria-current=page]{color:transparent;background:var(--ones-gradient);-webkit-background-clip:text;background-clip:text}
+  .site-nav a[aria-current=page]::before{transform:scaleX(0)}
+}
+
+/* Contact: form + single contact person, offices below */
+.contact-top{padding-top:clamp(28px,5vh,56px)}
+.contact-person__name{font-size:clamp(24px,2.4vw,34px);font-weight:600;letter-spacing:-.02em;margin:6px 0 2px}
+.contact-person__role{opacity:.7;margin:0 0 18px}
+.contact-person__phone{font-size:clamp(18px,1.6vw,22px);margin:0 0 22px}
+.contact-person__phone a{text-decoration:none;border-bottom:1px solid rgba(255,255,255,.35)}
+.wa-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid rgba(255,255,255,.3);border-radius:999px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:border-color .25s,background .25s}
+.wa-btn:hover{border-color:#25D366;background:rgba(37,211,102,.1)}
+.wa-btn img{display:block}
+.contact{padding-bottom:clamp(60px,10vh,100px)}
+.contact__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:20px}
+@media (max-width:760px){.contact__grid{grid-template-columns:1fr}}

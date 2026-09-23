@@ -2,7 +2,7 @@
 import '../styles/base.css';
 import '../styles/site.css';
 import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
-const { title, description = 'ONES is an international full service production company established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = '/media/cities/warsaw.webp' } = Astro.props;
+const { title, description = 'ONES is an international full service production company established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/cities/warsaw-mobile.webp" } = Astro.props;
 const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---

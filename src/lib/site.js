@@ -17,7 +17,7 @@ export const NAV = [
   ['/roster/', 'Roster'],
   ['/clients/', 'Clients'],
   ['/about/', 'About us'],
-  ['/contact/', 'Contacts'],
+  ['/contact/', 'Contact'],
 ];
 
 export const FOOTER_NAV = [];

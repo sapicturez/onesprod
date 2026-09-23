@@ -57,9 +57,7 @@
    "company": "ONES Spain",
    "lines": [
     "Production service across Spain & Iberia"
-   ],
-   "phone": "+34 656 23 06 19",
-   "contact": "Olga Pakina"
+   ]
   },
   {
    "city": "Warsaw",
@@ -126,5 +124,10 @@
  "vimeo_hash": {
   "1224596452": "4a9b9235a8"
  },
- "production_spain_html": "<h3>Barcelona, Catalonia and the whole of Spain — one production base for Southern Europe.</h3>\n<p>From 2026 ONES runs its third base in Barcelona, extending the same full service model we built in Warsaw and Bangkok to Spain and the Iberian Peninsula. Mediterranean light for most of the year, over 300 sunny days, and locations within two hours of the city that double for almost anywhere: Barcelona’s modernist and brutalist architecture, the beaches and coves of Costa Brava, the vineyards of Penedès, the Pyrenees, the semi-desert of Monegros and the industrial ports of Tarragona.</p>\n<h3>Service production, line producing and fixing in Spain:</h3>\n<ul><li>Location scouting &amp; permits — city, coast, mountains and desert within a short drive</li><li>Scheduling &amp; budgeting with Spanish and international crews</li><li>Experienced line producers based in Barcelona</li><li>Casting — local and international talent, EU actors and models available on site</li><li>Top-notch crews and rental houses; ARRI, RED and Sony packages locally</li><li>Studios and set construction in and around Barcelona</li><li>Tax incentives for international productions in Spain — we handle the paperwork</li><li>One European producer from ONES with you from the first call to delivery</li></ul>"
+ "production_spain_html": "<h3>Barcelona, Catalonia and the whole of Spain — one production base for Southern Europe.</h3>\n<p>From 2026 ONES runs its third base in Barcelona, extending the same full service model we built in Warsaw and Bangkok to Spain and the Iberian Peninsula. Mediterranean light for most of the year, over 300 sunny days, and locations within two hours of the city that double for almost anywhere: Barcelona’s modernist and brutalist architecture, the beaches and coves of Costa Brava, the vineyards of Penedès, the Pyrenees, the semi-desert of Monegros and the industrial ports of Tarragona.</p>\n<h3>Service production, line producing and fixing in Spain:</h3>\n<ul><li>Location scouting &amp; permits — city, coast, mountains and desert within a short drive</li><li>Scheduling &amp; budgeting with Spanish and international crews</li><li>Experienced line producers based in Barcelona</li><li>Casting — local and international talent, EU actors and models available on site</li><li>Top-notch crews and rental houses; ARRI, RED and Sony packages locally</li><li>Studios and set construction in and around Barcelona</li><li>Tax incentives for international productions in Spain — we handle the paperwork</li><li>One European producer from ONES with you from the first call to delivery</li></ul>",
+ "contact_person": {
+  "name": "Olga Pakina",
+  "role": "Executive Producer",
+  "phone": "+34 656 23 06 19"
+ }
 }

@@ -25,11 +25,7 @@ const regions = [
       </div>
     </div>
   </section>
-  <section class="work work--list" aria-labelledby="ps-reel-h" style="padding-top:0;padding-bottom:clamp(60px,10vh,100px)">
-    <div class="wrap section-head">
-      <h2 id="ps-reel-h" class="display">Produced as service.</h2>
-      <span class="count">{spots.length} spots</span>
-    </div>
+  <section class="work work--list" aria-label="Produced as service" style="padding-top:0;padding-bottom:clamp(60px,10vh,100px)">
     <div class="reel reel--tight">
       {spots.map((p, i) => <Tile item={p} group="ps" eager={i < 3} />)}
     </div>

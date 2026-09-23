@@ -1,15 +1,14 @@
 ---
 import Base from '../layouts/Base.astro';
 import { u, site } from '../lib/site.js';
+const mediaBase = u('/media/cities/');
 ---
 <Base sub={false} current="/">
   <h1 class="sr-only">ONES — International Film Production Service in Barcelona, Warsaw and Bangkok</h1>
-  <section id="cities" class="cities cities--gate" aria-label="Our bases">
+  <section id="cities" class="cities cities--gate" aria-label="Our bases" data-media={mediaBase}>
     {site.cities.map((c) => (
       <a class="city" href={u('/reel/')} aria-label={`${c.name} — open the TVC reel`}>
-        <video class="city__video" autoplay muted loop playsinline preload="metadata" poster={u(`/media/cities/${c.slug}.webp`)} aria-hidden="true">
-          <source src={u(`/media/cities/${c.slug}.mp4`)} type="video/mp4">
-        </video>
+        <video class="city__video" data-city={c.slug} autoplay muted loop playsinline preload="auto" poster={`${mediaBase}${c.slug}-desktop.webp`} aria-hidden="true"></video>
         <div class="city__overlay"></div>
         <div class="city__caption">
           <h2 class="city__name">{c.name}</h2>
@@ -24,6 +23,39 @@ import { u, site } from '../lib/site.js';
   html.is-gate main { height: 100%; }
   .cities--gate { height: 100%; grid-template-rows: 100%; }
   html.is-gate .site-footer { display: none; }
+  .cities--gate .city__video { filter: none; }
   @media (max-width: 900px) { .cities--gate { display: grid !important; height: 100% !important; min-height: 0; grid-template-columns: 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); } .cities--gate .city { height: auto !important; min-height: 0 !important; } }
 </style>
-<script is:inline>document.documentElement.classList.add('is-gate');</script>
+<script is:inline>
+  document.documentElement.classList.add('is-gate');
+  (function () {
+    // Pick the variant for this screen (stacked = landscape 16:9 clip, side by side = portrait 3:4 crop)
+    // and the best codec the browser can decode: AV1 → HEVC → H.264.
+    var sec = document.getElementById('cities'); if (!sec) return;
+    var base = sec.getAttribute('data-media');
+    var stacked = window.matchMedia('(max-width: 900px)').matches;
+    var variant = stacked ? 'mobile' : 'desktop';
+    var probe = document.createElement('video');
+    var codecs = [
+      ['av1', 'video/mp4; codecs="av01.0.08M.08"'],
+      ['hevc', 'video/mp4; codecs="hvc1.1.6.L93.B0"'],
+      ['h264', 'video/mp4; codecs="avc1.640028"']
+    ];
+    var pick = 'h264';
+    for (var i = 0; i < codecs.length; i++) { if (probe.canPlayType(codecs[i][1]) === 'probably') { pick = codecs[i][0]; break; } }
+    var vids = Array.prototype.slice.call(sec.querySelectorAll('.city__video'));
+    vids.forEach(function (v) {
+      var c = v.getAttribute('data-city');
+      v.poster = base + c + '-' + variant + '.webp';
+      v.src = base + c + '-' + variant + '.' + pick + '.mp4';
+      v.muted = true; v.defaultMuted = true;
+      v.load();
+    });
+    function tryPlay() { vids.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
+    tryPlay();
+    // iOS Low Power Mode / strict autoplay: retry on first interaction and when the tab becomes visible again
+    ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(function (ev) { window.addEventListener(ev, tryPlay, { passive: true, once: true }); });
+    document.addEventListener('visibilitychange', function () { if (!document.hidden) tryPlay(); });
+    vids.forEach(function (v) { v.addEventListener('canplay', function () { if (v.paused) tryPlay(); }, { once: true }); });
+  })();
+</script>
