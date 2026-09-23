@@ -103,9 +103,10 @@
   /* ── Creative cursor: gradient ring with orbiting label. Video = ▶ + "PLAY", photos = + + "VIEW" ── */
   (function initCursor() {
     if (!canHover) return;
-    var SEL_VIDEO = '.reel__poster[data-vimeo], [data-video-open], .tile a[href*="/tv-shows/"], .city';
+    var SEL_VIDEO = '.reel__poster[data-vimeo], [data-video-open], .tile a[href*="/tv-shows/"]';
+    var SEL_SELECT = '.city';
     var SEL_PHOTO = '.reel__poster[data-gallery], .gallery a, .roster a, .team__photo';
-    var targets = $$(SEL_VIDEO + ', ' + SEL_PHOTO); if (!targets.length) return;
+    var targets = $$(SEL_VIDEO + ', ' + SEL_PHOTO + ', ' + SEL_SELECT); if (!targets.length) return;
     var el = document.createElement('div');
     el.id = 'vid-cursor'; el.setAttribute('aria-hidden', 'true');
     el.innerHTML =
@@ -116,6 +117,8 @@
         '<g class="vc__orbit"><text class="vc__label"><textPath href="#vcp" startOffset="0"><tspan class="vc__t"></tspan></textPath></text></g>' +
         '<polygon class="vc__play" points="42,36 66,50 42,64" fill="#fff"/>' +
         '<g class="vc__plus" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><line x1="50" y1="40" x2="50" y2="60"/><line x1="40" y1="50" x2="60" y2="50"/></g>' +
+        '<circle class="vc__sel-ring" cx="50" cy="50" r="16" fill="none" stroke="url(#vcg)" stroke-width="1.5"/>' +
+        '<circle class="vc__sel-dot" cx="50" cy="50" r="5" fill="url(#vcg)"/>' +
       '</svg>';
     document.body.appendChild(el);
     var label = el.querySelector('.vc__t');
@@ -128,11 +131,11 @@
     function start() { if (!running) { running = true; requestAnimationFrame(loop); } }
     document.addEventListener('mousemove', function (e) { tx = e.clientX; ty = e.clientY; if (hovering && lb.hidden) { el.classList.add('is-active'); start(); } }, { passive: true });
     targets.forEach(function (t) {
-      var isVideo = t.matches(SEL_VIDEO);
+      var mode = t.matches(SEL_SELECT) ? 'select' : t.matches(SEL_VIDEO) ? 'video' : 'photo';
       t.addEventListener('mouseenter', function (e) {
         hovering = true; tx = cx = e.clientX; ty = cy = e.clientY;
-        el.classList.toggle('is-video', isVideo); el.classList.toggle('is-photo', !isVideo);
-        label.textContent = isVideo ? 'PLAY · PLAY · PLAY · PLAY · ' : 'VIEW · VIEW · VIEW · VIEW · ';
+        el.classList.toggle('is-video', mode === 'video'); el.classList.toggle('is-photo', mode === 'photo'); el.classList.toggle('is-select', mode === 'select');
+        label.textContent = mode === 'video' ? 'PLAY · PLAY · PLAY · PLAY · ' : mode === 'photo' ? 'VIEW · VIEW · VIEW · VIEW · ' : '';
         if (lb.hidden) el.classList.add('is-active'); start();
       });
       t.addEventListener('mouseleave', function () { hovering = false; el.classList.remove('is-active'); });

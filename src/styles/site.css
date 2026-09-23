@@ -196,3 +196,11 @@
 #vid-cursor.is-photo .vc__plus{opacity:1;transform:rotate(0) scale(1)}
 #vid-cursor.is-photo .vc__ring{stroke-dasharray:6 6}
 @keyframes vc-spin{to{transform:rotate(360deg)}}
+/* Home cities: minimal select cursor — gradient dot inside a thin gradient ring */
+#vid-cursor .vc__sel-ring,#vid-cursor .vc__sel-dot{opacity:0;transform-origin:50% 50%;transition:opacity .2s,transform .35s cubic-bezier(.2,.8,.2,1)}
+#vid-cursor .vc__sel-ring{transform:scale(.4)}
+#vid-cursor.is-select .vc__ring,#vid-cursor.is-select .vc__orbit,#vid-cursor.is-select .vc__play,#vid-cursor.is-select .vc__plus{opacity:0}
+#vid-cursor.is-select .vc__sel-dot{opacity:1}
+#vid-cursor.is-select .vc__sel-ring{opacity:1;transform:scale(1);animation:vc-breathe 2.4s ease-in-out infinite}
+#vid-cursor.is-select .vc{filter:drop-shadow(0 1px 6px rgba(0,0,0,.5))}
+@keyframes vc-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
