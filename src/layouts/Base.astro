@@ -75,6 +75,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   </div>
 </div>
 
-<script src="../scripts/site.js"></script>
+<script is:inline defer src={u('/site.js')}></script>
 </body>
 </html>
