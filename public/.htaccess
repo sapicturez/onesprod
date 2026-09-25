@@ -4,9 +4,12 @@ ErrorDocument 404 /404.html
 Options -Indexes
 
 RewriteEngine On
-# www -> bez www (HTTPS wlacza Hostinger: "Force HTTPS"; nie ruszamy /.well-known dla certyfikatu SSL)
+# Jeden skok: http:// i www. -> https://onesprod.com (nie ruszamy /.well-known dla certyfikatu SSL)
 RewriteCond %{REQUEST_URI} !^/\.well-known/
-RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
 RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
 # Cache: HTML krótko, zasoby długo
