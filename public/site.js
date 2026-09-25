@@ -187,8 +187,7 @@
     if (rail.getAttribute('data-tone') !== t) rail.setAttribute('data-tone', t);
   }
   function queue() { if (!raf) raf = requestAnimationFrame(update); }
-  ['scroll', 'resize', 'load'].forEach(function (e) { window.addEventListener(e, queue, { passive: true }); });
+  ['scroll', 'resize'].forEach(function (e) { window.addEventListener(e, queue, { passive: true }); });
   new MutationObserver(queue).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-  setInterval(queue, 1500);
-  queue();
+  if (document.readyState === 'complete') setTimeout(queue, 300); else window.addEventListener('load', function () { setTimeout(queue, 300); }, { once: true });
 })();

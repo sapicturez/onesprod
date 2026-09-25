@@ -12,7 +12,7 @@ const mediaBase = u('/media/cities/');
   <section id="cities" class="cities cities--gate" aria-label="Our bases" data-media={mediaBase}>
     {site.cities.map((c) => (
       <a class="city" href={u('/reel/')} aria-label={`${c.name} — open the TVC reel`}>
-        <video class="city__video" data-city={c.slug} autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+        <video class="city__video" data-city={c.slug} autoplay muted loop playsinline preload="none" aria-hidden="true"></video>
         <div class="city__overlay"></div>
         <div class="city__caption">
           <h2 class="city__name">{c.name}</h2>
@@ -51,17 +51,19 @@ const mediaBase = u('/media/cities/');
     var pick = 'h264';
     for (var i = 0; i < codecs.length; i++) { if (probe.canPlayType(codecs[i][1]) === 'probably') { pick = codecs[i][0]; break; } }
     var vids = Array.prototype.slice.call(sec.querySelectorAll('.city__video'));
-    vids.forEach(function (v) {
-      var c = v.getAttribute('data-city');
-      v.poster = base + c + '-' + variant + '.webp';
-      v.src = base + c + '-' + variant + '.' + pick + '.mp4';
-      v.muted = true; v.defaultMuted = true;
-      v.load();
-    });
-    function tryPlay() { vids.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
-    tryPlay();
+    // Frames (posters) paint immediately; the videos start loading right after the page has painted.
+    vids.forEach(function (v) { v.poster = base + v.getAttribute('data-city') + '-' + variant + '.webp'; v.muted = true; v.defaultMuted = true; });
+    var started = false;
+    function startVideos() {
+      if (started) return; started = true;
+      vids.forEach(function (v) { v.preload = 'auto'; v.src = base + v.getAttribute('data-city') + '-' + variant + '.' + pick + '.mp4'; v.load(); });
+      tryPlay();
+    }
+    function tryPlay() { if (!started) return; vids.forEach(function (v) { var p = v.play(); if (p && p.catch) p.catch(function () {}); }); }
+    if (document.readyState === 'complete') setTimeout(startVideos, 150);
+    else window.addEventListener('load', function () { setTimeout(startVideos, 150); }, { once: true });
     // iOS Low Power Mode / strict autoplay: retry on first interaction and when the tab becomes visible again
-    ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(function (ev) { window.addEventListener(ev, tryPlay, { passive: true, once: true }); });
+    ['touchstart', 'touchend', 'click', 'scroll', 'keydown'].forEach(function (ev) { window.addEventListener(ev, function () { if (started && vids.some(function (v) { return v.paused; })) tryPlay(); }, { passive: true }); });
     document.addEventListener('visibilitychange', function () { if (!document.hidden) tryPlay(); });
     vids.forEach(function (v) { v.addEventListener('canplay', function () { if (v.paused) tryPlay(); }, { once: true }); });
   })();
