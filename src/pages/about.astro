@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { site, u } from '../lib/site.js';
 const teamPhoto = (t) => u(`/media/team/${t.name.toLowerCase().replace(/[^a-z]+/g, '-').replace(/^-|-$/g, '')}.webp`);
-const body = site.about_html.replace('based in Bangkok and Warsaw', 'based in Barcelona, Warsaw and Bangkok').replace('in Poland and South East Asia', 'in Poland, South East Asia and Spain');
+const body = site.about_html.replace('in Poland and South East Asia', 'in Poland, South East Asia and Spain');
 ---
 <Base title="About us" current="/about/" description="ONES is an international production and service company operating as a production hub, established in 2012, based in Barcelona, Warsaw and Bangkok.">
   <PageHero eyebrow="Established 2012" title="International production and service company, operating as a production hub." large />
