@@ -316,3 +316,17 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
 @media (max-width:900px){.site-footer .site-footer__links a.site-footer__mail{color:var(--fg)}}
 /* narrow desktops (981–1180px): keep the nav + theme toggle inside the viewport */
 @media (min-width:981px) and (max-width:1180px){.site-nav{gap:12px;letter-spacing:.12em;font-size:10px}}
+/* ── Mobile menu (2026-09-25): compact type so everything fits one screen (iPhone Pro Max without scrolling);
+   the hamburger itself morphs into X in the same spot (no separate close button). ── */
+@media (max-width:900px){
+  .site-nav{justify-content:flex-start;padding:calc(84px + env(safe-area-inset-top)) 24px calc(24px + env(safe-area-inset-bottom))}
+  .site-nav a{font-size:clamp(22px,6.2vw,30px);line-height:1;padding:10px 0 9px;letter-spacing:-.03em}
+  .site-nav a::before{height:3px;bottom:5px;width:48px}
+  .nav-close{display:none!important}
+  .site-header:has(.nav-toggle:checked) .nav-toggle-label{display:flex;position:relative;z-index:1003}
+  .nav-toggle:checked ~ .nav-toggle-label span{background:#000}
+  .nav-toggle-label span{transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .2s ease,background-color .2s}
+  .theme-toggle{margin:16px 0 0}
+  .nav-contact{margin-top:14px;font-size:14px}
+  .nav-contact a{min-height:40px}
+}
