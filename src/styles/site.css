@@ -201,8 +201,8 @@
    Photo choices (gallery tiles, galleries, film stills) = camera viewfinder in the ONES gradient. No animation, no JS.
    (Overrides the old cursor:none / cursor:default rules still present in base.css.) */
 :root{
-  --cur-play:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M10 6.5 L26 16 L10 25.5 Z' fill='url(%23g)' stroke='rgba(0,0,0,.35)' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") 16 16, pointer;
-  --cur-photo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='rgba(0,0,0,.35)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='url(%23g)' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='url(%23g)' stroke='rgba(0,0,0,.35)' stroke-width='.8'/%3E%3C/svg%3E") 16 16, zoom-in;
+  --cur-play:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M10 6.5 L26 16 L10 25.5 Z' fill='url(%23g)'/%3E%3C/svg%3E") 16 16, pointer;
+  --cur-photo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='url(%23g)' stroke-width='1.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='1.6' fill='url(%23g)'/%3E%3C/svg%3E") 16 16, zoom-in;
 }
 #vid-cursor{display:none!important}
 .reel__poster,.reel__poster *{cursor:pointer!important}
@@ -243,17 +243,17 @@ html[data-theme=light] .site-header--solid .brand img{filter:invert(1)}
 
 /* ── Social rail: fixed vertical links hugging the right edge on every page and screen size.
    No background — transparent; a soft halo in the page colour keeps it legible over photos. ── */
-.social-rail{position:fixed;right:clamp(4px,.8vw,14px);top:50%;z-index:90;transform:translateY(-50%);
-  writing-mode:vertical-rl;display:flex;align-items:center;gap:18px;
+.social-rail{position:fixed;right:0;top:50%;z-index:95;transform:translateY(-50%);padding:8px clamp(0px,.4vw,6px);
+  writing-mode:vertical-rl;display:flex;align-items:center;gap:0;
   color:var(--fg);font-size:10px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;line-height:1;
   text-shadow:0 0 6px rgba(var(--bg-rgb),.55)}
 .social-rail--on-media{color:#fff;text-shadow:0 0 6px rgba(0,0,0,.5)}
-.social-rail::before{content:"";width:1px;height:56px;background:linear-gradient(180deg,#7FCFF5,#AFB5DE,#E18DAC,#F2A1A1)}
-.social-rail a{position:relative;padding:4px 0;opacity:.75;transition:opacity .25s}
-.social-rail a+a::before{content:"";position:absolute;left:50%;top:-11px;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:currentColor;opacity:.5}
+.social-rail::before{content:"";width:1px;height:56px;margin-bottom:8px;background:linear-gradient(180deg,#7FCFF5,#AFB5DE,#E18DAC,#F2A1A1)}
+.social-rail a{position:relative;padding:9px 12px;opacity:.75;transition:opacity .25s;cursor:pointer}
+.social-rail a+a::before{content:"";position:absolute;left:50%;top:-1.5px;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:currentColor;opacity:.5}
 .social-rail a:hover,.social-rail a:focus-visible{opacity:1}
 .social-rail a:focus-visible{outline:1px solid currentColor;outline-offset:4px}
-@media (max-width:900px){.social-rail{font-size:8.5px;letter-spacing:.3em;gap:14px}.social-rail::before{height:36px}}
+@media (max-width:900px){.social-rail{font-size:8.5px;letter-spacing:.3em}.social-rail a{padding:8px 10px}.social-rail::before{height:36px}}
 body:has(.nav-toggle:checked) .social-rail{display:none}
 @media print{.social-rail{display:none}}
 
