@@ -2,7 +2,7 @@
 import '../styles/core.css'; // editable copy of base.css (base.css is locked on disk)
 import '../styles/site.css';
 import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
-const { title, description = 'ONES is an international production and service company operating as a production hub, established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/cities/warsaw-mobile.webp" } = Astro.props;
+const { title, description = 'ONES is an international production and service company operating as a production hub, established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/og-ones.png" } = Astro.props;
 const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 ---
@@ -30,6 +30,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <meta property="og:url" content={canonical}>
 <meta property="og:site_name" content="ONES">
 <meta property="og:image" content={new URL(u(ogImage), Astro.site).href}>
+{ogImage === '/media/og-ones.png' && <><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"></>}
+<meta property="og:image:alt" content="ONES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content={new URL(u(ogImage), Astro.site).href}>
 <link rel="canonical" href={canonical}>
 <link rel="icon" href={u('/favicon.png')} type="image/png">
 <link rel="preconnect" href="https://player.vimeo.com" crossorigin>
@@ -82,7 +86,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 <div class="lb" id="lb" hidden aria-hidden="true" role="dialog" aria-label="Media viewer">
   <div class="lb__bd" data-lb-close></div>
-  <img class="lb__brand" src={u('/media/ones-logo-color.png')} alt="ONES" width="120" height="80">
+  <img class="lb__brand" src={u('/media/ones-logo-color-nav.png')} alt="ONES" width="461" height="274">
   <button class="lb__close" type="button" data-lb-close aria-label="Close">✕ close</button>
   <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Previous">←</button>
   <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Next">→</button>

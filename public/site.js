@@ -26,7 +26,17 @@
     $('[data-lb-prev]').disabled = idx <= 0; $('[data-lb-next]').disabled = idx >= list.length - 1;
     $('[data-lb-prev]').style.display = $('[data-lb-next]').style.display = list.length > 1 ? '' : 'none';
   }
+  /* Lightbox logo sits exactly where the menu logo is (same box, measured live) */
+  function placeLbBrand() {
+    var b = document.querySelector('.lb__brand'), h = document.querySelector('.site-header .brand img'), hd = document.querySelector('.site-header');
+    if (!b || !h || !hd) return;
+    var r = h.getBoundingClientRect(), hr = hd.getBoundingClientRect();
+    // header may be slid up (hidden on scroll): measure the logo relative to the header, header sits at the top
+    b.style.left = r.left + 'px'; b.style.top = (r.top - hr.top) + 'px'; b.style.width = r.width + 'px'; b.style.height = r.height + 'px';
+  }
+  window.addEventListener('resize', function () { if (!lb.hidden) placeLbBrand(); });
   function open(items, start) {
+    placeLbBrand();
     list = items; idx = start || 0; lastFocus = document.activeElement;
     lb.hidden = false; lb.setAttribute('aria-hidden', 'false'); document.body.style.overflow = 'hidden';
     render(); $('.lb__close').focus();

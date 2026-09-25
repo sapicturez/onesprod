@@ -258,5 +258,4 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
 @media print{.social-rail{display:none}}
 
 /* Lightbox: colourful ONES logo top-left — same branding over every video/photo, whichever Vimeo account hosts it */
-.lb__brand{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:20px;z-index:3;width:auto;height:44px;pointer-events:none}
-@media (max-width:640px){.lb__brand{height:34px;left:14px}}
+.lb__brand{position:absolute;top:22px;left:43px;z-index:3;width:77px;height:46px;object-fit:contain;display:block;pointer-events:none}
