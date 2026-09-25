@@ -4,7 +4,7 @@
 
 /* nav: 10 items → tighter tracking on desktop */
 .site-nav{gap:clamp(10px,1.6vw,26px);font-size:10.5px;letter-spacing:.2em}
-@media (min-width:981px){.site-nav a{var(--fg)-space:nowrap}}
+@media (min-width:981px){.site-nav a{white-space:nowrap}}
 .site-footer__links{display:flex;gap:16px;flex-wrap:wrap}
 .site-footer__links a{opacity:.7}.site-footer__links a:hover{opacity:1}
 
@@ -97,7 +97,7 @@
 .ps-region__body p{margin:0 0 1em}
 .ps-region__body h2,.ps-region__body h3,.ps-region__body h4{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:600!important;margin:1.4em 0 .5em;opacity:.7}
 
-/* clients wall: logos are JPG on var(--fg) → invert to var(--fg)-on-var(--bg) */
+/* clients wall: logos are JPG on white → invert to white-on-black */
 .logos-grid img{filter:grayscale(1) invert(1) contrast(1.05);mix-blend-mode:screen;opacity:.85;transition:opacity .3s}
 .logo-cell:hover img{opacity:1}
 

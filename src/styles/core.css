@@ -54,8 +54,8 @@ h2{font-weight:600!important}
 
 /* ── Gooey morph for city ↔ country on hover ─── */
 .city__morph{position:relative;display:inline-block;line-height:1;vertical-align:bottom;filter:url(#city-threshold)}
-.city__morph::before{content:'Barcelona';visibility:hidden;display:block;var(--fg)-space:nowrap}
-.city__morph-text{position:absolute;top:0;left:0;right:0;text-align:center;var(--fg)-space:nowrap}
+.city__morph::before{content:'Barcelona';visibility:hidden;display:block;white-space:nowrap}
+.city__morph-text{position:absolute;top:0;left:0;right:0;text-align:center;white-space:nowrap}
 .city__morph-text--a{opacity:1}
 .city__morph-text--b{opacity:0}
 
@@ -288,7 +288,7 @@ h2{font-weight:600!important}
 @keyframes hub-ring{0%{transform:scale(.3);opacity:.85}100%{transform:scale(2.3);opacity:0}}
 
 /* Label pill */
-.hub__pin-label{margin-top:14px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--fg);background:rgba(var(--c),.16);border:1px solid rgba(var(--c),.45);padding:6px 13px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;var(--fg)-space:nowrap}
+.hub__pin-label{margin-top:14px;font-size:10px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--fg);background:rgba(var(--c),.16);border:1px solid rgba(var(--c),.45);padding:6px 13px;border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);transition:background .3s ease,transform .35s cubic-bezier(.2,.8,.2,1),border-color .3s ease;white-space:nowrap}
 .hub__pin:hover .hub__pin-label,.hub__pin:focus-visible .hub__pin-label,.hub__pin.is-active .hub__pin-label{background:rgba(var(--c),.38);border-color:rgba(var(--c),.8);transform:translateY(-2px)}
 .hub__pin:focus-visible{outline:none}
 .hub__pin:focus-visible .hub__pin-dot{box-shadow:0 0 16px rgba(var(--c),.9),0 0 0 4px rgba(var(--c),.3),0 0 24px rgba(var(--c),.35)}
@@ -502,7 +502,7 @@ h2{font-weight:600!important}
   border:1px solid rgba(var(--fg-rgb),.12);
   color:var(--fg);font-size:10px;letter-spacing:.26em;
   text-transform:uppercase;font-weight:500;font-family:inherit;
-  padding:8px 15px;border-radius:6px;var(--fg)-space:nowrap;
+  padding:8px 15px;border-radius:6px;white-space:nowrap;
   opacity:0;transform:translate(0,0);
   transition:opacity .28s cubic-bezier(.4,0,.2,1);
   will-change:transform;
@@ -1234,7 +1234,7 @@ body{
   color:var(--hub-ink);font-size:clamp(25px,2.4vw,42px);line-height:1;letter-spacing:-.045em;
   text-transform:none;font-weight:600;backdrop-filter:none;transition:transform .35s var(--ease);
 }
-.hub__pin-region{order:5;margin-top:7px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.58;var(--fg)-space:nowrap}
+.hub__pin-region{order:5;margin-top:7px;font-size:9px;letter-spacing:.16em;text-transform:uppercase;opacity:.58;white-space:nowrap}
 .hub__map .hub__pin:hover .hub__pin-label,
 .hub__map .hub__pin:focus-visible .hub__pin-label,
 .hub__map .hub__pin.is-active .hub__pin-label{
@@ -1292,7 +1292,7 @@ body{
   .hub__map .hub__pin[data-city="warsaw"]{--top:47%;--left:42%}
   .hub__map .hub__pin[data-city="bangkok"]{--top:86%;--left:64%}
   .hub__map .hub__pin-label{font-size:30px}
-  .hub__pin-region{font-size:8px;var(--fg)-space:normal;max-width:145px}
+  .hub__pin-region{font-size:8px;white-space:normal;max-width:145px}
   .hub__map .hub__pin-tooltip{left:12px;width:min(200px,70vw)}
   .hub__map .hub__text{
     position:relative;inset:auto!important;width:100%;max-width:none;margin:0;
