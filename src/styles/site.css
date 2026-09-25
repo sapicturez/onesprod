@@ -170,7 +170,7 @@
 .contact-person__name{font-size:clamp(24px,2.4vw,34px);font-weight:600;letter-spacing:-.02em;margin:6px 0 2px}
 .contact-person__role{opacity:.7;margin:0 0 18px}
 .contact-person__phone{font-size:clamp(18px,1.6vw,22px);margin:0 0 22px}
-.contact-person__phone a{text-decoration:none;border-bottom:1px solid rgba(var(--fg-rgb),.35)}
+.contact-person__phone a{text-decoration:none;border-bottom:0}
 .wa-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border:1px solid rgba(var(--fg-rgb),.3);border-radius:999px;font-size:11px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;transition:border-color .25s,background .25s}
 .wa-btn:hover{border-color:#25D366;background:rgba(37,211,102,.1)}
 .wa-btn img{display:block}
