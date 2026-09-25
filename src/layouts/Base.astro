@@ -2,6 +2,7 @@
 import '../styles/core.css'; // editable copy of base.css (base.css is locked on disk)
 import '../styles/site.css';
 import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
+import OnesWordmark from '../components/OnesWordmark.astro';
 const BUILD = Date.now().toString(36); // new value on every build -> browsers fetch fresh site.js
 const { title, description = 'ONES is an international production and service company operating as a production hub, established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/og-ones.png" } = Astro.props;
 const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
@@ -81,18 +82,23 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 </main>
 
 <footer class="site-footer" role="contentinfo">
-  <div class="wrap site-footer__row">
-    <span>© <time>{new Date().getFullYear()}</time> ONES — International Production Company</span>
-    <span>Barcelona · Warsaw · Bangkok</span>
-    <span class="site-footer__links">
+  <div class="wrap site-footer__grid">
+    <p class="site-footer__brand">
+      <OnesWordmark class="site-footer__mark" />
+      <span>© <time>{new Date().getFullYear()}</time></span>
+      <span class="site-footer__tag">International Production Company</span>
+    </p>
+    <p class="site-footer__cities">Barcelona <i>·</i> Warsaw <i>·</i> Bangkok</p>
+    <nav class="site-footer__links" aria-label="ONES on social media and email">
       {FOOTER_NAV.map(([href, label]) => <a href={u(href)}>{label}</a>)}
       <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
       <a href={site.social.vimeo} target="_blank" rel="noopener">Vimeo</a>
       <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>
       <a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-    </span>
+      <a class="site-footer__mail" href={`mailto:${site.email}`}>{site.email}</a>
+    </nav>
   </div>
+  <div class="wrap site-footer__big" aria-hidden="true"><OnesWordmark class="site-footer__giant" /></div>
 </footer>
 
 <div class="lb" id="lb" hidden aria-hidden="true" role="dialog" aria-label="Media viewer">

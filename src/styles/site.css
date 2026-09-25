@@ -279,3 +279,37 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
   .nav-contact a{display:flex;align-items:center;min-height:44px;padding:0!important;font-size:inherit!important}
   .nav-contact a::before{display:none}
 }
+
+/* ── Footer (2026-09-25): black/white only; small ONES wordmark next to © on desktop, giant wordmark on mobile ── */
+.site-footer{padding:0;color:var(--fg);background:var(--bg);border-top:1px solid rgba(var(--fg-rgb),.14)}
+.site-footer .site-footer__grid{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px 40px;padding-top:26px;padding-bottom:26px;
+  font-size:10.5px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:rgba(var(--fg-rgb),.62)}
+.site-footer__grid p{margin:0}
+.site-footer__brand{display:flex;align-items:center;gap:12px;white-space:nowrap}
+.site-footer__mark{height:9px;width:auto;display:block;color:var(--fg)}
+.site-footer__tag::before{content:"—";margin-right:12px;opacity:.6}
+.site-footer__cities{justify-self:center}
+.site-footer__cities i{font-style:normal;opacity:.45;margin:0 .35em}
+.site-footer .site-footer__links{display:flex;flex-wrap:wrap;align-items:center;gap:6px 22px;justify-content:flex-end}
+.site-footer .site-footer__links a{position:relative;opacity:1;color:inherit;transition:color .25s}
+.site-footer .site-footer__links a::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.site-footer .site-footer__links a:hover,.site-footer .site-footer__links a:focus-visible{color:var(--fg)}
+.site-footer .site-footer__links a:hover::after,.site-footer .site-footer__links a:focus-visible::after{transform:scaleX(1)}
+.site-footer__mail{text-transform:none;letter-spacing:.06em}
+.site-footer__big{display:none}
+@media (max-width:1100px){
+  .site-footer .site-footer__grid{grid-template-columns:1fr auto}
+  .site-footer__cities{display:none}
+}
+@media (max-width:900px){
+  .site-footer .site-footer__grid{grid-template-columns:1fr;gap:22px;padding-top:34px;padding-bottom:8px;letter-spacing:.2em}
+  .site-footer__brand .site-footer__mark{display:none}
+  .site-footer__brand{order:3;font-size:10px}
+  .site-footer__cities{display:block;justify-self:start;order:1;font-size:11px;color:var(--fg)}
+  .site-footer .site-footer__links{order:2;display:grid;grid-template-columns:1fr 1fr;gap:0 18px;justify-content:stretch}
+  .site-footer .site-footer__links a{min-height:44px;display:flex;align-items:center;border-bottom:1px solid rgba(var(--fg-rgb),.12)}
+  .site-footer .site-footer__links a::after{display:none}
+  .site-footer__mail{grid-column:1/-1;font-size:14px;letter-spacing:.02em;color:var(--fg)}
+  .site-footer__big{display:block;padding-top:10px;padding-bottom:22px}
+  .site-footer__giant{display:block;width:100%;height:auto;color:var(--fg)}
+}
