@@ -11,8 +11,8 @@ RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [L,R=301]
 
 # Cache: HTML krótko, zasoby długo
 <IfModule mod_headers.c>
-  <FilesMatch "\.(html)$">
-    Header set Cache-Control "public, max-age=300"
+  <FilesMatch "\.(html|php)$">
+    Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
   <FilesMatch "\.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff2?)$">
     Header set Cache-Control "public, max-age=604800"

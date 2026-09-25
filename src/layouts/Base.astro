@@ -2,6 +2,7 @@
 import '../styles/core.css'; // editable copy of base.css (base.css is locked on disk)
 import '../styles/site.css';
 import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
+const BUILD = Date.now().toString(36); // new value on every build -> browsers fetch fresh site.js
 const { title, description = 'ONES is an international production and service company operating as a production hub, established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/og-ones.png" } = Astro.props;
 const fullTitle = title ? `${title} — ONES Production` : 'ONES — International Film Production Service | Barcelona · Warsaw · Bangkok';
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -103,6 +104,6 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   </div>
 </div>
 
-<script is:inline defer src={u('/site.js')}></script>
+<script is:inline defer src={u('/site.js') + '?v=' + BUILD}></script>
 </body>
 </html>

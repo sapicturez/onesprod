@@ -34,3 +34,6 @@ done
 
 curl -fsS -X POST "$API/accounts/$USERNAME/websites/$DOMAIN/deploy" "${AUTH[@]}" -d "{\"archive_path\":\"$ARCHIVE\"}"
 echo; echo "Deploy triggered for $DOMAIN"
+sleep 20
+curl -sS -X POST "$API/accounts/$USERNAME/websites/$DOMAIN/cache/clear" "${AUTH[@]}" -d '{}' || echo "cache clear failed (non-fatal)"
+echo; echo "Hostinger cache cleared"
