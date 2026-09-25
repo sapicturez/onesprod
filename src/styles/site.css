@@ -376,3 +376,29 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
   .team__list li:nth-child(2),.team__list li:nth-child(3){margin-top:0!important}
   .team__list li:nth-child(even) .team__info{text-align:right}
 }
+
+/* ── Phones & e-mails: ONES gradient on hover (never disappears on dark/inverted sections) ── */
+a[href^="tel:"],a[href^="mailto:"]{transition:opacity .25s}
+@media (hover:hover){
+  a[href^="tel:"]:hover,a[href^="mailto:"]:hover,a[href^="tel:"]:focus-visible,a[href^="mailto:"]:focus-visible{
+    opacity:1!important;color:transparent!important;-webkit-text-fill-color:transparent;
+    background:var(--ones-gradient);-webkit-background-clip:text;background-clip:text}
+}
+
+/* ── Footer on mobile = desktop footer, stacked in short single lines (no giant wordmark) ── */
+@media (max-width:900px){
+  .site-footer{display:block}
+  .site-footer__big{display:none!important}
+  .site-footer .site-footer__grid{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-top:24px;padding-bottom:24px;
+    font-size:9px;letter-spacing:.16em;color:rgba(var(--fg-rgb),.62)}
+  .site-footer__brand{order:0;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;white-space:normal;font-size:9px}
+  .site-footer__brand .site-footer__mark{display:block;height:8px}
+  .site-footer__tag::before{margin-right:8px}
+  .site-footer__cities{order:1;display:block;font-size:9px;color:rgba(var(--fg-rgb),.62)}
+  .site-footer .site-footer__links{order:2;display:flex;flex-wrap:nowrap;gap:0 16px;justify-content:flex-start;width:100%}
+  .site-footer .site-footer__links a{min-height:32px;border:0;white-space:nowrap;font-size:9px}
+  .site-footer .site-footer__links a.site-footer__mail{display:none}
+  .site-footer__mobile-mail{display:block}
+}
+.site-footer__mobile-mail{display:none;margin:0}
+@media (max-width:900px){.site-footer__mobile-mail{display:block;order:3;font-size:13px;letter-spacing:.02em;text-transform:none;color:var(--fg)}.site-footer__mobile-mail a{display:inline-flex;min-height:32px;align-items:center}}

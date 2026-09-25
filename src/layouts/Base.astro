@@ -86,7 +86,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
     <p class="site-footer__brand">
       <OnesWordmark class="site-footer__mark" />
       <span>© <time>{new Date().getFullYear()}</time></span>
-      <span class="site-footer__tag">International Production Company</span>
+      <span class="site-footer__tag">International production and service company</span>
     </p>
     <p class="site-footer__cities">Barcelona <i>·</i> Warsaw <i>·</i> Bangkok</p>
     <nav class="site-footer__links" aria-label="ONES on social media and email">
@@ -97,6 +97,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <a href={site.social.linkedin} target="_blank" rel="noopener">LinkedIn</a>
       <a class="site-footer__mail" href={`mailto:${site.email}`}>{site.email}</a>
     </nav>
+    <p class="site-footer__mobile-mail"><a href={`mailto:${site.email}`}>{site.email}</a></p>
   </div>
   <div class="wrap site-footer__big" aria-hidden="true"><OnesWordmark class="site-footer__giant" /></div>
 </footer>
