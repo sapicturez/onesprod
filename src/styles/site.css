@@ -313,3 +313,6 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
   .site-footer__big{display:block;padding-top:10px;padding-bottom:22px}
   .site-footer__giant{display:block;width:100%;height:auto;color:var(--fg)}
 }
+@media (max-width:900px){.site-footer .site-footer__links a.site-footer__mail{color:var(--fg)}}
+/* narrow desktops (981–1180px): keep the nav + theme toggle inside the viewport */
+@media (min-width:981px) and (max-width:1180px){.site-nav{gap:12px;letter-spacing:.12em;font-size:10px}}
