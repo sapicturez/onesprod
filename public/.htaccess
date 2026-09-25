@@ -1,0 +1,21 @@
+# ONES — Hostinger (LiteSpeed/Apache)
+DirectoryIndex index.html index.php
+ErrorDocument 404 /404.html
+Options -Indexes
+
+RewriteEngine On
+# HTTPS + bez www
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+# Cache: HTML krótko, zasoby długo
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html)$">
+    Header set Cache-Control "public, max-age=300"
+  </FilesMatch>
+  <FilesMatch "\.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff2?)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
