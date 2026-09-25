@@ -219,7 +219,7 @@
    "Dark islands" keep the dark tokens in light mode: anything sitting on video/photos, the lightbox,
    and the coloured sections (pink logos wall, purple CTA) whose text is black on colour. */
 :root,
-html[data-theme=light] :is(.lb,.cities,.city,.reel__frame,.ps-slide,.film-stills,.logos-wall,.cta-band,.video-embed){
+html[data-theme=light] :is(.lb,.cities,.city,.reel__frame,.reel__item figcaption,.photo-item figcaption,.person__cap,.ps-slide,.film-stills,.logos-wall,.cta-band,.video-embed){
   --bg:#000;--fg:#fff;--bg-2:#111;--fg-rgb:255,255,255;--bg-rgb:0,0,0;color-scheme:dark}
 html[data-theme=light]{--bg:#fff;--fg:#000;--bg-2:#f2f2f2;--fg-rgb:0,0,0;--bg-rgb:255,255,255;color-scheme:light}
 html{transition:background-color .3s ease}
@@ -232,3 +232,8 @@ html[data-theme=light] .site-header .brand img{filter:invert(1)}
 .theme-toggle__knob{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--ones-gradient);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .theme-toggle[aria-checked=true] .theme-toggle__knob{transform:translateX(18px)}
 @media (max-width:900px){.theme-toggle{width:52px;height:28px;margin:18px 0 0}.theme-toggle__knob{width:18px;height:18px;top:4px;left:4px}.theme-toggle[aria-checked=true] .theme-toggle__knob{transform:translateX(24px)}}
+html[data-theme=light] .site-header{mix-blend-mode:normal}
+/* mobile menu is a pink panel with black text — keep dark tokens there */
+@media (max-width:900px){
+  html[data-theme=light] .site-nav,html[data-theme=light] .site-header:has(.nav-toggle:checked){--bg:#000;--fg:#fff;--fg-rgb:255,255,255;--bg-rgb:0,0,0}
+}
