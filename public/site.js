@@ -101,6 +101,23 @@
 
   /* Cursors are pure CSS (see site.css "Cursors") — no JS follower. */
 
+  /* ── Theme toggle (dark ⇄ light), remembered in localStorage ── */
+  var root = document.documentElement;
+  function syncToggles() {
+    var light = root.getAttribute('data-theme') === 'light';
+    $$('[data-theme-toggle]').forEach(function (b) { b.setAttribute('aria-checked', light ? 'true' : 'false'); });
+  }
+  syncToggles();
+  $$('[data-theme-toggle]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('ones-theme', next); } catch (e) {}
+      var m = $('meta[name="theme-color"]'); if (m) m.setAttribute('content', next === 'light' ? '#ffffff' : '#000000');
+      syncToggles();
+    });
+  });
+
   /* ── Header: hide on scroll down, show on scroll up ── */
   var header = $('.site-header'), lastY = window.scrollY;
   if (header) {

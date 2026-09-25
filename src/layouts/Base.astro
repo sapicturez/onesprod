@@ -1,5 +1,5 @@
 ---
-import '../styles/base.css';
+import '../styles/core.css'; // editable copy of base.css (base.css is locked on disk)
 import '../styles/site.css';
 import { NAV, FOOTER_NAV, u, site } from '../lib/site.js';
 const { title, description = 'ONES is an international production and service company operating as a production hub, established in 2012. Bases in Barcelona, Warsaw and Bangkok. TV commercials, TV shows, documentary films, photoshoots and music videos.', sub = true, current = '', ogImage = "/media/cities/warsaw-mobile.webp" } = Astro.props;
@@ -14,6 +14,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <title>{fullTitle}</title>
 <meta name="description" content={description}>
 <meta name="theme-color" content="#000000">
+<script is:inline>
+  /* Theme before first paint: saved choice → system preference → dark */
+  (function () {
+    var t = null;
+    try { t = localStorage.getItem('ones-theme'); } catch (e) {}
+    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', t === 'light' ? '#ffffff' : '#000000');
+  })();
+</script>
 <meta property="og:type" content="website">
 <meta property="og:title" content={fullTitle}>
 <meta property="og:description" content={description}>
@@ -40,6 +50,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
       <nav class="site-nav" aria-label="Primary">
         <label for="nav-toggle" class="nav-close" aria-label="Close navigation">✕</label>
         {NAV.map(([href, label]) => <a href={u(href)} aria-current={current === href ? 'page' : undefined}>{label}</a>)}
+        <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light version" title="Dark / light version" data-theme-toggle><span class="theme-toggle__knob"></span></button>
       </nav>
     </>
   )}
