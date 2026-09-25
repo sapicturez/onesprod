@@ -417,3 +417,7 @@ a[href^="tel:"],a[href^="mailto:"]{transition:opacity .25s}
   .site-footer .site-footer__grid{grid-template-columns:1fr auto}
   .site-footer__cities{display:none}
 }
+@media (min-width:901px) and (max-width:1120px){
+  .site-footer .site-footer__grid{grid-template-columns:1fr;row-gap:12px}
+  .site-footer .site-footer__links{justify-content:flex-start}
+}
