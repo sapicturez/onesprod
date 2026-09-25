@@ -82,6 +82,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 
 <div class="lb" id="lb" hidden aria-hidden="true" role="dialog" aria-label="Media viewer">
   <div class="lb__bd" data-lb-close></div>
+  <img class="lb__brand" src={u('/media/ones-logo-color.png')} alt="ONES" width="120" height="80">
   <button class="lb__close" type="button" data-lb-close aria-label="Close">✕ close</button>
   <button class="lb__nav lb__nav--prev" type="button" data-lb-prev aria-label="Previous">←</button>
   <button class="lb__nav lb__nav--next" type="button" data-lb-next aria-label="Next">→</button>

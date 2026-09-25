@@ -256,3 +256,7 @@ html[data-theme=light] .site-header--solid .brand img{filter:invert(1)}
 @media (max-width:900px){.social-rail{font-size:8.5px;letter-spacing:.3em;gap:14px}.social-rail::before{height:36px}}
 body:has(.nav-toggle:checked) .social-rail{display:none}
 @media print{.social-rail{display:none}}
+
+/* Lightbox: colourful ONES logo top-left — same branding over every video/photo, whichever Vimeo account hosts it */
+.lb__brand{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));left:20px;z-index:3;width:auto;height:44px;pointer-events:none}
+@media (max-width:640px){.lb__brand{height:34px;left:14px}}
