@@ -56,6 +56,12 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
   )}
 </header>
 
+<aside class="social-rail" aria-label="ONES on social media">
+  <a href={site.social.instagram} target="_blank" rel="noopener">Instagram</a>
+  <a href={site.social.vimeo} target="_blank" rel="noopener">Vimeo</a>
+  <a href={site.social.facebook} target="_blank" rel="noopener">Facebook</a>
+</aside>
+
 <main id="main" class={sub ? 'sub' : undefined}>
   <slot />
 </main>

@@ -237,3 +237,18 @@ html[data-theme=light] .site-header{mix-blend-mode:normal}
 @media (max-width:900px){
   html[data-theme=light] .site-nav,html[data-theme=light] .site-header:has(.nav-toggle:checked){--bg:#000;--fg:#fff;--fg-rgb:255,255,255;--bg-rgb:0,0,0}
 }
+html[data-theme=light] .site-header--solid::before{display:none}
+
+/* ── Social rail: fixed vertical links on the left edge, always visible.
+   Editorial vertical type (reads bottom → top), hairline + dots between items.
+   mix-blend-mode:difference keeps it legible over black, white, pink and video alike. ── */
+.social-rail{position:fixed;left:clamp(12px,1.5vw,26px);top:50%;z-index:90;transform:translateY(-50%) rotate(180deg);
+  writing-mode:vertical-rl;display:flex;align-items:center;gap:18px;
+  color:#fff;mix-blend-mode:difference;font-size:10px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;line-height:1}
+.social-rail::after{content:"";width:1px;height:56px;background:currentColor;opacity:.5;order:9}
+.social-rail a{position:relative;padding:4px 0;opacity:.62;transition:opacity .25s}
+.social-rail a+a::before{content:"";position:absolute;left:50%;top:-11px;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:currentColor;opacity:.5}
+.social-rail a:hover,.social-rail a:focus-visible{opacity:1}
+.social-rail a:focus-visible{outline:1px solid currentColor;outline-offset:4px}
+@media (max-width:900px){.social-rail{display:none}}
+@media print{.social-rail{display:none}}
