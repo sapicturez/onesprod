@@ -246,8 +246,9 @@ html[data-theme=light] .site-header--solid .brand img{filter:invert(1)}
    always white on the home page, which is full-screen video. ── */
 .social-rail{position:fixed;right:clamp(12px,1.5vw,26px);top:50%;z-index:90;transform:translateY(-50%);
   writing-mode:vertical-rl;display:flex;align-items:center;gap:18px;
-  color:var(--fg);font-size:10px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;line-height:1}
-.social-rail--on-media{color:#fff;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  color:var(--fg);font-size:10px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;line-height:1;
+  padding:16px 8px;border-radius:999px;background:rgba(var(--bg-rgb),.72);-webkit-backdrop-filter:blur(10px) saturate(140%);backdrop-filter:blur(10px) saturate(140%)}
+.social-rail--on-media{color:#fff;background:rgba(0,0,0,.28)}
 .social-rail::before{content:"";width:1px;height:56px;background:var(--ones-gradient);background:linear-gradient(180deg,#7FCFF5,#AFB5DE,#E18DAC,#F2A1A1)}
 .social-rail a{position:relative;padding:4px 0;opacity:.7;transition:opacity .25s}
 .social-rail a+a::before{content:"";position:absolute;left:50%;top:-11px;width:3px;height:3px;margin-left:-1.5px;border-radius:50%;background:currentColor;opacity:.5}
