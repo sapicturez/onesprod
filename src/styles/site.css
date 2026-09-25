@@ -330,3 +330,12 @@ body:has(.nav-toggle:checked) .social-rail{display:none}
   .nav-contact{margin-top:14px;font-size:14px}
   .nav-contact a{min-height:40px}
 }
+@media (max-width:900px){.site-header:has(.nav-toggle:checked) .nav-toggle-label{top:1px}}
+/* shorter phones (e.g. iPhone mini/SE/13 in Safari): tighten further so the menu still fits one screen */
+@media (max-width:900px) and (max-height:760px){
+  .site-nav{padding-top:calc(72px + env(safe-area-inset-top));padding-bottom:calc(14px + env(safe-area-inset-bottom))}
+  .site-nav a{font-size:clamp(19px,5.4vw,24px);padding:7px 0 6px}
+  .theme-toggle{margin-top:10px}
+  .nav-contact{margin-top:8px;font-size:13px}
+  .nav-contact a{min-height:34px}
+}
