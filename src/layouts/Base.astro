@@ -13,13 +13,13 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>{fullTitle}</title>
 <meta name="description" content={description}>
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#ffffff">
 <script is:inline>
-  /* Theme before first paint: saved choice → system preference → dark */
+  /* Theme before first paint: saved choice → light (default for new visitors) */
   (function () {
     var t = null;
     try { t = localStorage.getItem('ones-theme'); } catch (e) {}
-    if (t !== 'light' && t !== 'dark') t = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    if (t !== 'light' && t !== 'dark') t = 'light';
     document.documentElement.setAttribute('data-theme', t);
     var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute('content', t === 'light' ? '#ffffff' : '#000000');
   })();
