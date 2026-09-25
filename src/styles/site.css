@@ -402,3 +402,10 @@ a[href^="tel:"],a[href^="mailto:"]{transition:opacity .25s}
 }
 .site-footer__mobile-mail{display:none;margin:0}
 @media (max-width:900px){.site-footer__mobile-mail{display:block;order:3;font-size:13px;letter-spacing:.02em;text-transform:none;color:var(--fg)}.site-footer__mobile-mail a{display:inline-flex;min-height:32px;align-items:center}}
+.site-footer__cities{white-space:nowrap}
+@media (min-width:901px){.site-footer .site-footer__grid{column-gap:28px}}
+@media (max-width:900px){
+  .site-footer__tag{flex-basis:100%}
+  .site-footer__tag::before{display:none}
+  .site-footer__mobile-mail{font-size:12px}
+}
