@@ -228,10 +228,10 @@ html{transition:background-color .3s ease}
 /* white logo → black in light mode */
 html[data-theme=light] .site-header--solid .brand img{filter:invert(1)}
 
-.theme-toggle{position:relative;flex:0 0 auto;width:38px;height:20px;padding:0;margin-left:4px;border-radius:999px;border:1.5px solid transparent;background:linear-gradient(var(--bg),var(--bg)) padding-box,var(--ones-gradient) border-box;cursor:pointer;transition:opacity .25s;opacity:.9}
+.theme-toggle{position:relative;flex:0 0 auto;width:38px;height:20px;padding:0;margin-left:4px;border-radius:999px;border:1.5px solid currentColor;background:transparent;color:inherit;cursor:pointer;transition:opacity .25s;opacity:.9}
 .theme-toggle:hover{opacity:1}
-.theme-toggle:focus-visible{outline:2px solid #80D6F7;outline-offset:3px}
-.theme-toggle__knob{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:var(--ones-gradient);transition:transform .3s cubic-bezier(.2,.8,.2,1)}
+.theme-toggle:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.theme-toggle__knob{position:absolute;top:3px;left:3px;width:12px;height:12px;border-radius:50%;background:currentColor;transition:transform .3s cubic-bezier(.2,.8,.2,1)}
 .theme-toggle[aria-checked=true] .theme-toggle__knob{transform:translateX(18px)}
 @media (max-width:900px){.theme-toggle{width:52px;height:28px;margin:18px 0 0}.theme-toggle__knob{width:18px;height:18px;top:4px;left:4px}.theme-toggle[aria-checked=true] .theme-toggle__knob{transform:translateX(24px)}}
 .site-header--solid{mix-blend-mode:normal}
