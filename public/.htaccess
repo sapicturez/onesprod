@@ -7,14 +7,28 @@ RewriteEngine On
 # www -> bez www (HTTPS wlacza Hostinger: "Force HTTPS"; nie ruszamy /.well-known dla certyfikatu SSL)
 RewriteCond %{REQUEST_URI} !^/\.well-known/
 RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
-RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [L,R=301]
+RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
 
 # Cache: HTML krótko, zasoby długo
 <IfModule mod_headers.c>
   <FilesMatch "\.(html|php)$">
     Header set Cache-Control "no-cache, must-revalidate"
   </FilesMatch>
-  <FilesMatch "\.(js|css|png|jpg|jpeg|webp|avif|svg|ico|woff2?)$">
-    Header set Cache-Control "public, max-age=604800"
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(png|jpg|jpeg|webp|avif|svg|ico|gif|mp4|webm)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  <FilesMatch "\.(woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+    Header set Access-Control-Allow-Origin "*"
   </FilesMatch>
 </IfModule>
+
+# Compression
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css application/javascript text/javascript application/json image/svg+xml application/manifest+json
+</IfModule>
+AddType font/woff2 .woff2
+AddType application/manifest+json .webmanifest

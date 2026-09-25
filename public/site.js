@@ -160,3 +160,35 @@
     document.addEventListener('click', function () { if (active) setActive(null); });
   }
 })();
+/* Social rail: black or white text depending on what is behind it (photo/video → white; light bg → black) */
+(function () {
+  var rail = document.querySelector('.social-rail'); if (!rail) return;
+  function lum(c) { var m = c.match(/[\d.]+/g); if (!m) return null; var a = m[3] === undefined ? 1 : +m[3]; if (a < 0.5) return null; return (0.2126 * m[0] + 0.7152 * m[1] + 0.0722 * m[2]) / 255; }
+  function toneAt(x, y) {
+    var stack = document.elementsFromPoint(x, y);
+    for (var i = 0; i < stack.length; i++) {
+      var el = stack[i];
+      if (el === rail || rail.contains(el)) continue;
+      var tag = el.tagName;
+      if (tag === 'IMG' || tag === 'VIDEO' || tag === 'IFRAME' || tag === 'PICTURE' || tag === 'CANVAS') return 'light';
+      var cs = getComputedStyle(el);
+      if (cs.backgroundImage && cs.backgroundImage.indexOf('url(') > -1) return 'light';
+      var l = lum(cs.backgroundColor); if (l !== null) return l < 0.5 ? 'light' : 'dark';
+    }
+    var root = lum(getComputedStyle(document.body).backgroundColor);
+    return root !== null && root < 0.5 ? 'light' : 'dark';
+  }
+  var raf = 0;
+  function update() {
+    raf = 0; if (getComputedStyle(rail).display === 'none') return;
+    var r = rail.getBoundingClientRect(), x = r.left + r.width / 2, votes = { light: 0, dark: 0 };
+    [0.15, 0.5, 0.85].forEach(function (f) { votes[toneAt(x, r.top + r.height * f)]++; });
+    var t = votes.light >= votes.dark ? 'light' : 'dark';
+    if (rail.getAttribute('data-tone') !== t) rail.setAttribute('data-tone', t);
+  }
+  function queue() { if (!raf) raf = requestAnimationFrame(update); }
+  ['scroll', 'resize', 'load'].forEach(function (e) { window.addEventListener(e, queue, { passive: true }); });
+  new MutationObserver(queue).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  setInterval(queue, 1500);
+  queue();
+})();

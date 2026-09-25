@@ -4,11 +4,15 @@ import { u, site } from '../lib/site.js';
 const mediaBase = u('/media/cities/');
 ---
 <Base sub={false} current="/">
+  <Fragment slot="head">
+    {site.cities.map((c) => <link rel="preload" as="image" href={`${mediaBase}${c.slug}-mobile.webp`} media="(max-width: 900px)" fetchpriority="high" />)}
+    {site.cities.map((c) => <link rel="preload" as="image" href={`${mediaBase}${c.slug}-desktop.webp`} media="(min-width: 901px)" fetchpriority="high" />)}
+  </Fragment>
   <h1 class="sr-only">ONES — International Film Production Service in Barcelona, Warsaw and Bangkok</h1>
   <section id="cities" class="cities cities--gate" aria-label="Our bases" data-media={mediaBase}>
     {site.cities.map((c) => (
       <a class="city" href={u('/reel/')} aria-label={`${c.name} — open the TVC reel`}>
-        <video class="city__video" data-city={c.slug} autoplay muted loop playsinline preload="auto" poster={`${mediaBase}${c.slug}-desktop.webp`} aria-hidden="true"></video>
+        <video class="city__video" data-city={c.slug} autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
         <div class="city__overlay"></div>
         <div class="city__caption">
           <h2 class="city__name">{c.name}</h2>
