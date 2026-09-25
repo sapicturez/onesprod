@@ -32,7 +32,7 @@
 .lb{position:fixed;inset:0;z-index:600;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.92)}
 .lb[hidden]{display:none}
 .lb__bd{position:absolute;inset:0}
-.lb__stage{position:relative;width:min(92vw,1400px);z-index:2}
+.lb__stage{position:relative;width:min(92vw,1400px,calc((100vh - 190px) * 16 / 9));z-index:2}
 .lb__frame{position:relative;width:100%;aspect-ratio:16/9;background:var(--bg);box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .lb__frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .lb__frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
