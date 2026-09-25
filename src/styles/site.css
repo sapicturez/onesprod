@@ -409,3 +409,11 @@ a[href^="tel:"],a[href^="mailto:"]{transition:opacity .25s}
   .site-footer__tag::before{display:none}
   .site-footer__mobile-mail{font-size:12px}
 }
+@media (min-width:901px){
+  .site-footer .site-footer__grid{letter-spacing:.18em}
+  .site-footer .site-footer__links{flex-wrap:nowrap;gap:6px 18px;white-space:nowrap}
+}
+@media (min-width:901px) and (max-width:1320px){
+  .site-footer .site-footer__grid{grid-template-columns:1fr auto}
+  .site-footer__cities{display:none}
+}
