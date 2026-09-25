@@ -178,33 +178,6 @@
 .contact__grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,48px);margin-top:20px}
 @media (max-width:760px){.contact__grid{grid-template-columns:1fr}}
 
-/* ── Creative cursor (overrides the old aperture cursor from base.css) ── */
-@media(hover:hover){
-  .reel__poster,.reel__poster *,[data-video-open],[data-video-open] *,.gallery a,.gallery a *,.film-stills a,.film-stills a *,.roster a,.roster a *,.city,.city *,.team__photo{cursor:none!important}
-}
-#vid-cursor{width:88px;height:88px;opacity:0;transition:opacity .25s ease,scale .35s cubic-bezier(.2,.8,.2,1);scale:.6}
-#vid-cursor::before,#vid-cursor::after{display:none}
-#vid-cursor.is-active{opacity:1;scale:1}
-#vid-cursor .vc{width:100%;height:100%;display:block;overflow:visible;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
-#vid-cursor .vc__ring{transform-origin:50% 50%;animation:vc-spin 9s linear infinite}
-#vid-cursor .vc__orbit{transform-origin:50% 50%;animation:vc-spin 7s linear infinite reverse}
-#vid-cursor .vc__label{font:600 9.5px/1 Inter,system-ui,sans-serif;letter-spacing:.32em;fill:#fff;text-transform:uppercase}
-#vid-cursor .vc__play,#vid-cursor .vc__plus{transform-origin:50% 50%;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
-#vid-cursor .vc__play{opacity:0;transform:scale(.6)}
-#vid-cursor .vc__plus{opacity:0;transform:rotate(-90deg) scale(.6)}
-#vid-cursor.is-video .vc__play{opacity:1;transform:scale(1)}
-#vid-cursor.is-photo .vc__plus{opacity:1;transform:rotate(0) scale(1)}
-#vid-cursor.is-photo .vc__ring{stroke-dasharray:6 6}
-@keyframes vc-spin{to{transform:rotate(360deg)}}
-/* Home cities: minimal select cursor — gradient dot inside a thin gradient ring */
-#vid-cursor .vc__sel-ring,#vid-cursor .vc__sel-dot{opacity:0;transform-origin:50% 50%;transition:opacity .2s,transform .35s cubic-bezier(.2,.8,.2,1)}
-#vid-cursor .vc__sel-ring{transform:scale(.4)}
-#vid-cursor.is-select .vc__ring,#vid-cursor.is-select .vc__orbit,#vid-cursor.is-select .vc__play,#vid-cursor.is-select .vc__plus{opacity:0}
-#vid-cursor.is-select .vc__sel-dot{opacity:1}
-#vid-cursor.is-select .vc__sel-ring{opacity:1;transform:scale(1);animation:vc-breathe 2.4s ease-in-out infinite}
-#vid-cursor.is-select .vc{filter:drop-shadow(0 1px 6px rgba(0,0,0,.5))}
-@keyframes vc-breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
-
 /* Films — Wild City as a story: chapters interleaved with stills */
 .film-story{padding:0 0 clamp(40px,8vh,96px)}
 .film-stills{display:grid;gap:6px;margin:6px 0}
@@ -222,3 +195,21 @@
 .film-credits h3{margin:0 0 1em;font-size:11px;letter-spacing:.3em;text-transform:uppercase;font-weight:600;opacity:.6}
 .film-credits strong{font-weight:600}
 @media (max-width:900px){.film-chapter{grid-template-columns:1fr}.film-chapter__no{margin:0}.film-credits{grid-template-columns:1fr}}
+
+/* ── Cursors ──
+   System cursor everywhere. Video choices (TVC tiles, video buttons, TV show tiles, home cities) = static ▶ in the ONES gradient.
+   Photo choices (gallery tiles, galleries, film stills) = camera viewfinder in the ONES gradient. No animation, no JS.
+   (Overrides the old cursor:none / cursor:default rules still present in base.css.) */
+:root{
+  --cur-play:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M10 6.5 L26 16 L10 25.5 Z' fill='url(%23g)' stroke='rgba(0,0,0,.35)' stroke-width='1' stroke-linejoin='round'/%3E%3C/svg%3E") 16 16, pointer;
+  --cur-photo:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237FCFF5'/%3E%3Cstop offset='.4' stop-color='%23AFB5DE'/%3E%3Cstop offset='.75' stop-color='%23E18DAC'/%3E%3Cstop offset='1' stop-color='%23F2A1A1'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='rgba(0,0,0,.35)' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M5 11V5h6M21 5h6v6M27 21v6h-6M11 27H5v-6' fill='none' stroke='url(%23g)' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='16' cy='16' r='2.6' fill='url(%23g)' stroke='rgba(0,0,0,.35)' stroke-width='.8'/%3E%3C/svg%3E") 16 16, zoom-in;
+}
+#vid-cursor{display:none!important}
+.reel__poster,.reel__poster *{cursor:pointer!important}
+.cities,.cities *{cursor:auto!important}
+@media (hover:hover){
+  .reel__poster[data-vimeo],.reel__poster[data-vimeo] *,[data-video-open],[data-video-open] *,
+  .tile a[href*="/tv-shows/"],.tile a[href*="/tv-shows/"] *,
+  .cities .city,.cities .city *{cursor:var(--cur-play)!important}
+  .reel__poster[data-gallery],.reel__poster[data-gallery] *,.gallery a,.gallery a *,.film-stills a,.film-stills a *{cursor:var(--cur-photo)!important}
+}
