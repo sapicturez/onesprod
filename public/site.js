@@ -50,7 +50,7 @@
         var imgs;
         try { imgs = JSON.parse(a.getAttribute('data-gallery')); } catch (err) { imgs = []; }
         if (imgs.length) { open(imgs.map(function (s) { return { type: 'image', src: s, title: a.getAttribute('data-title') }; }), 0); return; }
-        var wrap = a.closest('.gallery'); var links = wrap ? $$('a[data-gallery]', wrap) : [a];
+        var wrap = a.closest('[data-gallery-group], .gallery'); var links = wrap ? $$('a[data-gallery]', wrap) : [a];
         open(links.map(function (l) { return { type: 'image', src: l.getAttribute('href'), title: l.getAttribute('data-title') || '' }; }), links.indexOf(a));
         return;
       }
@@ -105,7 +105,7 @@
     if (!canHover) return;
     var SEL_VIDEO = '.reel__poster[data-vimeo], [data-video-open], .tile a[href*="/tv-shows/"]';
     var SEL_SELECT = '.city';
-    var SEL_PHOTO = '.reel__poster[data-gallery], .gallery a, .roster a, .team__photo';
+    var SEL_PHOTO = '.reel__poster[data-gallery], .gallery a, .film-stills a, .roster a, .team__photo';
     var targets = $$(SEL_VIDEO + ', ' + SEL_PHOTO + ', ' + SEL_SELECT); if (!targets.length) return;
     var el = document.createElement('div');
     el.id = 'vid-cursor'; el.setAttribute('aria-hidden', 'true');

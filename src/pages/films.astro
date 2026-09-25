@@ -2,21 +2,62 @@
 import Base from '../layouts/Base.astro';
 import PageHero from '../components/PageHero.astro';
 import { site, u } from '../lib/site.js';
-// The Films page currently carries one title (Wild City). New films: add a block below.
-const body = site.film_html.replace(/<h\d[^>]*>\s*WILD CITY\s*<\/h\d>/i, '').replace(/<h\d[^>]*>\s*ABOUT A FILM\s*<\/h\d>/i, '<h3>About the film</h3>');
-// Film stills as shown on the WordPress page (8 frames)
-const stills = [1, 2, 3, 4, 5, 6, 7, 8].map((n) => u(`/media/gallery/wild-city/${String(n).padStart(2, '0')}.webp`));
+// Films page — Wild City told as a story: chapters of text interleaved with film stills.
+// Split the WordPress HTML into sections by <h3> and drop the empty image anchors.
+const sections = {};
+site.film_html.replace(/<a [^>]*>\s*<\/a>/g, '').split(/<h3>/).slice(1).forEach((chunk) => {
+  const [head, ...rest] = chunk.split('</h3>');
+  sections[head.trim().toUpperCase()] = rest.join('</h3>').trim();
+});
+const find = (key) => Object.entries(sections).find(([k]) => k.startsWith(key))?.[1] || '';
+const about = find('ABOUT');
+const message = find('MESSAGE');
+const theatrical = find('THEATRICAL');
+const details = find('SPECIAL');
+const still = (n) => u(`/media/gallery/wild-city/${String(n).padStart(2, '0')}.webp`);
 ---
 <Base title="Films" current="/films/" description="Films by ONES — Wild City, a creative documentary by Krystian Matysek about animals living alongside people in the cities.">
   <PageHero eyebrow="Films" title="Wild City." lede="A creative documentary film by multi-award-winning director and cinematographer Krystian Matysek." />
-  <section class="article">
-    <div class="wrap article__grid">
-      <div class="article__body" set:html={body}></div>
-    </div>
-    <div class="wrap">
-      <div class="gallery gallery--film" aria-label="Wild City — film stills">
-        {stills.map((g, i) => <a href={g} data-gallery="[]" data-title={`Wild City — still ${i + 1}`}><img src={g.replace('.webp', '-sm.webp')} srcset={`${g.replace('.webp', '-sm.webp')} 480w, ${g} 1400w`} sizes="(max-width: 640px) 100vw, 50vw" alt={`Wild City — film still ${i + 1}`} width="1400" height="653" loading={i < 2 ? 'eager' : 'lazy'} decoding="async"></a>)}
-      </div>
-    </div>
-  </section>
+  <article class="film-story" data-gallery-group aria-label="Wild City">
+    {[
+      { type: 'full', n: [1] },
+      { type: 'text', no: '01', title: 'About the film', html: about },
+      { type: 'pair', n: [2, 3] },
+      { type: 'full', n: [4] },
+      { type: 'text', no: '02', title: 'Message of the film', html: message },
+      { type: 'pair', n: [5, 6] },
+      { type: 'full', n: [7] },
+      { type: 'credits' },
+      { type: 'full', n: [8] },
+    ].map((b) =>
+      b.type === 'text' ? (
+        <section class="wrap film-chapter">
+          <p class="eyebrow film-chapter__no">{b.no}</p>
+          <div class="film-chapter__body">
+            <h2 class="film-chapter__title">{b.title}</h2>
+            <div class="film-chapter__text" set:html={b.html}></div>
+          </div>
+        </section>
+      ) : b.type === 'credits' ? (
+        <section class="wrap film-chapter film-chapter--credits">
+          <p class="eyebrow film-chapter__no">03</p>
+          <div class="film-chapter__body">
+            <h2 class="film-chapter__title">The film</h2>
+            <div class="film-credits">
+              <div><h3>Theatrical version 80′</h3><div set:html={theatrical}></div></div>
+              <div><h3>Details</h3><div set:html={details}></div></div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <div class={`film-stills film-stills--${b.type}`}>
+          {b.n.map((n) => (
+            <a href={still(n)} data-gallery="[]" data-title={`Wild City — still ${n}`}>
+              <img src={still(n).replace('.webp', '-sm.webp')} srcset={`${still(n).replace('.webp', '-sm.webp')} 480w, ${still(n)} 1400w`} sizes={b.type === 'full' ? '100vw' : '(max-width: 640px) 100vw, 50vw'} alt={`Wild City — film still ${n}`} width="1400" height="653" loading={n === 1 ? 'eager' : 'lazy'} decoding="async">
+            </a>
+          ))}
+        </div>
+      )
+    )}
+  </article>
 </Base>

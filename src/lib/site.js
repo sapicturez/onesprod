@@ -23,7 +23,10 @@ export const NAV = [
 export const FOOTER_NAV = [];
 export const bySection = (key) => projects.filter((p) => p.sections.includes(key));
 export const reel = () => bySection('reel').sort((a, b) => a.order - b.order);
-export const tvShows = () => bySection('tv-shows').sort((a, b) => b.year - a.year);
+// Down The Road is pinned first; the rest newest first
+const TV_PINNED = ['down-the-road'];
+const pin = (p) => { const i = TV_PINNED.indexOf(p.slug); return i < 0 ? 99 : i; };
+export const tvShows = () => bySection('tv-shows').sort((a, b) => pin(a) - pin(b) || b.year - a.year);
 export const photoshoots = () => bySection('photoshoots');
 export const showcase = () => bySection('showcase');
 export const productionReel = () => site.production_service_reel.map((s) => projects.find((p) => p.slug === s)).filter(Boolean);
