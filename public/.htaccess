@@ -4,11 +4,10 @@ ErrorDocument 404 /404.html
 Options -Indexes
 
 RewriteEngine On
-# HTTPS + bez www
-RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} ^www\. [NC]
-RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
-RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+# www -> bez www (HTTPS wlacza Hostinger: "Force HTTPS"; nie ruszamy /.well-known dla certyfikatu SSL)
+RewriteCond %{REQUEST_URI} !^/\.well-known/
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ %{REQUEST_SCHEME}://%1%{REQUEST_URI} [L,R=301]
 
 # Cache: HTML krótko, zasoby długo
 <IfModule mod_headers.c>
